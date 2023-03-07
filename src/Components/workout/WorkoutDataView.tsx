@@ -6,7 +6,7 @@ import exp from "constants";
 
 
 
-const WorkoutData = () => {
+const WorkoutData = (props: {muscle: string}) => {
  const [workoutData, setWorkoutData] = React.useState([]);
 
  //make a fetchWorkoutData function that fetches data from here:https://api.api-ninjas.com/v1/exercises?muscle=quadriceps
@@ -14,6 +14,7 @@ const WorkoutData = () => {
  //you can use the useEffect hook to call this function when the component mounts
 
  const fetchWorkoutData = async (muscle: string) => {
+
   try {
    const response = await fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${muscle}`, {
     headers: {
@@ -37,7 +38,7 @@ const WorkoutData = () => {
 
      useEffect(() => {
       const getWorkoutData = async () => {
-         await fetchWorkoutData("quadriceps");
+         await fetchWorkoutData(props.muscle);
 
       }
         getWorkoutData();
@@ -53,7 +54,8 @@ const columns: GridColDef[] = [
  { field: 'id', headerName: 'id', width: 70 },
  { field: 'name', headerName: 'Name', width: 130 },
  { field: 'equipment', headerName: 'Equipment', width: 130 },
-
+    { field: 'muscle', headerName: 'Muscle', width: 130 },
+    {field: 'difficulty', headerName: 'Difficulty', width: 130},
 
 ];
 
@@ -61,19 +63,24 @@ const rows = workoutData.map((dataItem: any) => ({
   id: Math.floor(Math.random() * 100),
   name: dataItem.name,
   equipment: dataItem.equipment,
+    muscle: dataItem.muscle,
+    difficulty: dataItem.difficulty,
+
  }));
 
 //const rowsData = WorkoutData();
 
  return (
 
-     <div style={{ height: 400, width: '30%' , backgroundColor: 'white' }}>
+     <div style={{ height: 400, width: "auto" , backgroundColor: 'white' }}>
 
 
        <DataGrid
           rows={rows}
           columns={columns}
           checkboxSelection
+          autoPageSize={true}
+
 
       />
 
