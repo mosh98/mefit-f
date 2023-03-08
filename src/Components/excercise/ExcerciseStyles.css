@@ -1,0 +1,15 @@
+.accordion-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    margin-right: 1em;
+    margin-bottom: 0.5em;
+    border-radius: 5px;
+    cursor: pointer;
+    border-bottom: 2px solid #fff;
+}
+
+.accordion-button:hover {
+    border-bottom: 2px solid #e9e9e9;
+}
