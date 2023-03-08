@@ -37,7 +37,8 @@ const Excercise = () => {
     };
 
     return (
-        <div>
+     <>
+
             <h1>Excercise</h1>
             <h4>Choose your own parts to train</h4>
             <div>
@@ -46,17 +47,8 @@ const Excercise = () => {
                 {showChestAccordion && (<ExcerciseData muscle="chest" />)}
             </div>
 
-            <div>
-                <List>
-                    <ListItem disablePadding>
-                        <ListItemButton>
+     </>
 
-                            <ListItemText primary="Inbox" />
-                        </ListItemButton>
-                    </ListItem>
-                </List>
-            </div>
-        </div>
     );
 }
 

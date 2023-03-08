@@ -1,12 +1,13 @@
 //add an empty export
 import * as React from 'react';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import {DataGrid, GridColDef, GridRowId, GridRowSelectionModel, GridValueGetterParams} from '@mui/x-data-grid';
 import {useEffect} from "react";
 
 
 
 const ExcerciseData = (props: {muscle: string}) => {
  const [workoutData, setWorkoutData] = React.useState([]);
+    const [selectedRows, setSelectedRows] = React.useState<GridRowId[]>([]);
 
     const localData = localStorage.getItem(`Workout_Data_${props.muscle}`);
 
@@ -52,7 +53,10 @@ const ExcerciseData = (props: {muscle: string}) => {
         getWorkoutData();
     }, []);
 
-
+     const handleSelectionChange = (params: GridRowSelectionModel) => {
+        setSelectedRows(params);
+        console.log(params);
+    };
 
 const columns: GridColDef[] = [
  { field: 'name', headerName: 'Name', width: 130 },
@@ -73,22 +77,33 @@ const rows = workoutData.map((dataItem: any) => ({
 
 
  return (
-
-     <div style={{ height: 400, width: "auto" , backgroundColor: 'white' }}>
-       <DataGrid
-          rows={rows}
-          columns={columns}
-          checkboxSelection
-          autoPageSize={true}
-
-          columnVisibilityModel={{
-              id: false
-          }}
-          onCellClick={(params) => {
-          console.log(params.row.name)
-          }
-          }
-       />
+     <div className="container-fluid">
+         <div className="row">
+             <div className="col-md-8">
+                 <div style={{ height: 400, backgroundColor: 'white' }}>
+                     <DataGrid
+                         rows={rows}
+                         columns={columns}
+                         checkboxSelection
+                         autoPageSize={true}
+                         columnVisibilityModel={{
+                             id: false,
+                         }}
+                         onRowSelectionModelChange={handleSelectionChange}
+                     />
+                 </div>
+             </div>
+             <div className="col-md-4">
+                 <div>
+                     <h3>Selected Excercises:</h3>
+                     <ul>
+                         {selectedRows.map((data, index) => (
+                             <li key={index}>{JSON.stringify(data)}</li>
+                         ))}
+                     </ul>
+                 </div>
+             </div>
+         </div>
      </div>
  )
 }
