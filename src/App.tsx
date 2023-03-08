@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter,Route,Routes} from "react-router-dom"
-import Workout from "./Components/workout/Workout"
+import Excercise from "./Components/excercise/Excercise"
 
 //Test
 function App() {
@@ -12,7 +12,7 @@ function App() {
           <header className="App-header">
 
               <Routes>
-                  <Route path="/" element={<Workout/>}></Route>
+                  <Route path="/" element={<Excercise/>}></Route>
               </Routes>
 
           </header>

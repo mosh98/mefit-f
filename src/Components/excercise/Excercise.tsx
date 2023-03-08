@@ -1,25 +1,25 @@
 import {useNavigate} from "react-router-dom";
-import WorkoutData from "./WorkoutDataView";
+import ExcerciseData from "./ExcerciseDataView";
 import * as React from "react";
 
-const Workout = () => {
+const Excercise = () => {
     // const navigate = useNavigate();
 
     return (
         <>
-            <h2>Workout</h2>
+            <h2>Excercise (Different Body Parts )</h2>
             <div style={{ display: 'flex' }}>
                 <div style={{ marginRight: 50 }}>
                     <h6>Chest Workout</h6>
-                    <WorkoutData muscle="chest" />
+                    <ExcerciseData muscle="chest" />
                 </div>
                 <div>
                     <h6>Quadriceps Workout</h6>
-                    <WorkoutData muscle="quadriceps" />
+                    <ExcerciseData muscle="quadriceps" />
                 </div>
             </div>
         </>
     );
 }
 
-export default Workout;
+export default Excercise;
