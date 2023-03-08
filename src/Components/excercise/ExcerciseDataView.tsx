@@ -50,7 +50,6 @@ const ExcerciseData = (props: {muscle: string}) => {
 
       }
         getWorkoutData();
-      console.log(workoutData);
     }, []);
 
 
@@ -59,12 +58,6 @@ const ExcerciseData = (props: {muscle: string}) => {
 
 
 const columns: GridColDef[] = [
-    {
-        field: 'id',
-        headerName: 'id',
-        width: 70,
-
-    },
  { field: 'name', headerName: 'Name', width: 130 },
  { field: 'equipment', headerName: 'Equipment', width: 130 },
     { field: 'muscle', headerName: 'Muscle', width: 130 },
@@ -73,7 +66,7 @@ const columns: GridColDef[] = [
 ];
 
 const rows = workoutData.map((dataItem: any) => ({
-  id: Math.floor(Math.random() * 100),
+    id:dataItem.name,
   name: dataItem.name,
   equipment: dataItem.equipment,
     muscle: dataItem.muscle,
@@ -90,12 +83,15 @@ const rows = workoutData.map((dataItem: any) => ({
           columns={columns}
           checkboxSelection
           autoPageSize={true}
+
           columnVisibilityModel={{
-              // Hide columns status and traderName, the other columns will remain visible
-              status: false,
-              traderName: false,
+              id: false
           }}
-      />
+          onCellClick={(params) => {
+          console.log(params.row.name)
+          }
+          }
+       />
      </div>
  )
 }
