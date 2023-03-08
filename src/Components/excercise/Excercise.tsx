@@ -3,17 +3,28 @@ import ExcerciseData from "./ExcerciseDataView";
 import * as React from "react";
 import {useState} from "react";
 import './ExcerciseStyles.css';
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import {ListItemButton, ListItemSecondaryAction} from "@mui/material";
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 
 
 
 const Excercise = () => {
-    // const navigate = useNavigate();
-    //chest
+
+    //TODO: state for selected rows
+    const [selectedRows, setSelectedRows] = useState([]);
+
+    //TODO:chest
     const [showChestAccordion, setShowChestAccordion] = useState(false);
+
     //TODO:back
     const [showBackAccordion, setShowBackAccordion] = useState(false);
+
     //TODO:biceps
     const [showBicepsAccordion, setShowBicepsAccordion] = useState(false);
+
     //TODO:triceps
     const [showTricepsAccordion, setShowTricepsAccordion] = useState(false);
     //TODO: shoulders
@@ -35,6 +46,16 @@ const Excercise = () => {
                 {showChestAccordion && (<ExcerciseData muscle="chest" />)}
             </div>
 
+            <div>
+                <List>
+                    <ListItem disablePadding>
+                        <ListItemButton>
+
+                            <ListItemText primary="Inbox" />
+                        </ListItemButton>
+                    </ListItem>
+                </List>
+            </div>
         </div>
     );
 }

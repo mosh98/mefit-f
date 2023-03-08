@@ -54,9 +54,6 @@ const ExcerciseData = (props: {muscle: string}) => {
 
 
 
-
-
-
 const columns: GridColDef[] = [
  { field: 'name', headerName: 'Name', width: 130 },
  { field: 'equipment', headerName: 'Equipment', width: 130 },
