@@ -6,8 +6,8 @@ function LoginForm() {
             <Container maxWidth="xs">
                 <Stack direction='column' spacing={2} marginBottom={10}>
                     <Typography variant='h4' component='h1'>Login</Typography>
-                    <TextField id="login-email" type='email' label="Email" variant="standard"/>
-                    <TextField id="login-password" type='password' label="Password" variant="standard"/>
+                    <TextField id="login-email" type='email' label="Email" variant="standard" required/>
+                    <TextField id="login-password" type='password' label="Password" variant="standard" required/>
                     <Button variant='contained' size='large' disableElevation onClick={() => console.log("Login-button clicked!")}>Login</Button>
                 </Stack>
                 <Stack spacing={1}>
