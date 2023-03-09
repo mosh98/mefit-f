@@ -1,0 +1,64 @@
+{
+  "workout": "Shoulder Workout",
+  "beginner": [
+    {
+      "name": "Dumbbell Shoulder Press",
+      "sets": 2,
+      "reps": "10-15"
+    },
+    {
+      "name": "Dumbbell Lateral Raises",
+      "sets": 2,
+      "reps": "10-15"
+    },
+    {
+      "name": "Dumbbell Front Raises",
+      "sets": 2,
+      "reps": "10-15"
+    }
+  ],
+  "intermediate": [
+    {
+      "name": "Barbell Shoulder Press",
+      "sets": 3,
+      "reps": "8-12"
+    },
+    {
+      "name": "Arnold Press",
+      "sets": 3,
+      "reps": "8-12"
+    },
+    {
+      "name": "Cable Lateral Raises",
+      "sets": 3,
+      "reps": "8-12"
+    },
+    {
+      "name": "Upright Rows",
+      "sets": 3,
+      "reps": "8-12"
+    }
+  ],
+  "expert": [
+    {
+      "name": "Standing Military Press",
+      "sets": 4,
+      "reps": "6-10"
+    },
+    {
+      "name": "Dumbbell Lateral Raises (Drop Sets)",
+      "sets": 4,
+      "reps": "6-10"
+    },
+    {
+      "name": "Reverse Flyes",
+      "sets": 4,
+      "reps": "6-10"
+    },
+    {
+      "name": "Barbell Shrugs",
+      "sets": 4,
+      "reps": "6-10"
+    }
+  ]
+}

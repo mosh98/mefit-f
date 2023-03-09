@@ -1,0 +1,78 @@
+
+{
+  "beginner": [
+    {
+      "name": "Beginner Back Workout",
+      "exercises": [
+        {
+          "name": "Bodyweight Rows",
+          "sets": 2,
+          "reps": 10,
+          "rest": 60
+        },
+        {
+          "name": "Lat Pull-Downs",
+          "sets": 2,
+          "reps": 10,
+          "rest": 60
+        },
+        {
+          "name": "Back Extensions",
+          "sets": 2,
+          "reps": 10,
+          "rest": 60
+        }
+      ]
+    }
+
+  ],
+  "intermediate": [
+    {
+      "name": "Intermediate Back Workout",
+      "exercises": [
+        {
+          "name": "Pull-Ups",
+          "sets": 3,
+          "reps": 8,
+          "rest": 90
+        },
+        {
+          "name": "Bent-Over Barbell Rows",
+          "sets": 3,
+          "reps": 8,
+          "rest": 90
+        },
+        {
+          "name": "Seated Cable Rows",
+          "sets": 3,
+          "reps": 8
+        }
+
+        ],
+  "expert":
+    {
+      "name": "Expert Back Workout",
+      "exercises": [
+        {
+          "name": "Pull-Ups",
+          "sets": 3,
+          "reps": 12,
+          "rest": 90
+        },
+        {
+          "name": "Bent-Over Barbell Rows",
+          "sets": 3,
+          "reps": 12,
+          "rest": 90
+        },
+        {
+          "name": "Seated Cable Rows",
+          "sets": 3,
+          "reps": 12
+        }
+
+        ]
+    }
+
+  ]
+}

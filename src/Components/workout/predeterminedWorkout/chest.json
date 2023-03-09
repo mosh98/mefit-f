@@ -1,0 +1,68 @@
+{
+  "beginner": [
+    {
+      "name": "Pushups",
+      "sets": 2,
+      "reps": "10-15"
+    },
+    {
+      "name": "Dumbbell Flyes",
+      "sets": 2,
+      "reps": "10-15"
+    },
+    {
+      "name": "Incline Dumbbell Bench Press",
+      "sets": 2,
+      "reps": "10-15"
+    }
+  ],
+  "intermediate": [
+    {
+      "name": "Dumbbell Bench Press",
+      "sets": 3,
+      "reps": "8-12"
+    },
+    {
+      "name": "Close-grip Bench Press",
+      "sets": 3,
+      "reps": "8-12"
+    },
+    {
+      "name": "Low-cable Cross-over",
+      "sets": 3,
+      "reps": "8-12"
+    },
+    {
+      "name": "Decline Dumbbell Flyes",
+      "sets": 3,
+      "reps": "8-12"
+    }
+  ],
+  "expert": [
+    {
+      "name": "Barbell Bench Press - Medium Grip",
+      "sets": 4,
+      "reps": "6-10"
+    },
+    {
+      "name": "Chest Dip",
+      "sets": 4,
+      "reps": "6-10"
+    },
+    {
+      "name": "Incline Dumbbell Bench Press",
+      "sets": 4,
+      "reps": "6-10"
+    },
+    {
+      "name": "Low-cable Cross-over",
+      "sets": 4,
+      "reps": "6-10"
+    },
+    {
+      "name": "Decline Dumbbell Flyes",
+      "sets": 4,
+      "reps": "6-10"
+    }
+  ]
+}
