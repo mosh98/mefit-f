@@ -1,10 +1,10 @@
-function OverviewPage() {
+function WorkoutPage() {
 
 
     return (
         <div>
-            <h1>Products Page</h1>
+            <h1>Workout Page</h1>
         </div>
     );
 }
-export default OverviewPage;
+export default WorkoutPage;

@@ -7,17 +7,20 @@ import keycloak from "../keycloak";
  * @param {{ children: ReactNode, role: string, redirectTo: string }} props
  * @returns {JSX.Element}
  */
+
+// Make redirectTo optional
+// If not provided, default to "/"
 function KeycloakRoute({ children, role, redirectTo = "/" }) {
 
-    if (!keycloak.authenticated) {
-        return <Navigate replace to={redirectTo} />;
-    }
+      if (!keycloak.authenticated) {
+     return <Navigate replace to={redirectTo} />;
+      }
 
-    if (keycloak.hasRealmRole(role)) {
-        return <>{children}</>;
-    }
+      if (keycloak.hasRealmRole(role)) {
+     return <>{children}</>;
+      }
 
-    return <Navigate replace to={redirectTo} />;
+      return <Navigate replace to={redirectTo} />;
+
 }
-
 export default KeycloakRoute;

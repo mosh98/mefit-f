@@ -12,7 +12,7 @@ function Navbar() {
                             <Link to="/">Start</Link>
                         </li>
                         <li>
-                            <Link to="/workout">Products</Link>
+                            <Link to="/workout">Workout</Link>
                         </li>
                         {keycloak.authenticated && (
                             <li>

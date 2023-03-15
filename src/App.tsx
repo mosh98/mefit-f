@@ -15,15 +15,20 @@ function App() {
         <main className="container">
           <Routes>
             <Route path="/" element={<StartPage />} />
-            <Route path="/workout" element={<WorkoutPage />} />
-            <Route
-                path="/profile"
-                element={
-                  <KeycloakRoute role={ ROLES.User }>
-                    <ProfilePage />
-                  </KeycloakRoute>
-                }
-            />
+            <Route path="/workout"
+                   element={
+                       <KeycloakRoute role={ ROLES.Admin } redirectTo={"/"}>
+                           <WorkoutPage />
+                       </KeycloakRoute>
+                } />
+              <Route
+                  path="/profile"
+                  element={
+                      <KeycloakRoute role={ ROLES.User } redirectTo={"/"}>
+                          <ProfilePage />
+                      </KeycloakRoute>
+                  }
+              />
           </Routes>
         </main>
       </BrowserRouter>
