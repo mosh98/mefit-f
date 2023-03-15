@@ -5,6 +5,7 @@ import ProfilePage from "./views/ProfilePage";
 import Navbar from "./components/navbar/Navbar";
 import KeycloakRoute from "./routes/KeycloakRoute";
 import { ROLES } from "./const/roles";
+import './App.css';
 
 
 function App() {
