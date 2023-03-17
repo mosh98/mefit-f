@@ -2,16 +2,17 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import StartPage from "./views/StartPage";
 import WorkoutPage from "./views/WorkoutPage";
 import ProfilePage from "./views/ProfilePage";
-import Navbar from "./components/navbar/Navbar";
 import KeycloakRoute from "./routes/KeycloakRoute";
 import { ROLES } from "./const/roles";
 import './App.css';
+import DashboardPage from "./views/DashboardPage";
+import SidebarDrawer from "./components/navbar/SidebarDrawer";
 
 
 function App() {
   return (
       <BrowserRouter>
-        <Navbar />
+        <SidebarDrawer />
         <main className="container">
           <Routes>
             <Route path="/" element={<StartPage />} />
@@ -29,6 +30,13 @@ function App() {
                       </KeycloakRoute>
                   }
               />
+              <Route path={"/dashboard"} element={
+                  <KeycloakRoute role={ ROLES.User } redirectTo={"/"}>
+                      <DashboardPage />
+                  </KeycloakRoute>
+              }
+              />
+              <Route path="*" element={<h1>404 - Not Found!</h1>} />
           </Routes>
         </main>
       </BrowserRouter>
