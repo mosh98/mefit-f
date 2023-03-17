@@ -6,12 +6,13 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 /**
  * SAMPLE FUNCTION: Fetch workouts from a REST API
+ * @param {string} endPoint
  * @returns { Promise<{ workouts: [], error: null | string }>} response
  */
 
-export const fetchWorkouts = async () => {
+export const fetchWorkouts = async (endPoint) => {
     try {
-        const response = await axios.get(`${apiUrl}workouts/allWorkouts`, {
+        const response = await axios.get(`${apiUrl}${endPoint}`, {
             headers: {
                 'Authorization': `Bearer ${keycloak.token}`,
                 'Content-Type': 'application/json',

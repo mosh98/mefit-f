@@ -11,7 +11,7 @@ function useWorkouts() {
 
   useEffect(() => {
     const init = async () => {
-      const { workouts, error } = await fetchWorkouts();
+      const { workouts, error } = await fetchWorkouts("workouts/allWorkouts");
 
       setWorkouts(workouts);
       setError(error);
