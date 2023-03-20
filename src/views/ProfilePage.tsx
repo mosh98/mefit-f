@@ -7,23 +7,38 @@ import Box from "@mui/material/Box";
 
 interface User {
     name: string;
+    firstName: string;
+    lastName: string;
     username: string;
     sub: string;
+    email: string;
     weight?: number;
     height?: number;
     disabilities?: string;
     medicalConditions?: string;
     profileImage?: string;
+
+    roles?: string[];
 }
 
 function ProfilePage() {
 
-    const tokenParsed = keycloak.tokenParsed as { name?: string; preferred_username?: string; sub?: string };
+    const tokenParsed = keycloak.tokenParsed as {
+        name?: string;
+        given_name?: string;
+        family_name?: string;
+        preferred_username?: string;
+        sub?: string;
+        email?: string };
 
     const user: User = {
         name: tokenParsed.name || '',
+        firstName: tokenParsed.given_name || '',
+        lastName: tokenParsed.family_name || '',
         username: tokenParsed.preferred_username || '',
         sub: tokenParsed.sub || '',
+        email: tokenParsed.email || '',
+        roles: keycloak.tokenParsed?.realm_access?.roles || [],
     };
 
     const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
@@ -47,8 +62,23 @@ function ProfilePage() {
                     </Typography>
 
                     <Typography>Name: { user?.name }</Typography>
+                    <Typography>First name: { user?.firstName }</Typography>
+                    <Typography>Last name: { user?.lastName }</Typography>
                     <Typography>Username: { user?.username}</Typography>
                     <Typography>Sub: { user?.sub }</Typography>
+                    <Typography>Email: { user?.email }</Typography>
+                    {user.roles && (
+                        <>
+                            <Typography variant="h6" component="h3">
+                                Roles
+                            </Typography>
+                            <ul>
+                                {user.roles.map((role, index) => (
+                                    <li key={index}>{role}</li>
+                                ))}
+                            </ul>
+                        </>
+                    )}
 
                 </Box>
             }

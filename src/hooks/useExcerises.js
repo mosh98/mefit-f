@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchExercises} from "../api/data";
+import { fetchExercises} from "../api/exercises";
 
 /**
  * Make an HTTP Request and return response

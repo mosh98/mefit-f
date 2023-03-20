@@ -1,5 +1,6 @@
 import {Button, Container, Stack, TextField, Typography} from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
+import keycloak from "../../keycloak";
 
 interface RegisterFormProps {
     onSubmit: () => void;
@@ -22,9 +23,9 @@ interface RegisterFormData {
 
 function UpdateForm({onSubmit}: RegisterFormProps) {
     const [formData, setFormData] = useState<RegisterFormData>({
-        firstName: '',
-        lastName: '',
-        email: '',
+        firstName: keycloak.tokenParsed?.given_name,
+        lastName: keycloak.tokenParsed?.family_name,
+        email: keycloak.tokenParsed?.email,
         password: '',
         address: '',
         postalCode: '',
