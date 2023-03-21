@@ -9,9 +9,10 @@ import {ReactNode, useEffect, useRef} from "react";
 interface ScrollDialogProps {
     content: ReactNode;
     buttonText: string;
+    headerText: string;
 }
 
-function ScrollDialog({ content, buttonText }: ScrollDialogProps) {
+function ScrollDialog({ content, buttonText, headerText }: ScrollDialogProps) {
     const [open, setOpen] = React.useState(false);
     const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
 
@@ -45,7 +46,7 @@ function ScrollDialog({ content, buttonText }: ScrollDialogProps) {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                <DialogTitle id="scroll-dialog-title">Subscribe</DialogTitle>
+                <DialogTitle id="scroll-dialog-title">{headerText}</DialogTitle>
                 <DialogContent dividers={scroll === 'paper'}>
                     {content}
                 </DialogContent>

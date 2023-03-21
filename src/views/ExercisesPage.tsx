@@ -4,8 +4,7 @@ function ExercisesPage() {
 
     return (
         <div>
-            <h1>ExercisesPage Page</h1>
-
+            <h1>Exercise Overview</h1>
             <ExercisesTable />
         </div>
     );
