@@ -8,21 +8,17 @@ interface CreateUserFormProps {
 }
 
 interface CreateUserFormData {
-    // password: string;
     e_mail: string;
     first_name: string;
     last_name: string;
-    //  userType: string;
     keyCloakId?: string;
 }
 
 function CreateUser({onSubmit}: CreateUserFormProps) {
     const [formData, setFormData] = useState<CreateUserFormData>({
-        // password: '',
         e_mail: keycloak.tokenParsed?.email,
         first_name: keycloak.tokenParsed?.given_name,
         last_name: keycloak.tokenParsed?.family_name,
-        // userType: 'USER',
         keyCloakId: keycloak.tokenParsed?.sub,
     });
 
@@ -32,14 +28,12 @@ function CreateUser({onSubmit}: CreateUserFormProps) {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Your form submission logic here
-
         console.log('Form submitted' + JSON.stringify(formData));
 
         const result = await createUser(formData);
         onSubmit(result);
 
-        console.log('Form submitted' + JSON.stringify(result));
+        console.log('Form returned' + JSON.stringify(result));
     };
 
     return (

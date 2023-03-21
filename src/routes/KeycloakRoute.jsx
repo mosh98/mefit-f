@@ -15,52 +15,56 @@ const apiUrl = process.env.REACT_APP_API_URL;
 // Make redirectTo optional
 // If not provided, default to "/"
 function KeycloakRoute({children, role, redirectTo = "/"}) {
-    const { sub } = keycloak.tokenParsed;
- //   const [userCreated, setUserCreated] = useState(false);
+    const {sub} = keycloak.tokenParsed;
 
     useEffect(() => {
-        const fetchUsers = async () => {
+        const checkUserExists = async () => {
             try {
-                const response = await axios.get(`${apiUrl}users/userByKeycloakId/${sub}`, {
+                const response = await axios.get(`${apiUrl}users/allUsers`, {
                     headers: {
                         Authorization: `Bearer ${keycloak.token}`,
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     },
                 });
+                const users = response.data;
 
-                // If user found in database do nothing
-                console.log("User found in database: ", response.data);
-              //  setUserCreated(true);
-                return {user: response.data, error: null};
-            } catch (error) {
-                // If user not found in database, create user
-                console.log("User not found in database: ", error.message);
-                const user = {
-                    e_mail: keycloak.tokenParsed?.email,
-                    first_name: keycloak.tokenParsed?.given_name,
-                    last_name: keycloak.tokenParsed?.family_name,
-                    keyCloakId: keycloak.tokenParsed?.sub,
-                };
+                // Find user with matching sub
+                const user = users.find(user => user.keyCloakId === sub);
 
+                console.log(sub)
 
+                if (!user) {
+                    const newUser = {
+                        e_mail: keycloak.tokenParsed?.email,
+                        first_name: keycloak.tokenParsed?.given_name,
+                        last_name: keycloak.tokenParsed?.family_name,
+                        keyCloakId: keycloak.tokenParsed?.sub,
+                    };
+                    console.log(newUser);
+
+                    // Create user in database
                     try {
-                        const response = await axios.post(`${apiUrl}users/newUser`, user, {
+                        const response = await axios.post(`${apiUrl}users/newUser`, newUser, {
                             headers: {
                                 'Authorization': `Bearer ${keycloak.token}`,
                                 'Content-Type': 'application/json',
                             }
                         });
-
-                  //      setUserCreated(true);
                         return {user: response.data, error: null};
                     } catch (error) {
                         return {user: [], error: error.message};
                     }
 
-            }
-        };
+                } else {
+                    console.log("User found in database: ", user)
+                }
 
-        fetchUsers();
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        checkUserExists();
     }, [sub]);
 
     if (!keycloak.authenticated) {

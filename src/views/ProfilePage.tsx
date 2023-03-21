@@ -46,7 +46,6 @@ function ProfilePage() {
     const handleSubmit = () => {
         // Your form submission logic here
         setFormSubmitted(true);
-        console.log('Form submitted');
     };
 
     return (

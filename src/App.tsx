@@ -46,7 +46,7 @@ function App() {
                            }/>
                     <Route path="/admin"
                            element={
-                               <KeycloakRoute role={ROLES.Admin} redirectTo={"/"}>
+                               <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
                                    <AdminPage />
                                </KeycloakRoute>
                            }/>
