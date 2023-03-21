@@ -1,9 +1,9 @@
 import keycloak from "../keycloak";
 import {Typography} from "@mui/material";
 import ScrollDialog from "../components/dialogs/ScrollDialog";
-import UpdateForm from "../components/forms/UpdateForm";
 import {useState} from "react";
 import Box from "@mui/material/Box";
+import CreateUser from "../components/forms/CreateUser";
 
 interface User {
     name: string;
@@ -83,7 +83,7 @@ function ProfilePage() {
                 </Box>
             }
             <Typography variant="h4" component="h2">
-                Update profile
+                Create User!
             </Typography>
 
             {formSubmitted ? (
@@ -91,7 +91,7 @@ function ProfilePage() {
                     Update submitted!
                 </Typography>
             ) : (
-                <ScrollDialog content={<UpdateForm onSubmit={handleSubmit}  />} buttonText="Open update"  />
+                <ScrollDialog content={<CreateUser onSubmit={handleSubmit}  />} buttonText="Open update"  />
             )}
 
 

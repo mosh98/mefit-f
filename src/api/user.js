@@ -27,18 +27,22 @@ export const createProfile = async (user) => {
   }
 };
 
-export const createUser = async (endPoint, userInfo) => {
+
+/**
+ * Create a new user on the database
+ * @param userInfo
+ * @returns {Promise<{userInfo: *[], error}|{userInfo: any, error: null}>}
+ */
+export const createUser = async (userInfo) => {
   try {
-    const response = await axios.get(`${apiUrl}${endPoint}`, {
-      method: 'POST',
+    const response = await axios.post(`${apiUrl}users/newUser`, userInfo, {
       headers: {
         'Authorization': `Bearer ${keycloak.token}`,
         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userInfo)
+      }
     });
-    return {exercises: response.data, error: null};
+    return {user: response.data, error: null};
   } catch (error) {
-    return {exercises: [], error: error.message};
+    return {user: [], error: error.message};
   }
 }
