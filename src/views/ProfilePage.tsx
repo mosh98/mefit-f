@@ -91,7 +91,7 @@ function ProfilePage() {
                     Update submitted!
                 </Typography>
             ) : (
-                <ScrollDialog content={<UpdateForm onSubmit={handleSubmit}  />} buttonText="Open update"  />
+                <ScrollDialog content={<UpdateForm onSubmit={handleSubmit}  />} buttonText="Open update" headerText="Create user" />
             )}
 
 
