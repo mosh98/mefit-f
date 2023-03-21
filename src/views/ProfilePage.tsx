@@ -49,7 +49,6 @@ function ProfilePage() {
         console.log('Form submitted');
     };
 
-
     return (
         <>
             <Typography variant="h2" component="h1">
@@ -91,10 +90,8 @@ function ProfilePage() {
                     Update submitted!
                 </Typography>
             ) : (
-                <ScrollDialog content={<CreateUser onSubmit={handleSubmit}  />} buttonText="Open update"  />
+                <ScrollDialog content={<CreateUser onSubmit={handleSubmit}  />} buttonText="Open create new user"  />
             )}
-
-
         </>
     );
 }

@@ -8,6 +8,7 @@ import './App.css';
 import DashboardPage from "./views/DashboardPage";
 import SidebarDrawer from "./components/navbar/SidebarDrawer";
 import ExercisesPage from "./views/ExercisesPage";
+import AdminPage from "./views/AdminPage";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
                     />
                     <Route path="/workout"
                            element={
-                               <KeycloakRoute role={ROLES.Admin} redirectTo={"/"}>
+                               <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
                                    <WorkoutPage/>
                                </KeycloakRoute>
                            }/>
@@ -41,6 +42,12 @@ function App() {
                            element={
                                <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
                                    <ExercisesPage/>
+                               </KeycloakRoute>
+                           }/>
+                    <Route path="/admin"
+                           element={
+                               <KeycloakRoute role={ROLES.Admin} redirectTo={"/"}>
+                                   <AdminPage />
                                </KeycloakRoute>
                            }/>
                     <Route path="*" element={<h1>404 - Not Found!</h1>}/>
