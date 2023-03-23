@@ -12,6 +12,7 @@ function StartPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
+
         if (keycloak.authenticated) {
             const init = async () => {
                 try {
@@ -29,7 +30,7 @@ function StartPage() {
             console.log(profile.profileImg == null);
 
             if (profile.profileImg == null) {
-                navigate("/profile");
+                navigate("/registration");
             } else {
                 navigate("/dashboard");
             }
@@ -39,7 +40,10 @@ function StartPage() {
 
 
     function handleLogout() {
+        //Clear local storage
+        localStorage.clear();
         keycloak.logout();
+
     }
 
     return (

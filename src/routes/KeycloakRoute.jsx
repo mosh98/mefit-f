@@ -14,15 +14,16 @@ import {createUser} from "../api/user";
 // If not provided, default to "/"
 function KeycloakRoute({children, role, redirectTo = "/"}) {
     const [isNewUser, setIsNewUser] = useState({});
-    const newUser = {
-        e_mail: keycloak.tokenParsed.email,
-        first_name: keycloak.tokenParsed.given_name,
-        last_name: keycloak.tokenParsed.family_name,
-        keyCloakId: keycloak.tokenParsed.sub,
-    };
+
 
     useEffect(() => {
         if (keycloak.authenticated && isNewUser === {}) {
+            const newUser = {
+                e_mail: keycloak.tokenParsed.email,
+                first_name: keycloak.tokenParsed.given_name,
+                last_name: keycloak.tokenParsed.family_name,
+                keyCloakId: keycloak.tokenParsed.sub,
+            };
             const checkCreateUser = async () => {
                 try {
                     const response = await createUser(newUser);
@@ -35,11 +36,16 @@ function KeycloakRoute({children, role, redirectTo = "/"}) {
             checkCreateUser();
         }
 
-    }, [ newUser]);
+    }, [ ]);
 
     if (!keycloak.authenticated) {
         return <Navigate replace to={redirectTo}/>;
-    } if (keycloak.hasRealmRole(role)) {
+    }
+
+    if (keycloak.hasRealmRole(role)) {
         return <>{children}</>;
-    } return <Navigate replace to={redirectTo}/>;
+    }
+
+    return <Navigate replace to={redirectTo}/>;
+
 }export default KeycloakRoute;
