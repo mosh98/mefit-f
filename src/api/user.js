@@ -16,21 +16,13 @@ export const createUser = async (userInfo) => {
         'Content-Type': 'application/json',
       }
     });
-    return {user: response.status, error: null};
+    return {user: response, error: null};
   } catch (error) {
     return {user: [], error: error.status};
   }
 }
 
-/**axios.post('/api/my-endpoint', myData)
-   .then(function (response) {
-    console.log(response.status);
-    // do something with the response data
-  })
-   .catch(function (error) {
-    console.log(error);
-    // handle the error
-  });*/
+
 
 
 export const fetchUsers = async () => {
