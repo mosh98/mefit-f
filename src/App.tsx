@@ -10,12 +10,13 @@ import SidebarDrawer from "./components/navbar/SidebarDrawer";
 import ExercisesPage from "./views/ExercisesPage";
 import AdminPage from "./views/AdminPage";
 import RegistrationPage from "./views/RegistrationPage";
+import keycloak from "./keycloak";
 
 
 function App() {
     return (
         <BrowserRouter>
-            <SidebarDrawer/>
+            {keycloak.authenticated && <SidebarDrawer/>}
             <main className="container">
                 <Routes>
                     <Route path="/" element={<StartPage/>}/>
