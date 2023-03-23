@@ -25,6 +25,11 @@ function SetGoal() {
       <LevelsCards setLevel={setLevel} level={level} />,
       <ProgramWorkoutCards />,
     ];
+
+     // updates the level state with the selected level
+    const handleLevelChange = (selectedLevel) => {
+          setLevel(selectedLevel);
+    };
   
     const isStepOptional = (step) => {
       return step === 1;
