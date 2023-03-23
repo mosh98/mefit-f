@@ -32,6 +32,7 @@ export default function SidebarDrawer() {
         { to: '/workout', icon: FitnessCenter, text: 'Workouts' },
         { to: '/exercise', icon: FitnessCenter, text: 'Exercise' },
         { to: '/admin', icon: Person, text: 'Admin' },
+        { to: '/setgoals', icon: Person, text: 'Set Goals'}
     ];
 
     return (

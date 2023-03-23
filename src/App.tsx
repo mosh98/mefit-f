@@ -9,6 +9,7 @@ import DashboardPage from "./views/DashboardPage";
 import SidebarDrawer from "./components/navbar/SidebarDrawer";
 import ExercisesPage from "./views/ExercisesPage";
 import AdminPage from "./views/AdminPage";
+import SetGoalPage from "./views/SetGoalPage";
 
 
 function App() {
@@ -29,6 +30,12 @@ function App() {
                     <Route path={"/dashboard"} element={
                         <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
                             <DashboardPage/>
+                        </KeycloakRoute>
+                    }
+                    />
+                    <Route path={"/setgoals"} element={
+                        <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
+                            <SetGoalPage />
                         </KeycloakRoute>
                     }
                     />
