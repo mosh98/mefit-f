@@ -1,7 +1,8 @@
 import keycloak from "../keycloak";
 import {Button} from "@mui/material";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
+import {fetchProfileByKeycloakId} from "../api/profile";
 
 /**
  * Example Start Page using Keycloak Context.
@@ -12,7 +13,27 @@ function StartPage() {
 
     useEffect(() => {
         if (keycloak.authenticated) {
-            navigate("/dashboard");
+            const init = async () => {
+                try {
+                    const { profile } = await fetchProfileByKeycloakId(keycloak.idTokenParsed.sub);
+
+                    localStorage.setItem("profile", JSON.stringify(profile));
+                } catch (error) {
+                    console.log(error);
+                }
+            };
+            init();
+
+            const profile = JSON.parse(localStorage.getItem("profile"));
+
+            console.log(profile.profileImg == null);
+
+            if (profile.profileImg == null) {
+                navigate("/registration");
+            } else {
+                navigate("/dashboard");
+            }
+
         }
     }, [navigate])
 
@@ -43,4 +64,5 @@ function StartPage() {
         </div>
     );
 }
+
 export default StartPage;
