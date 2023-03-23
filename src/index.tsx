@@ -15,9 +15,9 @@ root.render(<Loading message="Connecting to Keycloak..." />)
 initialize()
     .then(() => { // If No Keycloak Error occurred - Display the App
         root.render(
-          //  <React.StrictMode>
+           // <React.StrictMode>
                 <App />
-          //  </React.StrictMode>
+           // </React.StrictMode>
         );
     })
     .catch(() => {

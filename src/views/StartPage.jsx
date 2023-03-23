@@ -29,7 +29,7 @@ function StartPage() {
             console.log(profile.profileImg == null);
 
             if (profile.profileImg == null) {
-                navigate("/registration");
+                navigate("/profile");
             } else {
                 navigate("/dashboard");
             }

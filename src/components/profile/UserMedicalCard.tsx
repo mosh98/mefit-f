@@ -1,6 +1,9 @@
 import {Card, CardActions, CardContent, Typography} from "@mui/material";
 import ScrollDialog from "../../components/dialogs/ScrollDialog";
 import ProfileForm from "../../components/forms/ProfileForm";
+import {useProfileDetailByKeycloakId} from "../../hooks/useProfileDetail";
+import keycloak from "../../keycloak";
+import React from "react";
 
 interface User {
     weight?: number;
@@ -15,7 +18,28 @@ interface UserMedicalCardProps {
     onSubmit: () => void;
 }
 
-function UserMedicalCard({ user, onSubmit }: UserMedicalCardProps) {
+function UserMedicalCard({ onSubmit }: UserMedicalCardProps) {
+
+    const user: User = {
+        // weight: userInfo.profile.weight
+        weight: 0,
+        //  height: userInfo.profile.height ,
+        height: 0,
+        //  disabilities: userInfo.profile.disabilities || '',,
+        disabilities: "hehe" || '',
+        //  medicalConditions: userInfo.profile.medicalConditions
+        medicalConditions: '',
+    };
+
+    const userInfo = useProfileDetailByKeycloakId(keycloak.tokenParsed?.sub);
+
+    if (!userInfo) {
+        return <div>Loading...</div>;
+    }
+    if (userInfo.error) {
+        return <div>Error: {userInfo.error}</div>;
+    }
+
 
     return (
         <Card sx={{ maxWidth: 400 }}>
