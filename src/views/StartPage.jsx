@@ -14,6 +14,7 @@ function StartPage() {
     useEffect(() => {
 
         if (keycloak.authenticated) {
+            setTimeout(() => {
             const init = async () => {
                 try {
                     const { profile } = await fetchProfileByKeycloakId(keycloak.idTokenParsed.sub);
@@ -24,6 +25,7 @@ function StartPage() {
                 }
             };
             init();
+            }, 3000);
 
             const profile = JSON.parse(localStorage.getItem("profile"));
 

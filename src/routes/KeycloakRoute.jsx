@@ -17,13 +17,15 @@ function KeycloakRoute({children, role, redirectTo = "/"}) {
 
 
     useEffect(() => {
-        if (keycloak.authenticated && isNewUser === {}) {
+        if (keycloak.authenticated) {
             const newUser = {
                 e_mail: keycloak.tokenParsed.email,
                 first_name: keycloak.tokenParsed.given_name,
                 last_name: keycloak.tokenParsed.family_name,
                 keyCloakId: keycloak.tokenParsed.sub,
             };
+
+            console.log("newUser ",newUser);
             const checkCreateUser = async () => {
                 try {
                     const response = await createUser(newUser);
