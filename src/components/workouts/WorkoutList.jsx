@@ -1,25 +1,42 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, Box, Typography } from "@mui/material";
 import Paper from '@mui/material/Paper';
 import {Link} from "react-router-dom";
 import { useState } from "react";
-import { KeyboardArrowDown } from "@mui/icons-material";
+import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
+import Collapse from "@mui/material/Collapse";
 
 
 function Row(props) {
-  console.log(props);
+  const [open, setOpen] = useState(false);
+  // console.log(props);
+
   return (
-    <TableRow>
-      <TableCell>
-        <IconButton
-          onClick={() => console.log("Open cell")}
-        >
-          <KeyboardArrowDown />
-        </IconButton>
-      </TableCell>
-      <TableCell>{props.workout.name}</TableCell>
-      <TableCell>{props.workout.type}</TableCell>
-      <TableCell>{props.workout.exercises.length}</TableCell>
-    </TableRow>
+    <>
+      {/* Workout data rows */}
+      <TableRow>
+        <TableCell>
+          <IconButton onClick={() => setOpen(!open)} >
+            {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+          </IconButton>
+        </TableCell>
+        <TableCell>{props.workout.name}</TableCell>
+        <TableCell>{props.workout.type}</TableCell>
+        <TableCell>{props.workout.exercises.length}</TableCell>
+      </TableRow>
+      {/* Collapsible rows */}
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto">
+            <Box sx={{ margin: 1 }}>
+              <Typography variant="h6">Exercises</Typography>
+              <ul>
+                {props.workout.exercises.map(id => <li>{id}</li>)}
+              </ul>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </>
   )
 }
 
@@ -36,21 +53,8 @@ function WorkoutList(props) {
     return <p>Loading workouts...</p>;
   }
 
-
-
   return (
     <div>
-      <ul>
-        {/* {workouts.map((p) => (
-          <li key={p.id}>
-            <Link to={ "/workouts/" + p.id } >
-              <span>{p.name}</span>
-              <span>{p.type}</span>
-              <span>{p.type}</span>
-            </Link>
-          </li>
-        ))} */}
-      </ul>
       <Paper sx={{ width: '99%', mb: 2 }}>
         <TableContainer>
           <Table>
