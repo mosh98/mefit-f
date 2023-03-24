@@ -1,5 +1,7 @@
     import useWorkouts from "../hooks/useWorkouts";
     import WorkoutList from "../components/workouts/WorkoutList";
+    import SelectedWorkout from "../components/workouts/SelectWorkout";
+    import GoalWorkouts from "../components/workouts/GoalWorkouts";
 
 
 function WorkoutPage() {
@@ -14,7 +16,10 @@ function WorkoutPage() {
     return (
         <div>
             <h1>Workout Page</h1>
-<WorkoutList    workouts={workouts} />
+
+            <GoalWorkouts workouts={workouts} />
+            {/*<SelectedWorkout workouts={workouts} />*/}
+            {/*<WorkoutList workouts={workouts} />*/}
 
         </div>
     );

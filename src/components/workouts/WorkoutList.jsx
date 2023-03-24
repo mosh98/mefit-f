@@ -30,9 +30,6 @@ function Row(props) {
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6">Exercises</Typography>
               <ExercisesTableTest exercises={props.workout.exercises} />
-{/*              <ul>
-                {props.workout.exercises.map(id => <li>{id}</li>)}
-              </ul>*/}
             </Box>
           </Collapse>
         </TableCell>
