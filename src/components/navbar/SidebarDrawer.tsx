@@ -27,12 +27,13 @@ const DrawerHeader = styled('div')(({theme}) => ({
 export default function SidebarDrawer() {
 
     const items = [
-        {to: '/', icon: Home, text: 'Start'},
-        {to: '/dashboard', icon: Dashboard, text: 'Dashboard'},
-        {to: '/profile', icon: Person, text: 'Profile'},
-        {to: '/workout', icon: FitnessCenter, text: 'Workouts'},
-        {to: '/exercise', icon: FitnessCenter, text: 'Exercise'},
-        {to: '/admin', icon: Person, text: 'Admin'},
+        { to: '/', icon: Home, text: 'Start' },
+        { to: '/dashboard', icon: Dashboard, text: 'Dashboard' },
+        { to: '/profile', icon: Person, text: 'Profile' },
+        { to: '/workout', icon: FitnessCenter, text: 'Workouts' },
+        { to: '/exercise', icon: FitnessCenter, text: 'Exercise' },
+        { to: '/admin', icon: Person, text: 'Admin' },
+        { to: '/setgoals', icon: Person, text: 'Set Goals'}
     ];
 
     return (
