@@ -64,7 +64,7 @@ function WorkoutList(props) {
             </TableHead>
             <TableBody>
               {workouts.map((workout) => (
-                <Row workout={workout} />
+                <Row key={workout.id} workout={workout} />
               ))}
             </TableBody>
           </Table>
