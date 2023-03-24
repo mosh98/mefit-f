@@ -49,7 +49,7 @@ function ProfilePage() {
         //  height: userInfo.profile.height ,
         height: 0,
         //  disabilities: userInfo.profile.disabilities || '',,
-        disabilities: '',
+        disabilities: "hehe" || '',
         //  medicalConditions: userInfo.profile.medicalConditions
         medicalConditions: '',
         profileImage: "",

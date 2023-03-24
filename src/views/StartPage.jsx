@@ -29,7 +29,7 @@ function StartPage() {
 
             const profile = JSON.parse(localStorage.getItem("profile"));
 
-            console.log(profile.profileImg == null);
+            console.log("profile", profile);
 
             if (profile.profileImg == null) {
                 navigate("/registration");
@@ -61,12 +61,6 @@ function StartPage() {
                 )}
             </section>
 
-            {keycloak.token && (
-                <div>
-                    <h4>Token</h4>
-                    <pre>{keycloak.token}</pre>
-                </div>
-            )}
         </div>
     );
 }

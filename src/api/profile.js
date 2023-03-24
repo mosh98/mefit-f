@@ -37,3 +37,19 @@ export const fetchProfileByKeycloakId = async (keycloakId) => {
         return {profile: [], error: error.message};
     }
 }
+
+// update profile
+export const updateProfile = async (profile, profileId) => {
+    try {
+        const response = await axios.patch(`${apiUrl}profiles/updateProfile/${profileId}`, profile, {
+            headers: {
+                'Authorization': `Bearer ${keycloak.token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        return {profile: response.data, error: null};
+    } catch (error) {
+        return {profile: [], error: error.message};
+
+    }
+}

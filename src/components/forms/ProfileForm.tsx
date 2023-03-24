@@ -8,7 +8,7 @@ interface ProfileFormProps {
 }
 
 interface ProfileFormData {
-    profileImg: string;
+  //  profileImg: string;
     weight: number;
     height: number;
     disabilities?: string;
@@ -17,7 +17,7 @@ interface ProfileFormData {
 
 function ProfileForm({onSubmit, headerText}: ProfileFormProps) {
     const [formData, setFormData] = useState<ProfileFormData>({
-        profileImg: '',
+     //   profileImg: '',
         weight: 0,
         height: 0,
         disabilities: '',
@@ -31,6 +31,7 @@ function ProfileForm({onSubmit, headerText}: ProfileFormProps) {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         onSubmit(formData);
+        console.log("formData ", formData);
     };
 
     return (
@@ -40,15 +41,6 @@ function ProfileForm({onSubmit, headerText}: ProfileFormProps) {
                     <Typography variant="h4" component="h1">
                         {headerText}
                     </Typography>
-                    <TextField
-                        id="profileImg"
-                        type="text"
-                        label="Profile Image"
-                        variant="standard"
-                        //  required
-                        value={formData.profileImg}
-                        onChange={handleChange}
-                    />
                     <TextField
                         id="weight"
                         type="number"
