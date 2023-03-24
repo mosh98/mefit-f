@@ -17,9 +17,10 @@ function WorkoutPage() {
         <div>
             <h1>Workout Page</h1>
 
-            <GoalWorkouts workouts={workouts} />
+            {/*<GoalWorkouts workouts={workouts} />*/}
             {/*<SelectedWorkout workouts={workouts} />*/}
-            {/*<WorkoutList workouts={workouts} />*/}
+
+            <WorkoutList workouts={workouts} />
 
         </div>
     );
