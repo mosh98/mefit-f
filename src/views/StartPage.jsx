@@ -17,11 +17,15 @@ function StartPage() {
             setTimeout(() => {
             const init = async () => {
                 try {
+
                     const { profile } = await fetchProfileByKeycloakId(keycloak.idTokenParsed.sub);
 
                     localStorage.setItem("profile", JSON.stringify(profile));
+
                 } catch (error) {
+
                     console.log(error);
+
                 }
             };
             init();

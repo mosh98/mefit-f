@@ -27,12 +27,19 @@ function KeycloakRoute({children, role, redirectTo = "/"}) {
 
             console.log("newUser ",newUser);
             const checkCreateUser = async () => {
+
                 try {
+
                     const response = await createUser(newUser);
+
                     setIsNewUser(response);
-                    console.log(response);
+
+                    console.log("Create User Response Status ",response);
+
                 } catch (error) {
+
                     console.log(error);
+
                 }
             };
             checkCreateUser();
