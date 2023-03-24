@@ -1,4 +1,5 @@
-import useWorkouts from "../hooks/useWorkouts";
+    import useWorkouts from "../hooks/useWorkouts";
+    import WorkoutList from "../components/workouts/WorkoutList";
 
 
 function WorkoutPage() {
@@ -13,20 +14,7 @@ function WorkoutPage() {
     return (
         <div>
             <h1>Workout Page</h1>
-            {workouts.map((workout) => (
-                <div key={workout.id}>
-                    <h2>{workout.name}</h2>
-                    <p>{workout.goal}</p>
-                    <ul>
-                        {workout.exercises.map((exercise) => (
-                            <li key={exercise.id}>
-                                <h3>{exercise.name}</h3>
-                                <p>Muscle group: {exercise.muscleGroup}</p>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            ))}
+<WorkoutList    workouts={workouts} />
 
         </div>
     );

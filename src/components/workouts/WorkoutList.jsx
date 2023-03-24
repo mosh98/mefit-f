@@ -1,9 +1,9 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, Box, Typography } from "@mui/material";
 import Paper from '@mui/material/Paper';
-import {Link} from "react-router-dom";
 import { useState } from "react";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import Collapse from "@mui/material/Collapse";
+import ExercisesTableTest from "../exercise/ExercisesTableTest";
 
 
 function Row(props) {
@@ -29,9 +29,10 @@ function Row(props) {
           <Collapse in={open} timeout="auto">
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6">Exercises</Typography>
-              <ul>
+              <ExercisesTableTest exercises={props.workout.exercises} />
+{/*              <ul>
                 {props.workout.exercises.map(id => <li>{id}</li>)}
-              </ul>
+              </ul>*/}
             </Box>
           </Collapse>
         </TableCell>
@@ -41,9 +42,7 @@ function Row(props) {
 }
 
 function WorkoutList(props) {
-  const { workouts, error, exercises, exError } = props;
-  // console.log(workouts);
-  // console.log(exercises);
+  const { workouts, error } = props;
 
   if (error) {
     return <p>{error}</p>;
