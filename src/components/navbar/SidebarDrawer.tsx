@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,10 +11,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import {Dashboard, FitnessCenter, Home, Person} from "@mui/icons-material";
 import {Link} from "react-router-dom";
+import keycloak from "../../keycloak";
 
 const drawerWidth = 240;
 
-const DrawerHeader = styled('div')(({ theme }) => ({
+const DrawerHeader = styled('div')(({theme}) => ({
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
@@ -26,17 +27,17 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function SidebarDrawer() {
 
     const items = [
-        { to: '/', icon: Home, text: 'Start' },
-        { to: '/dashboard', icon: Dashboard, text: 'Dashboard' },
-        { to: '/profile', icon: Person, text: 'Profile' },
-        { to: '/workout', icon: FitnessCenter, text: 'Workouts' },
-        { to: '/exercise', icon: FitnessCenter, text: 'Exercise' },
-        { to: '/admin', icon: Person, text: 'Admin' },
+        {to: '/', icon: Home, text: 'Start'},
+        {to: '/dashboard', icon: Dashboard, text: 'Dashboard'},
+        {to: '/profile', icon: Person, text: 'Profile'},
+        {to: '/workout', icon: FitnessCenter, text: 'Workouts'},
+        {to: '/exercise', icon: FitnessCenter, text: 'Exercise'},
+        {to: '/admin', icon: Person, text: 'Admin'},
     ];
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
+        <Box sx={{display: 'flex'}}>
+            <CssBaseline/>
             <Drawer
                 sx={{
                     width: drawerWidth,
@@ -53,18 +54,20 @@ export default function SidebarDrawer() {
                 </DrawerHeader>
                 <List>
                     {items.map((item) => (
-                        <ListItem component={Link} to={item.to} key={item.text} >
+                        <ListItem component={Link} to={item.to} key={item.text}>
                             <ListItemButton>
                                 <ListItemIcon>
-                                    <item.icon />
+                                    <item.icon/>
                                 </ListItemIcon>
-                                <ListItemText primary={item.text} />
+                                <ListItemText primary={item.text}/>
                             </ListItemButton>
                         </ListItem>
                     ))}
                 </List>
-                <Divider />
-
+                <Divider/>
+                {keycloak.authenticated && (
+                    <button onClick={() => keycloak.logout()}>Logout</button>
+                )}
             </Drawer>
         </Box>
     );

@@ -9,33 +9,32 @@ const apiUrl = process.env.REACT_APP_API_URL;
  * @returns {Promise<{userInfo: any[], error}|{userInfo: any, error: null}>}
  */
 export const createUser = async (userInfo) => {
-  try {
-    const response = await axios.post(`${apiUrl}users/newUser`, userInfo, {
-      headers: {
-        'Authorization': `Bearer ${keycloak.token}`,
-        'Content-Type': 'application/json',
-      }
-    });
-    return {user: response.data, error: null};
-  } catch (error) {
-    return {user: [], error: error.message};
-  }
+    try {
+        const response = await axios.post(`${apiUrl}users/newUser`, userInfo, {
+            headers: {
+                'Authorization': `Bearer ${keycloak.token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return {user: response.status, error: null};
+    } catch (error) {
+        return {user: [], error: error.status};
+    }
 }
 
 
-
 export const fetchUsers = async () => {
-  try {
-    const response = await axios.get(`${apiUrl}users/allUsers`, {
-      headers: {
-        'Authorization': `Bearer ${keycloak.token}`,
-        'Content-Type': 'application/json',
-      }
-    });
-    return {users: response.data, error: null};
-  } catch (error) {
-    return {users: [], error: error.message};
-  }
+    try {
+        const response = await axios.get(`${apiUrl}users/allUsers`, {
+            headers: {
+                'Authorization': `Bearer ${keycloak.token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return {users: response.data, error: null};
+    } catch (error) {
+        return {users: [], error: error.message};
+    }
 }
 
 
@@ -46,18 +45,18 @@ export const fetchUsers = async () => {
  */
 
 export const createProfile = async (user) => {
-  try {
-    const { data } = await axios.get("URL-TO-API", {
-      data: user,
-    });
-    return Promise.resolve({
-      user: data,
-      error: null,
-    });
-  } catch (e) {
-    return Promise.reject({
-      error: e.message,
-      user: null,
-    });
-  }
+    try {
+        const {data} = await axios.get("URL-TO-API", {
+            data: user,
+        });
+        return Promise.resolve({
+            user: data,
+            error: null,
+        });
+    } catch (e) {
+        return Promise.reject({
+            error: e.message,
+            user: null,
+        });
+    }
 };
