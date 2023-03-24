@@ -4,6 +4,7 @@ import AddressForm from "../../components/forms/AddressForm";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import keycloak from "../../keycloak";
+import Dialog from "@mui/material/Dialog";
 
 interface User {
     address: string;
@@ -27,6 +28,7 @@ export function UserAddressCard({ user, onSubmit }: UserDetailsCardProps) {
     });
 
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     //create user adress object
 
@@ -64,6 +66,14 @@ export function UserAddressCard({ user, onSubmit }: UserDetailsCardProps) {
     };
 
 
+    //opening and closing modal
+    const handleModalOpen = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+    };
 
     return (
         <>
@@ -79,7 +89,7 @@ export function UserAddressCard({ user, onSubmit }: UserDetailsCardProps) {
                         Country: {userObject.country} <br />
                     </Typography>
                     <CardActions>
-                        <ScrollDialog content={<AddressForm onSubmit={handleFormSubmit} headerText={"Update info"} />} buttonText="Update" headerText="Update info" />
+                        <ScrollDialog  content={<AddressForm onSubmit={handleFormSubmit} headerText={"Update info"} />} buttonText="Update" headerText="Update info"  />
                     </CardActions>
                 </CardContent>
             </Card>
