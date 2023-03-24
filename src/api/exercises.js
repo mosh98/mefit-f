@@ -6,19 +6,19 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 /**
  * SAMPLE FUNCTION: Fetch exercises from a REST API
- * @param {string} endPoint
  * @returns { Promise<{ exercises: [], error: null | string }>} response
  */
 
-export const fetchExercises = async (endPoint) => {
+
+export const fetchExercises = async () => {
     try {
-        const response = await axios.get(`${apiUrl}${endPoint}`, {
+        const response = await axios.get(`${apiUrl}exercises/allExercises`, {
             headers: {
                 'Authorization': `Bearer ${keycloak.token}`,
                 'Content-Type': 'application/json',
             }
         });
-        return {exercise: response.data, error: null};
+        return {exercises: response.data, error: null};
     } catch (error) {
         return {exercises: [], error: error.message};
     }
