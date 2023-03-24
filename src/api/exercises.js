@@ -18,7 +18,7 @@ export const fetchExercises = async (endPoint) => {
                 'Content-Type': 'application/json',
             }
         });
-        return {exercises: response.data, error: null};
+        return {exercise: response.data, error: null};
     } catch (error) {
         return {exercises: [], error: error.message};
     }
