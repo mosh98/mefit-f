@@ -17,6 +17,7 @@ interface AddressFormData {
 }
 
 function AddressForm({onSubmit, headerText}: AddressFormProps) {
+
     const [formData, setFormData] = useState<AddressFormData>({
         address: "",
         post_code: "",
@@ -69,7 +70,7 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
         }
 
     };
-    
+
     const handleClick = () => {
         console.log(formData);
         onSubmit(formData)
@@ -79,12 +80,6 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
         const profile:  Record<string, any>  = JSON.parse(localStorage.getItem('profile') || '{}');
         const address_id: number = profile.address
         updateAddress(address_id, formData)
-
-
-
-
-
-
     };
 
     return (

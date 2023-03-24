@@ -67,13 +67,20 @@ function ProfilePage() {
         console.log("submitting");
     }
 
+
     return (
         <>
             <h1>Profile Page</h1>
 
+            <br/>
+
             <UserProfileCard user={user} />
 
+            <br/>
+
             <UserMedicalCard user={user} onSubmit={handleSubmit} />
+
+            <br/>
 
             <UserAddressCard user={user} onSubmit={handleSubmit} />
 
