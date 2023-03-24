@@ -1,25 +1,36 @@
-import WorkoutList from "../components/workouts/WorkoutList";
-import useExercises from "../hooks/useExcerises";
 import useWorkouts from "../hooks/useWorkouts";
-import WorkoutTest from "./WorkoutTest";
-import {fetchExercises} from "../api/exercises";
+
 
 function WorkoutPage() {
 
     const { workouts, error } = useWorkouts();
-   const { exercises, exError } = useExercises();
-//    const { exercises, exError } =  fetchExercises();
+
+    if (error) return <div>Failed to load workouts</div>;
+    if (!workouts) return <div>Loading...</div>;
 
     console.log("workouts ", workouts, error);
-    console.log("exercises ", exercises, exError);
 
     return (
         <div>
             <h1>Workout Page</h1>
-         {/*   <WorkoutList workouts={ workouts } error={ error } exercises={ exercises } exError={ exError }/>*/}
-            <WorkoutTest />
+            {workouts.map((workout) => (
+                <div key={workout.id}>
+                    <h2>{workout.name}</h2>
+                    <p>{workout.goal}</p>
+                    <ul>
+                        {workout.exercises.map((exercise) => (
+                            <li key={exercise.id}>
+                                <h3>{exercise.name}</h3>
+                                <p>Muscle group: {exercise.muscleGroup}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
 
         </div>
     );
 }
 export default WorkoutPage;
+
+
