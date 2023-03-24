@@ -38,6 +38,7 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
                 }
             })
             setFormData(response.data)
+
         }
         fetchAdress();
 
@@ -68,23 +69,19 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
         }
 
     };
-
-    /**
-     * {
-     *   "address": "string",
-     *   "post_code": "string",
-     *   "city": "string",
-     *   "country": "string",
-     * }
-     */
+    
     const handleClick = () => {
         console.log(formData);
+        onSubmit(formData)
         //TODO: update user profile in server
 
         //get profile from local storage
         const profile:  Record<string, any>  = JSON.parse(localStorage.getItem('profile') || '{}');
         const address_id: number = profile.address
         updateAddress(address_id, formData)
+
+
+
 
 
 

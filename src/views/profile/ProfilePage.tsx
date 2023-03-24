@@ -60,29 +60,7 @@ function ProfilePage() {
         country: "",
     };
 
-    //https://database-mefit.herokuapp.com/addresses/addressByUserId/1
-    useEffect(() => {
 
-        const profile:  Record<string, any>  = JSON.parse(localStorage.getItem('profile') || '{}');
-
-        const fetchAdress = async () => {
-            console.log("Fetch adress from profile page:");
-
-            const response = await axios.get(`https://database-mefit.herokuapp.com/addresses/addressByUserId/${profile.user}`, {
-                headers: {
-                    'Authorization': `Bearer ${keycloak.token}`,
-                    'Content-Type': 'application/json',
-                }
-            })
-            user.address = response.data.address;
-            user.post_code = response.data.post_code;
-            user.city = response.data.city;
-            user.country = response.data.country;
-        }
-
-        fetchAdress();
-        console.log(user)
-    },[]);
 
     function handleSubmit() {
         // Your form submission logic here
