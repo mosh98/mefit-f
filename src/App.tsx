@@ -5,7 +5,6 @@ import ProfilePage from "./views/profile/ProfilePage";
 import KeycloakRoute from "./routes/KeycloakRoute";
 import {ROLES} from "./const/roles";
 import './App.css';
-
 import DashboardPage from "./views/DashboardPage";
 import SidebarDrawer from "./components/navbar/SidebarDrawer";
 import ExercisesPage from "./views/ExercisesPage";
