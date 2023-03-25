@@ -17,10 +17,7 @@ function CreateExercise() {
 
     return (
         <div>
-            <h1>Create Exercises</h1>
-
             <ExerciseForm onSubmit={onCreate} mode="create"/>
-
         </div>
     )
 }

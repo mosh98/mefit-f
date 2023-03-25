@@ -1,8 +1,6 @@
 import {Typography} from "@mui/material";
 import useUsers from "../hooks/useUsers";
 import UserTable from "../components/profile/UserTable";
-import CreateExercise from "../components/exercise/CreateExercise";
-
 
 function AdminPage() {
 
@@ -15,8 +13,6 @@ function AdminPage() {
             <Typography variant="h2" component="h1">
                 Admin Page
             </Typography>
-
-            <CreateExercise />
 
             <div>
                 <h1>Users List</h1>

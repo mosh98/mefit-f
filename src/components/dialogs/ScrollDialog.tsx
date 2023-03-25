@@ -9,7 +9,7 @@ import {ReactNode, useEffect, useRef} from "react";
 interface ScrollDialogProps {
     content: ReactNode;
     buttonText: string;
-    headerText: string;
+    headerText?: string;
 }
 
 function ScrollDialog({ content, buttonText, headerText }: ScrollDialogProps) {

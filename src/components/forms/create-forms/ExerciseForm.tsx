@@ -80,7 +80,7 @@ function ExerciseForm({ onSubmit, mode, initialData }: ExerciseFormProps) {
                             label="Description"
                             variant="standard"
                             multiline
-                            rows={5}
+                            rows={4}
                             required
                             value={formData.description}
                             onChange={handleChange}
