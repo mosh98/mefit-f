@@ -1,9 +1,10 @@
-import ExercisesTable from "../components/exercise/ExercisesTable";
 import ExercisesTableTest from "../components/exercise/ExercisesTableTest";
 import useExercises from "../hooks/useExcerises";
+import ExercisesCheckmark from "../components/exercise/ExerciseCheckmark";
+import keycloak from "../keycloak";
 
 function ExercisesPage() {
-    const { exercises, error } = useExercises();
+    const {exercises, error} = useExercises();
 
     if (error) {
         return <p>{error}</p>;
@@ -15,9 +16,14 @@ function ExercisesPage() {
     return (
         <div>
             <h1>Exercise Overview</h1>
-            {/*<ExercisesTable />*/}
-            <ExercisesTableTest exercises={exercises}  />
+
+            {keycloak.hasRealmRole('ADMIN') ? <ExercisesCheckmark exercises={exercises} pageAction={'update'}/>
+                : <ExercisesTableTest exercises={exercises}/>}
+
+            {/*<ExercisesCheckmark exercises={exercises} pageAction={'checkbox'} />*/}
+
         </div>
     );
 }
+
 export default ExercisesPage;

@@ -1,0 +1,1 @@
+export const userExperience = ["Beginner", "Intermediate", "Expert"];
