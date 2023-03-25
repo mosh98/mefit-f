@@ -18,7 +18,7 @@ function ExercisesPage() {
             <h1>Exercise Overview</h1>
 
             {keycloak.hasRealmRole('ADMIN') ? <ExercisesCheckmark exercises={exercises} pageAction={'update'}/>
-                : <ExercisesTableTest exercises={exercises}/>}
+                : <ExercisesTableTest exercises={exercises} tableSize={'normal'}/>}
 
             {/*<ExercisesCheckmark exercises={exercises} pageAction={'checkbox'} />*/}
 

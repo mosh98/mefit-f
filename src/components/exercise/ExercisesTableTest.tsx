@@ -9,6 +9,8 @@ import Paper from '@mui/material/Paper';
 import ScrollDialog from "../../components/dialogs/ScrollDialog";
 import { Box } from '@mui/system';
 import { useState } from 'react';
+import {Checkbox} from "@mui/material";
+import ExerciseForm from "../forms/create-forms/ExerciseForm";
 
 interface Exercise {
     muscleGroup: string;
@@ -21,10 +23,11 @@ interface Exercise {
 
 interface Props {
     exercises: Exercise[];
+    tableSize: "small" | "normal";
 }
 
 export default function ExercisesTableTest(props: Props) {
-    const { exercises } = props;
+    const { exercises, tableSize } = props;
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -92,7 +95,7 @@ export default function ExercisesTableTest(props: Props) {
             <Box sx={{ width: '100%' }}>
                 <Paper sx={{ width: '99%', mb: 2 }}>
                     <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: 650 }} aria-label="exercise table">
+                        <Table sx={{ minWidth: 650 }} size={tableSize === 'small' ? 'small' : 'medium'} aria-label="exercise table">
                             <TableHead>
                                 <TableRow>
                                     {headCells.map((headcell) => (

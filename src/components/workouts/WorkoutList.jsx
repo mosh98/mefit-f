@@ -29,7 +29,7 @@ function Row(props) {
           <Collapse in={open} timeout="auto">
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6">Exercises</Typography>
-              <ExercisesTableTest exercises={props.workout.exercises} />
+              <ExercisesTableTest exercises={props.workout.exercises} tableSize={'small'} />
             </Box>
           </Collapse>
         </TableCell>
