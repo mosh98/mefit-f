@@ -1,12 +1,15 @@
 import keycloak from "../keycloak";
-import {Button} from "@mui/material";
+import {Button, CircularProgress} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import React, {useEffect} from "react";
 import {fetchProfileByKeycloakId} from "../api/profile";
+import {Box} from "@mui/system";
 
 /**
  * Example Start Page using Keycloak Context.
  */
+
+// TODO: add error handling for Forms
 function StartPage() {
 
     const navigate = useNavigate();
@@ -14,7 +17,7 @@ function StartPage() {
     useEffect(() => {
 
         if (keycloak.authenticated) {
-            setTimeout(() => {
+
             const init = async () => {
                 try {
 
@@ -29,10 +32,9 @@ function StartPage() {
                 }
             };
             init();
-            }, 3000);
 
+        setTimeout(() => {
             const profile = JSON.parse(localStorage.getItem("profile"));
-
             console.log("profile", profile);
 
             if (profile.profileImg == null) {
@@ -40,17 +42,15 @@ function StartPage() {
             } else {
                 navigate("/dashboard");
             }
-
+        }, 1500);
         }
     }, [navigate])
 
 
-    function handleLogout() {
-        //Clear local storage
+    /*function handleLogout() {
         localStorage.clear();
         keycloak.logout();
-
-    }
+    }*/
 
     return (
         <div>
@@ -61,7 +61,10 @@ function StartPage() {
                     <Button onClick={() => keycloak.login()}>Login</Button>
                 )}
                 {keycloak.authenticated && (
-                    <Button onClick={handleLogout}>Logout</Button>
+                    <Box sx={{ display: 'flex' }}>
+                        <CircularProgress />
+                    </Box>
+                    /*<Button onClick={handleLogout}>Logout</Button>*/
                 )}
             </section>
 
