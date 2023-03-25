@@ -7,7 +7,7 @@ interface User {
     weight?: number;
     height?: number;
     disabilities?: string;
-    medicalConditions?: string;
+    medicalCondition?: string;
     profileImage?: string;
 }
 
@@ -23,7 +23,7 @@ function UserMedicalCard({ onSubmit }: UserMedicalCardProps) {
         weight: userInfo.weight || 0,
         height: userInfo.height || 0,
         disabilities: userInfo.disabilities,
-        medicalConditions: userInfo.medicalConditions || '',
+        medicalCondition: userInfo.medicalCondition || '',
     };
 
 
@@ -41,11 +41,11 @@ function UserMedicalCard({ onSubmit }: UserMedicalCardProps) {
                     User Medical Info
                 </Typography>
                 <Typography variant="body2" sx={{ fontSize: 16 }}>
-                    Medical Conditions: {user.medicalConditions} <br />
+                    Medical Conditions: {user.medicalCondition} <br />
                     Weight: {user.weight} <br />
                     Height: {user.height} <br />
                     Disabilities: {user.disabilities} <br />
-                    Medical Conditions: {user.medicalConditions} <br />
+                    Medical Conditions: {user.medicalCondition} <br />
                 </Typography>
                 <CardActions>
                     <ScrollDialog content={<ProfileForm onSubmit={onSubmit} headerText={"Update info"} />} buttonText="Update" headerText="Update info" />

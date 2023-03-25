@@ -18,7 +18,7 @@ export default function RegistrationStepper() {
         weight: 0,
         height: 0,
         disabilities: '',
-        medicalConditions: '',
+        medicalCondition: '',
     });
 
     const handleAvatarSelect = (profileImg: any) => {
@@ -58,7 +58,7 @@ export default function RegistrationStepper() {
             weight: 0,
             height: 0,
             disabilities: '',
-            medicalConditions: '',
+            medicalCondition: '',
         });
     };
 
@@ -118,7 +118,7 @@ export default function RegistrationStepper() {
                                     </Box>
                                     <Box sx={{ display: 'flex' }}>
                                         <Typography sx={{ fontWeight: 'bold', mr: 1 }}>Medical conditions:</Typography>
-                                        <Typography>{formData.medicalConditions}</Typography>
+                                        <Typography>{formData.medicalCondition}</Typography>
                                     </Box>
                                 </Box>
                             </Box>

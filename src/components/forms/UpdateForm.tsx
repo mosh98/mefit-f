@@ -18,7 +18,7 @@ interface RegisterFormData {
     weight: number;
     height: number;
     disabilities?: string;
-    medicalConditions?: string;
+    medicalCondition?: string;
 }
 
 function UpdateForm({onSubmit}: RegisterFormProps) {
@@ -34,7 +34,7 @@ function UpdateForm({onSubmit}: RegisterFormProps) {
         weight: 0,
         height: 0,
         disabilities: '',
-        medicalConditions: '',
+        medicalCondition: '',
     });
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -153,11 +153,11 @@ function UpdateForm({onSubmit}: RegisterFormProps) {
                         onChange={handleChange}
                     />
                     <TextField
-                        id="medicalConditions"
+                        id="medicalCondition"
                         type="text"
                         label="Medical Conditions"
                         variant="standard"
-                        value={formData.medicalConditions}
+                        value={formData.medicalCondition}
                         onChange={handleChange}
                     />
                     <Button

@@ -12,7 +12,7 @@ interface ProfileFormData {
     weight: number;
     height: number;
     disabilities?: string;
-    medicalConditions?: string;
+    medicalCondition?: string;
 }
 
 function ProfileForm({onSubmit, headerText}: ProfileFormProps) {
@@ -21,7 +21,7 @@ function ProfileForm({onSubmit, headerText}: ProfileFormProps) {
         weight: 0,
         height: 0,
         disabilities: '',
-        medicalConditions: '',
+        medicalCondition: '',
     });
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -68,11 +68,11 @@ function ProfileForm({onSubmit, headerText}: ProfileFormProps) {
                         onChange={handleChange}
                     />
                     <TextField
-                        id="medicalConditions"
+                        id="medicalCondition"
                         type="text"
                         label="Medical Conditions"
                         variant="standard"
-                        value={formData.medicalConditions}
+                        value={formData.medicalCondition}
                         onChange={handleChange}
                     />
                     <Button
