@@ -16,9 +16,6 @@ import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import Collapse from "@mui/material/Collapse";
 import ExercisesTableNew from "../exercise/ExercisesTableNew";
 
-
-
-
 function Row(props) {
     const [open, setOpen] = useState(false);
 
@@ -46,7 +43,10 @@ function Row(props) {
                     <Checkbox
                         checked={isChecked()}
                         onChange={(event) => {
-                            props.handleCheckboxChange(props.workout.id, event.target.checked);
+                            props.handleCheckboxChange(
+                                props.workout,
+                                event.target.checked
+                            );
                         }}
                     />
                 </TableCell>
@@ -69,19 +69,27 @@ function Row(props) {
 function WorkoutListCheckmark(props) {
     const { workouts, error, mode, onWorkoutSelection, onWorkoutCompletion } = props;
     const [checkedIds, setCheckedIds] = useState([]);
+    const [pickedWorkouts, setPickedWorkouts] = useState([]);
 
-    const handleCheckboxChange = (workoutId, checked) => {
+    const handleCheckboxChange = (workout, checked) => {
         if (mode === "select") {
             if (checked) {
-                onWorkoutSelection([...checkedIds, workoutId]);
-                setCheckedIds([...checkedIds, workoutId]);
-            } else {
-                const newCheckedIds = checkedIds.filter((id) => id !== workoutId);
-                onWorkoutSelection(newCheckedIds);
+                const newCheckedIds = [...checkedIds, workout.id];
+                const newPickedWorkouts = [...pickedWorkouts, workout];
+                onWorkoutSelection(newPickedWorkouts);
                 setCheckedIds(newCheckedIds);
+                setPickedWorkouts(newPickedWorkouts);
+            } else {
+                const newCheckedIds = checkedIds.filter((id) => id !== workout.id);
+                const newPickedWorkouts = pickedWorkouts.filter(
+                    (w) => w.id !== workout.id
+                );
+                onWorkoutSelection(newPickedWorkouts);
+                setCheckedIds(newCheckedIds);
+                setPickedWorkouts(newPickedWorkouts);
             }
         } else if (mode === "complete") {
-            onWorkoutCompletion(workoutId, checked);
+            onWorkoutCompletion(workout.id, checked);
         }
     };
 
@@ -92,6 +100,7 @@ function WorkoutListCheckmark(props) {
     if (!workouts) {
         return <p>Loading workouts...</p>;
     }
+
 
     return (
         <div>

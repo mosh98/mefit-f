@@ -3,7 +3,7 @@ import {Box, Button, Stepper, Step, StepLabel, Typography, Stack} from '@mui/mat
 import WorkoutForm from "../forms/create-forms/WorkoutForm";
 import TransferList from "../TransferList";
 import * as React from "react";
-import {SortExercises} from "../SortExercises";
+import {SortByExperienceLevel} from "../SortByExperienceLevel";
 import useExercises from "../../hooks/useExcerises";
 import {Exercise, Workout} from "../../const/interface";
 import WorkoutSummary from "./WorkoutSummary";
@@ -111,7 +111,7 @@ export default function CreateWorkoutStepper() {
             ) : (
                 <Fragment>
                     {activeStep === 0 && (
-                        <SortExercises
+                        <SortByExperienceLevel
                             onUserExperienceChange={handleSelectedExperienceChange}/>
                     )}
                     {activeStep === 1 && (

@@ -1,4 +1,4 @@
-import SetGoal from "../components/forms/setgoal/SetGoal";
+import SetGoalNew from "../components/forms/setgoal/SetGoalNew";
 
 
 function SetGoalPage() {
@@ -6,7 +6,7 @@ function SetGoalPage() {
     return (
         <>
             <p>setgoal page</p>
-            <SetGoal />
+            <SetGoalNew />
         </>
         
     );

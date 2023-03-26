@@ -1,5 +1,6 @@
 import {Card, CardContent, Typography} from "@mui/material";
 import keycloak from "../keycloak";
+import GoalWorkouts from "../components/workouts/GoalWorkouts";
 
 function DashboardPage() {
 
@@ -17,6 +18,8 @@ function DashboardPage() {
                 </Typography>
             </CardContent>
         </Card>
+
+        {/*<GoalWorkouts workouts={workouts} />*/}
     </div>
   );
 }

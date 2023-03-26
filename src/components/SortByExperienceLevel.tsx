@@ -10,7 +10,7 @@ interface SortExercisesProps {
     onUserExperienceChange: (experience: string) => void;
 }
 
-export function SortExercises({ onUserExperienceChange }: SortExercisesProps) {
+export function SortByExperienceLevel({ onUserExperienceChange }: SortExercisesProps) {
     const [selectedValue, setSelectedValue] = React.useState('');
 
     const handleChange = (event: { target: { value: any; }; }) => {

@@ -8,7 +8,6 @@ import ExercisesTableNew from "../exercise/ExercisesTableNew";
 
 function Row(props) {
   const [open, setOpen] = useState(false);
-  // console.log(props);
 
   return (
     <>

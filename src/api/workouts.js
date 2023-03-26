@@ -36,7 +36,6 @@ export const postWorkout = async (workout) => {
                 'Authorization': `Bearer ${keycloak.token}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(workout)
         });
         return {workout: response.data, error: null};
     } catch (error) {

@@ -9,6 +9,7 @@ const WorkoutSummary = ({ workout }: WorkoutSummaryProps) => {
     return (
         <div>
             <Typography variant="h5">Workout Summary</Typography>
+            <Typography>Workout ID: {workout.id}</Typography>
             <Typography>Name: {workout.name}</Typography>
             <Typography>Type: {workout.type}</Typography>
             <Typography>Experience Level: {workout.experienceLevel}</Typography>
