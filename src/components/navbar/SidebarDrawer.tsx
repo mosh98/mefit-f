@@ -9,7 +9,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import {Dashboard, FitnessCenter, Home, Person} from "@mui/icons-material";
+import {Dashboard, FitnessCenter, Person} from "@mui/icons-material";
 import {Link} from "react-router-dom";
 import LogoutButton from "../LogoutButton";
 import {ListSubheader} from "@mui/material";
@@ -28,7 +28,6 @@ const DrawerHeader = styled('div')(({theme}) => ({
 export default function SidebarDrawer() {
 
     const pageItems = [
-        { to: '/', icon: Home, text: 'Start' },
         { to: '/dashboard', icon: Dashboard, text: 'Dashboard' },
         { to: '/profile', icon: Person, text: 'Profile' },
         { to: '/admin', icon: Person, text: 'Admin' },
