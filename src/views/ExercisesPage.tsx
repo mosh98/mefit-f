@@ -1,4 +1,4 @@
-import ExercisesTableTest from "../components/exercise/ExercisesTableTest";
+import ExercisesTableNew from "../components/exercise/ExercisesTableNew";
 import useExercises from "../hooks/useExcerises";
 import ExercisesCheckmark from "../components/exercise/ExerciseCheckmark";
 import keycloak from "../keycloak";
@@ -23,7 +23,7 @@ function ExercisesPage() {
                 <ScrollDialog content={<CreateExercise />} buttonText="Create exercise"/>
                 <ExercisesCheckmark exercises={exercises} pageAction={'update'}/>
                 </>
-                : <ExercisesTableTest exercises={exercises} tableSize={'normal'}/>}
+                : <ExercisesTableNew exercises={exercises} tableSize={'normal'}/>}
 
             {/*<ExercisesCheckmark exercises={exercises} pageAction={'checkbox'} />*/}
 

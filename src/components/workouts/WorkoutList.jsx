@@ -3,7 +3,7 @@ import Paper from '@mui/material/Paper';
 import { useState } from "react";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import Collapse from "@mui/material/Collapse";
-import ExercisesTableTest from "../exercise/ExercisesTableTest";
+import ExercisesTableNew from "../exercise/ExercisesTableNew";
 
 
 function Row(props) {
@@ -29,7 +29,7 @@ function Row(props) {
           <Collapse in={open} timeout="auto">
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6">Exercises</Typography>
-              <ExercisesTableTest exercises={props.workout.exercises} tableSize={'small'} />
+              <ExercisesTableNew exercises={props.workout.exercises} tableSize={'small'} />
             </Box>
           </Collapse>
         </TableCell>

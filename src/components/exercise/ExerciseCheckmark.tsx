@@ -1,18 +1,16 @@
-import TableContainer from '@mui/material/TableContainer';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import { useState } from 'react';
+import Checkbox from '@mui/material/Checkbox';
+import Box from '@mui/system/Box';
 import Paper from '@mui/material/Paper';
-
-import ScrollDialog from "../../components/dialogs/ScrollDialog";
-import {Box} from '@mui/system';
-import {useState} from 'react';
-import {Checkbox} from "@mui/material";
-import ExerciseForm, {ExerciseFormData} from "../forms/create-forms/ExerciseForm";
-import {patchExercise, postExercise} from "../../api/exercises";
-
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import Table from '@mui/material/Table';
+import ScrollDialog from '../../components/dialogs/ScrollDialog';
+import ExerciseForm, { ExerciseFormData } from '../forms/create-forms/ExerciseForm';
+import { patchExercise } from '../../api/exercises';
 interface Exercise {
     id: number;
     muscleGroup: string;
@@ -33,23 +31,9 @@ interface Props {
 export default function ExercisesCheckmark(props: Props) {
     const {exercises, pageAction} = props;
     const [open, setOpen] = useState(false);
-    const handleClickOpen = () => {
-        setOpen(true);
-    }
 
-    const handleClose = () => {
-        setOpen(false);
-    }
-
-    const handleCheckboxChange = (exercise: Exercise) => {
-        // implement checkbox change logic here
-        console.log("Is checkbox exercise ", exercise);
-    };
-
-    const handleUpdateExercise = (exercise: Exercise) => {
-        // implement update exercise logic here
-        console.log("Is update exercise ", exercise);
-    };
+    const handleClickOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     // Model
     interface Data {
@@ -69,36 +53,12 @@ export default function ExercisesCheckmark(props: Props) {
     }
 
     const headCells: readonly HeadCell[] = [
-        {
-            id: 'name',
-            numeric: false,
-            label: 'Name',
-        },
-        {
-            id: 'description',
-            numeric: false,
-            label: 'Description'
-        },
-        {
-            id: 'muscleGroup',
-            numeric: false,
-            label: 'Muscle group',
-        },
-        {
-            id: 'userExperience',
-            numeric: true,
-            label: 'User experience',
-        },
-        {
-            id: 'sets',
-            numeric: true,
-            label: 'Sets',
-        },
-        {
-            id: 'reps',
-            numeric: true,
-            label: 'Reps',
-        },
+        { id: 'name', numeric: false, label: 'Name' },
+        { id: 'description', numeric: false, label: 'Description' },
+        { id: 'muscleGroup', numeric: false, label: 'Muscle group' },
+        { id: 'userExperience', numeric: true, label: 'User experience' },
+        { id: 'sets', numeric: true, label: 'Sets' },
+        { id: 'reps', numeric: true, label: 'Reps' },
     ];
 
 

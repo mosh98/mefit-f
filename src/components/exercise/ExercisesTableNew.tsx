@@ -9,24 +9,14 @@ import Paper from '@mui/material/Paper';
 import ScrollDialog from "../../components/dialogs/ScrollDialog";
 import { Box } from '@mui/system';
 import { useState } from 'react';
-import {Checkbox} from "@mui/material";
-import ExerciseForm from "../forms/create-forms/ExerciseForm";
-
-interface Exercise {
-    muscleGroup: string;
-    sets: number;
-    userExperience: string;
-    name: string;
-    reps: number;
-    description: string;
-}
+import { Exercise } from "../../const/interface"
 
 interface Props {
     exercises: Exercise[];
     tableSize: "small" | "normal";
 }
 
-export default function ExercisesTableTest(props: Props) {
+export default function ExercisesTableNew(props: Props) {
     const { exercises, tableSize } = props;
     const [open, setOpen] = useState(false);
 

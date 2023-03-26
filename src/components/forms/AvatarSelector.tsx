@@ -43,14 +43,14 @@ function AvatarSelector({ onSelect, headerText, handleSubmit  }: AvatarSelectorP
                         {avatars.map((avatar, index) => (
                         <img
                             key={index}
-                            src={`/avatars/${avatar}`}
+                            src={`/img/avatars/${avatar}`}
                             alt="avatar"
-                            onClick={() => handleSelect(`/avatars/${avatar}`)}
+                            onClick={() => handleSelect(`/img/avatars/${avatar}`)}
                             style={{
                                 width: "100px",
                                 height: "100px",
                                 border:
-                                    selectedAvatar === `/avatars/${avatar}` ? "2px solid blue" : "none",
+                                    selectedAvatar === `/img/avatars/${avatar}` ? "2px solid blue" : "none",
                             }}
                         />
                     ))}

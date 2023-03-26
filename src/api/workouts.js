@@ -24,6 +24,26 @@ export const fetchWorkouts = async (endPoint) => {
     }
 }
 
+/**
+ * Post a workout to the API
+ * @param workout
+ * @returns {Promise<{workout: null, error}|{workout: any, error: null}>}
+ */
+export const postWorkout = async (workout) => {
+    try {
+        const response = await axios.post(`${apiUrl}workouts/createWorkout`, workout, {
+            headers: {
+                'Authorization': `Bearer ${keycloak.token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(workout)
+        });
+        return {workout: response.data, error: null};
+    } catch (error) {
+        return {workout: null, error: error.message};
+    }
+}
+
 
 /**
  * Fetch a workout by its id.

@@ -53,7 +53,7 @@ function ExerciseForm({ onSubmit, mode, initialData }: ExerciseFormProps) {
         onSubmit(formData);
     };
 
-    const handleChangeSelect = (e: SelectChangeEvent<string>) => {
+    const handleChangeSelect = (e: SelectChangeEvent) => {
         setFormData({ ...formData, userExperience: e.target.value });
     };
 

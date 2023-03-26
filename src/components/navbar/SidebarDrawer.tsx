@@ -57,7 +57,7 @@ export default function SidebarDrawer() {
                 <DrawerHeader>
                 </DrawerHeader>
                 <Divider/>
-                <List subheader={<ListSubheader>Pages</ListSubheader>}>                    {pageItems.map((item) => (
+                <List subheader={<ListSubheader>Pages</ListSubheader>}> {pageItems.map((item) => (
                         <ListItem component={Link} to={item.to} key={item.text}>
                             <ListItemButton>
                                 <ListItemIcon>

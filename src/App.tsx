@@ -12,6 +12,7 @@ import AdminPage from "./views/AdminPage";
 import RegistrationPage from "./views/RegistrationPage";
 import keycloak from "./keycloak";
 import SetGoalPage from "./views/SetGoalPage";
+import CreateWorkoutPage from "./views/CreateWorkoutPage";
 
 
 
@@ -64,6 +65,12 @@ function App() {
                            element={
                                <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
                                    <RegistrationPage />
+                               </KeycloakRoute>
+                           }/>
+                    <Route path="/create-workout"
+                           element={
+                               <KeycloakRoute role={ROLES.Admin} redirectTo={"/"}>
+                                   <CreateWorkoutPage />
                                </KeycloakRoute>
                            }/>
                     <Route path="*" element={<h1>404 - Not Found!</h1>}/>
