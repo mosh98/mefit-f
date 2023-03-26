@@ -21,6 +21,7 @@ function LevelsCards(props) {
 
     setSelectedValue(selectedLevelId);
     props.setLevel(selectedLevel); // call the setLevel function passed in as a prop
+    localStorage.setItem('selectedLevel', JSON.stringify(selectedLevel));
     console.log(selectedLevel)
   };
 
@@ -51,7 +52,7 @@ function LevelsCards(props) {
     
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
     {levels.map((level) => (
-    <Card sx={{ width: 345, height: 200, margin: '0.5rem' }} key={level.id}>
+    <Card sx={{ Maxwidth: 345, height: 250, margin: '0.5rem' }} key={level.id}>
       <CardActionArea>
 
         <CardContent>
