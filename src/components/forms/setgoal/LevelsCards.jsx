@@ -5,20 +5,25 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Radio from '@mui/material/Radio';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 
 
 function LevelsCards(props) {
-  const [selectedValue, setSelectedValue] = React.useState('1');
+  const [selectedValue, setSelectedValue] = useState('');
+
+  useEffect(() => {
+    const savedSelection = JSON.parse(localStorage.getItem('selectedLevel'));
+    if (savedSelection) {
+      setSelectedValue(savedSelection.id.toString());
+    }
+  }, []);
 
   const handleChange = (event) => {
     const selectedLevelId = event.target.value;
     const selectedLevel = levels.find((level) => level.id.toString() === selectedLevelId);
     props.setLevel(selectedLevel);
-    console.log("1:"+selectedLevel)
-
     setSelectedValue(selectedLevelId);
     props.setLevel(selectedLevel); // call the setLevel function passed in as a prop
     localStorage.setItem('selectedLevel', JSON.stringify(selectedLevel));
@@ -52,7 +57,7 @@ function LevelsCards(props) {
     
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
     {levels.map((level) => (
-    <Card sx={{ Maxwidth: 345, height: 250, margin: '0.5rem' }} key={level.id}>
+    <Card sx={{ Maxwidth: 345, Maxheight: 300, margin: '0.5rem' }} key={level.id}>
       <CardActionArea>
 
         <CardContent>

@@ -6,16 +6,28 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Radio from '@mui/material/Radio';
 import Stack from '@mui/material/Stack';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 
 
-function ProgramWorkoutCards() {
-  const [selectedValue, setSelectedValue] = React.useState('1');
+function ProgramWorkoutCards(props) {
+  const [selectedValue, setSelectedValue] = useState('');
+
+  useEffect(() => {
+    const savedSelection = JSON.parse(localStorage.getItem('programWorkoutSelection'));
+    if (savedSelection) {
+      setSelectedValue(savedSelection.id.toString());
+    }
+  }, []);
 
   const handleChange = (event) => {
-    setSelectedValue(event.target.value);
+    const selectedPorWId =event.target.value;
+    const selectedPorW = picks.find((pick)=> pick.id.toString()=== selectedPorWId)
+    props.setProgramWorkout(selectedPorWId);
+    setSelectedValue(selectedPorWId);
+    props.setProgramWorkout(selectedPorWId);
+    localStorage.setItem('programWorkoutSelection', JSON.stringify(selectedPorW));
   };
 
   const [picks, setPicks] = useState( [
@@ -61,8 +73,15 @@ function ProgramWorkoutCards() {
 
       <CardActions style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '1rem' }}>
   
-          <Button variant="contained"  >{pick.button_name}</Button>
-       
+         {/*  <Button variant="contained"  >{pick.button_name}</Button> */}
+         <Radio
+          
+          checked={selectedValue === pick.id.toString()}
+          onChange={handleChange}
+          value={pick.id.toString()}
+          name="radio-buttons"
+          inputProps={{ 'aria-label': pick.name }}
+        />
       </CardActions>
     </Card>
     ))}

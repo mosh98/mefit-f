@@ -8,9 +8,10 @@ import Typography from '@mui/material/Typography';
 import GoalsCards from './GoalsCards';
 import LevelsCards from './LevelsCards';
 import ProgramWorkoutCards from './ProgramWorkoutCards';
+import ProgramORWorkouts from './ProgramORWorkouts';
 import { useState } from 'react';
 
-const steps = ['What is your goal?', 'What is your Level?', 'Select a program or workouts.'];
+const steps = ['What is your goal?', 'What is your Level?', 'Select a program or workouts', 'Select your workouts.'];
 
 function SetGoal() {
     const [content, setContent] = useState(<GoalsCards />);
@@ -18,12 +19,14 @@ function SetGoal() {
     const [skipped, setSkipped] = React.useState(new Set());
     const [goal, setGoal] = useState(null);
     const [level, setLevel] = useState(null);
+    const [programWorkout, setProgramWorkout] = useState(null);
 
 
     const stepsContent = [
       <GoalsCards setGoal={setGoal} goal={goal} />,
       <LevelsCards setLevel={setLevel} level={level} />,
-      <ProgramWorkoutCards />,
+      <ProgramWorkoutCards setProgramWorkout={setProgramWorkout} programWorkout={programWorkout}/>,
+      <ProgramORWorkouts/>,
     ];
 
      // updates the level state with the selected level
@@ -65,6 +68,9 @@ function SetGoal() {
         case 2:
           setLevel(null); // reset the state of the LevelsCards component
           break;
+          case 3:
+          setProgramWorkout(null); // reset the state of the ProgramWorkoutCards component
+            break;
         default:
           break;
       }
