@@ -138,7 +138,7 @@ function SetGoal() {
                         </Typography>
 
                         {selectedWorkouts.map((workout) => (
-                            <WorkoutSummary workout={workout} />
+                            <WorkoutSummary key={workout.id} workout={workout} />
                         ))
                         }
                         <Button onClick={handleSubmit}>Submit</Button>
