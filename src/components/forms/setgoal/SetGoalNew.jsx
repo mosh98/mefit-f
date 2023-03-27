@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import GoalsCards from './GoalsCards';
 import ProgramWorkoutCards from './ProgramWorkoutCards';
 import { useState } from 'react';
+import {SortByTargetArea} from '../../SortByTargetArea';
 import {SortByExperienceLevel} from "../../SortByExperienceLevel";
 import useWorkouts from "../../../hooks/useWorkouts";
 import WorkoutSummary from "../../workouts/WorkoutSummary";
@@ -15,14 +16,15 @@ import axios from "../../../api";
 import keycloak from "../../../keycloak";
 
 
-const steps = ['What is your goal?', 'What is your Level?', 'Select a program or workouts.'];
+const steps = ['What is your Taget Area?', 'What is your Level?', 'Select a program or workouts.'];
 
 function SetGoal() {
     const {workouts, isLoading, isError} = useWorkouts();  // steg 1
-    const [content, setContent] = useState(<GoalsCards />);
+    const [content, setContent] = useState(<SortByTargetArea />);
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
-    const [goal, setGoal] = useState(null);  // ska bli nr 2 (targeteria)
+    //const [goal, setGoal] = useState(null);  // ska bli nr 2 (targeteria)
+    const [targetArea, setTargetArea] = useState(null);
     const [level, setLevel] = useState(null); // steg 2, ska bli 3
     const [selectedWorkouts, setSelectedWorkouts] = useState([]);
 
@@ -38,24 +40,44 @@ function SetGoal() {
 
     const profile = JSON.parse(localStorage.getItem('profile'));
 
+    function handleSelectedTargetAreaChange(targetArea) {
+        setTargetArea(targetArea)
+        console.log("handleSelectedTargetAreaChange", targetArea);
+    }
+
     function handleSelectedExperienceChange(experience) {
         setLevel(experience)
         console.log("handleSelectedExperienceChange", experience);
     }
 
-    const workoutsBySelectedExperience = workouts.filter((workout) => {
-        return !level || workout.experienceLevel === level;
+    const workoutsBySelectedTargetArea = workouts.filter((workout) => {
+        return !targetArea || workout.type === targetArea;
+        
     });
+
+    console.log("TargetArea "+level)
+
+
+    const workoutsBySelectedExperience = workoutsBySelectedTargetArea.filter((workout) => {
+        return !level || workout.experienceLevel === level;
+        
+    });
+    
+    
+    console.log("level "+level)
+
     const handleWorkoutSelection = (selectedWorkouts) => {
         setSelectedWorkouts(selectedWorkouts);
         console.log("Selected Workouts:", selectedWorkouts);
     };
 
     const stepsContent = [
-        <GoalsCards setGoal={setGoal} goal={goal} />,
-        <SortByExperienceLevel onUserExperienceChange={handleSelectedExperienceChange} />,
+        <SortByTargetArea 
+            onUserTargetAreaChange={handleSelectedTargetAreaChange} />,
+        <SortByExperienceLevel 
+            onUserExperienceChange={handleSelectedExperienceChange} />,
         <ProgramWorkoutCards
-            sortedWorkouts={workoutsBySelectedExperience}
+            sortedWorkouts={ workoutsBySelectedExperience}
             onWorkoutSelection={handleWorkoutSelection}
         />
     ];
@@ -86,7 +108,7 @@ function SetGoal() {
 
         switch (activeStep) {
             case 1:
-                setGoal(null); // reset the state of the GoalsCards component
+                setTargetArea(null); // reset the state of the GoalsCards component
                 break;
             case 2:
                 setLevel(null); // reset the state of the LevelsCards component
