@@ -48,8 +48,8 @@ export function SortByTargetArea({ onUserTargetAreaChange }: SortTargetAreaProps
 
 
   return (
-    
-    
+    <>
+    <h1>Choose Your Target Area</h1>
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
     {targetAreas.map((targetArea) => (
     <Card sx={{ width: 345, height: 200, margin: '0.5rem' }} key={targetArea.id}>
@@ -84,6 +84,7 @@ export function SortByTargetArea({ onUserTargetAreaChange }: SortTargetAreaProps
     </Card>
     ))}
     </div>
+    </>
 
   );
 }
