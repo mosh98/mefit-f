@@ -95,7 +95,7 @@ export default function ExercisesTableNew(props: Props) {
                             </TableHead>
                             <TableBody>
                                 {exercises.map((exercise) => (
-                                    <TableRow key={exercise['name'] + "-" + exercise['userExperience']}>
+                                    <TableRow key={exercise['id'] + "-" + exercise['userExperience']}>
                                         <TableCell>{exercise['name']}</TableCell>
                                         <TableCell>
                                             <ScrollDialog content={<div>{exercise['description']}</div>} buttonText="Info" headerText={`Description for ${exercise['name']}`} />

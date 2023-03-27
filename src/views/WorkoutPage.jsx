@@ -36,7 +36,8 @@ function WorkoutPage() {
 
             {keycloak.hasRealmRole('ADMIN') ? <>
                     <Button onClick={handleClick}> Create Workout</Button>
-                    <SelectedWorkout workouts={workouts} />
+                    {/*<SelectedWorkout workouts={workouts} />*/}
+                    <WorkoutList workouts={workouts} />
                 </>
                 : <WorkoutList workouts={workouts} />}
 

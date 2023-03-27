@@ -65,3 +65,25 @@ export const fetchWorkoutById = async (workoutId) => {
         };
     }
 }
+
+/**
+ * Delete a workout by its id.
+ * @param {number} workoutId
+ * @returns {Promise<{workout: { id, name, type, completed, programs, exercises, goal } | null, error: null}>}
+ * @returns {Promise<{workout: null, error: null}>}
+ */
+
+export const deleteWorkoutById = async (workoutId) => {
+    try {
+        const response = await axios.delete(`${apiUrl}workouts/deleteWorkoutById/${workoutId}`, {
+            headers: {
+                'Authorization': `Bearer ${keycloak.token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return {workout: response.data, error: null};
+    } catch (error) {
+        return {workout: null, error: error.message};
+    }
+}
+
