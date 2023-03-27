@@ -5,16 +5,28 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Radio from '@mui/material/Radio';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 
 
-function GoalsCards() {
-  const [selectedValue, setSelectedValue] = React.useState('1');
+function GoalsCards(props) {
+  const [selectedValue, setSelectedValue] = useState('');
+
+    useEffect(() => {
+    const savedSelection = JSON.parse(localStorage.getItem('selectedGoal'));
+    if (savedSelection) {
+      setSelectedValue(savedSelection.id.toString());
+    }
+  }, []);
 
   const handleChange = (event) => {
-    setSelectedValue(event.target.value);
+    const selectedGoalId = event.target.value;
+    const selectedGoal = goals.find((goal)=> goal.id.toString() ===selectedGoalId);
+    props.setGoal(selectedGoal);
+    setSelectedValue(selectedGoalId);
+    props.setGoal(selectedGoal);
+    localStorage.setItem('selectedGoal', JSON.stringify(selectedGoal));
   };
 
   const [goals, setGoals] = useState( [
