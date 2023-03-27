@@ -83,3 +83,23 @@ export const patchExercise = async (exerciseInfo, exerciseId) => {
         return {exercise: [], error: error.status};
     }
 }
+
+/**
+ * Delete an exercise on the database
+ * @param exerciseId
+ * @returns {Promise<{exercise: *[], error}|{exercise: axios.AxiosResponse<any>, error: null}>}
+ */
+
+export const deleteExercise = async (exerciseId) => {
+    try {
+        const response = await axios.delete(`${apiUrl}exercises/deleteExercise/${exerciseId}`, {
+            headers: {
+                'Authorization': `Bearer ${keycloak.token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return {exercise: response, error: null};
+    } catch (error) {
+        return {exercise: [], error: error.status};
+    }
+}

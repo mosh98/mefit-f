@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/system/Box';
 import Paper from '@mui/material/Paper';
@@ -9,8 +9,10 @@ import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import Table from '@mui/material/Table';
 import ScrollDialog from '../../components/dialogs/ScrollDialog';
-import ExerciseForm, { ExerciseFormData } from '../forms/create-forms/ExerciseForm';
-import { patchExercise } from '../../api/exercises';
+import ExerciseForm, {ExerciseFormData} from '../forms/create-forms/ExerciseForm';
+import {deleteExercise, patchExercise} from '../../api/exercises';
+import DeleteDialog from "../dialogs/DeleteDialog";
+
 interface Exercise {
     id: number;
     muscleGroup: string;
@@ -30,10 +32,8 @@ interface Props {
 
 export default function ExercisesCheckmark(props: Props) {
     const {exercises, pageAction} = props;
-    const [open, setOpen] = useState(false);
-
-    const handleClickOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const [deleteError, setDeleteError] = useState<string | null>(null);
+    const [deleteSuccess, setDeleteSuccess] = useState<string | null>(null);
 
     // Model
     interface Data {
@@ -53,12 +53,12 @@ export default function ExercisesCheckmark(props: Props) {
     }
 
     const headCells: readonly HeadCell[] = [
-        { id: 'name', numeric: false, label: 'Name' },
-        { id: 'description', numeric: false, label: 'Description' },
-        { id: 'muscleGroup', numeric: false, label: 'Muscle group' },
-        { id: 'userExperience', numeric: true, label: 'User experience' },
-        { id: 'sets', numeric: true, label: 'Sets' },
-        { id: 'reps', numeric: true, label: 'Reps' },
+        {id: 'name', numeric: false, label: 'Name'},
+        {id: 'description', numeric: false, label: 'Description'},
+        {id: 'muscleGroup', numeric: false, label: 'Muscle group'},
+        {id: 'userExperience', numeric: true, label: 'User experience'},
+        {id: 'sets', numeric: true, label: 'Sets'},
+        {id: 'reps', numeric: true, label: 'Reps'},
     ];
 
 
@@ -73,6 +73,21 @@ export default function ExercisesCheckmark(props: Props) {
         }
     }
 
+    const onDelete = async (id: number) => {
+        const {exercise, error} = await deleteExercise(id);
+        if (error) {
+            setDeleteError(error);
+            console.error("Error deleting exercise:", error);
+            return { error, response: null };
+        } else {
+            setDeleteSuccess("Exercise deleted successfully");
+            console.log("Exercise deleted successfully:", exercise);
+            return { error: null, response: exercise };
+        }
+
+        // TODO Handle refresh of the page after delete when handleClose in DeleteDialog
+    }
+
     return (
         <>
             <Box sx={{width: '100%'}}>
@@ -84,10 +99,22 @@ export default function ExercisesCheckmark(props: Props) {
                                     {headCells.map((headcell) => (
                                         <TableCell key={headcell.id}>{headcell.label}</TableCell>
                                     ))}
-
-                                    <TableCell>
-                                        {pageAction === "checkbox" ? "Checkbox" : "Update"}
-                                    </TableCell>
+                                    {pageAction === "checkbox" ?
+                                        (
+                                            <TableCell>
+                                                Checkbox
+                                            </TableCell>
+                                        ) : (
+                                            <>
+                                                <TableCell>
+                                                    Update
+                                                </TableCell>
+                                                <TableCell>
+                                                    Delete
+                                                </TableCell>
+                                            </>
+                                        )
+                                    }
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -107,19 +134,29 @@ export default function ExercisesCheckmark(props: Props) {
                                             <TableCell padding="checkbox" align={'center'}>
                                                 <Checkbox/>
                                             </TableCell>) : (
-                                            <TableCell>
-                                                <ScrollDialog
-                                                    content={
-                                                        <ExerciseForm
-                                                            mode={"update"}
-                                                            onSubmit={(exerciseInfo) => onUpdate(exercise.id, exerciseInfo)}
-                                                            initialData={exercise}
-                                                        />
-                                                    }
-                                                    buttonText="Update"
-                                                    headerText={`Update exercise ${exercise['name']}`}
-                                                />
-                                            </TableCell>
+                                            <>
+                                                <TableCell>
+                                                    <ScrollDialog
+                                                        content={
+                                                            <ExerciseForm
+                                                                mode={"update"}
+                                                                onSubmit={(exerciseInfo) => onUpdate(exercise.id, exerciseInfo)}
+                                                                initialData={exercise}
+                                                            />
+                                                        }
+                                                        buttonText="Update"
+                                                        headerText={`Update exercise ${exercise['name']}`}
+                                                    />
+                                                </TableCell>
+                                                <TableCell>
+                                                    <DeleteDialog
+                                                        entityName={exercise['name']}
+                                                        onDelete={() => onDelete(exercise.id)}
+                                                        errorMessage={deleteError}
+                                                        successMessage={deleteSuccess}
+                                                    />
+                                                </TableCell>
+                                            </>
                                         )}
                                     </TableRow>
                                 ))}
