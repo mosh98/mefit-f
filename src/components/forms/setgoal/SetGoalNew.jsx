@@ -11,17 +11,19 @@ import { useState } from 'react';
 import {SortByExperienceLevel} from "../../SortByExperienceLevel";
 import useWorkouts from "../../../hooks/useWorkouts";
 import WorkoutSummary from "../../workouts/WorkoutSummary";
+import axios from "../../../api";
+import keycloak from "../../../keycloak";
 
 
 const steps = ['What is your goal?', 'What is your Level?', 'Select a program or workouts.'];
 
 function SetGoal() {
-    const {workouts, isLoading, isError} = useWorkouts();
+    const {workouts, isLoading, isError} = useWorkouts();  // steg 1
     const [content, setContent] = useState(<GoalsCards />);
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
-    const [goal, setGoal] = useState(null);
-    const [level, setLevel] = useState(null);
+    const [goal, setGoal] = useState(null);  // ska bli nr 2 (targeteria)
+    const [level, setLevel] = useState(null); // steg 2, ska bli 3
     const [selectedWorkouts, setSelectedWorkouts] = useState([]);
 
     if (isLoading) {
@@ -98,15 +100,26 @@ function SetGoal() {
         setActiveStep(0);
     };
 
-    function handleSubmit() {
+    const handleSubmit = async () => {
+        const id = keycloak.tokenParsed.sub
+        const workoutId = selectedWorkouts.map(item => item.id);
+        const dataForm = {
+            keyCloakId: id,
+            workouts: workoutId
+        }
 
-        console.log(
-            "Goal: ", profile.goal,
-            "Profile id: ", profile.id,
-            "Level: ", level,
-            "Workouts: ", selectedWorkouts
-        )
-
+      try {
+            const response = await axios.patch(`https://database-mefit.herokuapp.com/goal/addWorkoutToGoal/${id}`, dataForm, {
+                headers: {
+                    'Authorization': `Bearer ${keycloak.token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            console.log(response.data)
+            return {goal: response.data, error: null};
+        } catch (error) {
+            return {goal: null, error: error.message};
+        }
     }
 
 

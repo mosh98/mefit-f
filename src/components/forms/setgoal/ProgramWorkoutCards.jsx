@@ -34,9 +34,8 @@ function ProgramWorkoutCards({sortedWorkouts, onWorkoutSelection}) {
         ]
     )
 
-    const numWorkouts = sortedWorkouts.length;
-    const randomIndex = Math.floor(Math.random() * numWorkouts); // generates a random index between 0 and numWorkouts - 1
-    const randomWorkouts = sortedWorkouts.slice(randomIndex, randomIndex + 4);
+    const numWorkouts = sortedWorkouts.slice(0,3);
+
 
 
     return (
@@ -68,7 +67,7 @@ function ProgramWorkoutCards({sortedWorkouts, onWorkoutSelection}) {
                             <FullWidthDialog
                                 content={<WorkoutListCheckmark
                                     mode={'select'}
-                                    workouts={randomWorkouts}
+                                    workouts={numWorkouts}
                                     onWorkoutSelection={onWorkoutSelection}
                                 />}
                                 buttonText={pick.button_name}
