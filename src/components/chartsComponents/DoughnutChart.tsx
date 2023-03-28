@@ -11,13 +11,11 @@ import {Box} from "@mui/system";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const DoughnutChart = () => {
-    let totalWorkouts = 0;
     let achievedWorkouts = 0;
     let remainingWorkouts = 0;
 
     goalsFvie.forEach(goalWorkout => {
         goalWorkout.workouts.forEach(workout => {
-            totalWorkouts += 1;
 
             if (workout.completed) {
                 achievedWorkouts += 1;
