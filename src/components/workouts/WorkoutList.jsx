@@ -17,7 +17,7 @@ import ExercisesTableNew from "../exercise/ExercisesTableNew";
 import keycloak from "../../keycloak";
 import DeleteDialog from "../dialogs/DeleteDialog";
 import {deleteWorkoutById} from "../../api/workouts";
-
+import UpdateDialog from "../dialogs/UpdateDialog";
 
 function Row(props) {
     const [open, setOpen] = useState(false);
@@ -52,15 +52,25 @@ function Row(props) {
                 <TableCell>{props.workout.type}</TableCell>
                 <TableCell>{props.workout.experienceLevel}</TableCell>
                 {keycloak.hasRealmRole('ADMIN') &&
-                    <TableCell>
-                        {props.workout['id']}
-                        <DeleteDialog
-                            entityName={props.workout['name']}
-                            onDelete={() => onDelete(props.workout.id)}
-                            errorMessage={deleteError}
-                            successMessage={deleteSuccess}
-                        />
-                    </TableCell>}
+                    <>
+                        <TableCell>
+                            <UpdateDialog
+                                entityName={props.workout['name']}
+                                onUpdate={() => onDelete(props.workout.id)}
+                                errorMessage={deleteError}
+                                successMessage={deleteSuccess}
+                            />
+                        </TableCell>
+                        <TableCell>
+                            <DeleteDialog
+                                entityName={props.workout['name']}
+                                onDelete={() => onDelete(props.workout.id)}
+                                errorMessage={deleteError}
+                                successMessage={deleteSuccess}
+                            />
+                        </TableCell>
+                    </>
+                }
             </TableRow>
             {/* Collapsible rows */}
             <TableRow>

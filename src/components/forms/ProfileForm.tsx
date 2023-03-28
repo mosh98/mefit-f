@@ -49,6 +49,7 @@ function ProfileForm({onSubmit, headerText}: ProfileFormProps) {
                         required
                         value={formData.weight}
                         onChange={handleChange}
+                        inputProps={{ min: 0 }}
                     />
                     <TextField
                         id="height"
@@ -58,6 +59,7 @@ function ProfileForm({onSubmit, headerText}: ProfileFormProps) {
                         required
                         value={formData.height}
                         onChange={handleChange}
+                        inputProps={{ min: 0 }}
                     />
                     <TextField
                         id="disabilities"

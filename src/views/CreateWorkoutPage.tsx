@@ -5,7 +5,7 @@ function CreateWorkoutPage() {
 
     return (
         <Box className={"page-view"}>
-            <h1>Create new user</h1>
+            <h1>Create new exercise</h1>
             <CreateWorkoutStepper />
 
         </Box>

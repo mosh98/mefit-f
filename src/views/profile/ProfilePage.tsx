@@ -51,7 +51,7 @@ function ProfilePage() {
         height: 0,
         //  disabilities: userInfo.profile.disabilities || '',,
         disabilities: '',
-        //  medicalCondition: userInfo.profile.medicalCondition
+        // medicalCondition: userInfo.profile.medicalCondition
         medicalCondition: '',
         profileImage: "",
         address: "",
