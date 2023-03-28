@@ -53,7 +53,7 @@ function StartPage() {
     }*/
 
     return (
-        <div>
+        <div className={"fullscreen-mode"}>
             <h1>Start Page</h1>
 
             <section className="actions">

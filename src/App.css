@@ -1,0 +1,17 @@
+.fullscreen-mode {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.fullscreen-mode h1 {
+    margin: 0;
+    text-align: center;
+}
+
+.fullscreen-mode .actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

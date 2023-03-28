@@ -22,9 +22,11 @@ function App() {
         <BrowserRouter>
             <Box sx={{flexGrow: 1}}>
                 <Grid container spacing={2}>
+                    {keycloak.authenticated &&
                     <Grid item xs={3}>
-                        {keycloak.authenticated && <SidebarDrawer/>}
+                         <SidebarDrawer/>
                     </Grid>
+                    }
                     <Grid item xs={9}>
                         <main className="container">
                             <Routes>
