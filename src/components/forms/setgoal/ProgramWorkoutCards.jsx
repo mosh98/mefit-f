@@ -15,7 +15,7 @@ function ProgramWorkoutCards({sortedWorkouts, onWorkoutSelection}) {
         setSelectedValue(event.target.value);
     };
 
-    const [picks, setPicks] = useState([
+    const [picks] = useState([
             {
                 id: 1,
                 // name: "Pick a program",
@@ -39,6 +39,8 @@ function ProgramWorkoutCards({sortedWorkouts, onWorkoutSelection}) {
 
 
     return (
+    <>
+        <h1>Pick your workouts</h1>
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             {picks.map((pick) => (
                 <Card sx={{width: 400, height: 200, margin: '0.5rem'}} key={pick.id}>
@@ -97,6 +99,7 @@ function ProgramWorkoutCards({sortedWorkouts, onWorkoutSelection}) {
                 </Card>
             ))}
         </div>
+        </>
 
     );
 }

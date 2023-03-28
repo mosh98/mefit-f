@@ -43,7 +43,7 @@ export function SortByExperienceLevel({ onUserExperienceChange }: SortExercisesP
             <h1>Choose Your Level</h1>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 {levels.map((level) => (
-                    <Card sx={{ width: 345, height: 200, margin: '0.5rem' }} key={level.id}>
+                    <Card sx={{ width: 345, height: 260, margin: '0.5rem' }} key={level.id}>
                         <CardActionArea>
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div" style={{ textAlign: 'center' }}>
