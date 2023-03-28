@@ -1,5 +1,5 @@
 import keycloak from "../keycloak";
-import {Button, CircularProgress} from "@mui/material";
+import {Button, CircularProgress, Stack} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import React, {useEffect} from "react";
 import {fetchProfileByKeycloakId} from "../api/profile";
@@ -21,7 +21,7 @@ function StartPage() {
             const init = async () => {
                 try {
 
-                    const { profile } = await fetchProfileByKeycloakId(keycloak.idTokenParsed.sub);
+                    const {profile} = await fetchProfileByKeycloakId(keycloak.idTokenParsed.sub);
 
                     localStorage.setItem("profile", JSON.stringify(profile));
 
@@ -33,16 +33,16 @@ function StartPage() {
             };
             init();
 
-        setTimeout(() => {
-            const profile = JSON.parse(localStorage.getItem("profile"));
-            console.log("profile", profile);
+            setTimeout(() => {
+                const profile = JSON.parse(localStorage.getItem("profile"));
+                console.log("profile", profile);
 
-            if (profile.profileImg == null) {
-                navigate("/registration");
-            } else {
-                navigate("/dashboard");
-            }
-        }, 1500);
+                if (profile.profileImg == null) {
+                    navigate("/registration");
+                } else {
+                    navigate("/dashboard");
+                }
+            }, 1500);
         }
     }, [navigate])
 
@@ -53,21 +53,29 @@ function StartPage() {
     }*/
 
     return (
-        <div className={"fullscreen-mode"}>
-            <h1>Start Page</h1>
-
+        <div>
             <section className="actions">
                 {!keycloak.authenticated && (
-                    <Button onClick={() => keycloak.login()}>Login</Button>
+                    <Box className={"fullscreen-mode"}>
+
+                        <Stack sx={{minWidth: 300}} spacing={3}>
+                            <img src={'/img/image_1.png'} alt="Fit me" style={{width: "300px", height: "300px"}}/>
+                            <h1>ME FIT</h1>
+                        </Stack>
+                        <Stack sx={{minWidth: 300}} direction={'row'} spacing={5}>
+                            <Button className={'start-button'} onClick={() => keycloak.login()}>Login</Button>
+                            <Button className={'start-button'} onClick={() => keycloak.register()}>Register</Button>
+                        </Stack>
+
+                    </Box>
                 )}
                 {keycloak.authenticated && (
-                    <Box sx={{ display: 'flex' }}>
-                        <CircularProgress />
+                    <Box sx={{display: 'flex'}}>
+                        <CircularProgress/>
                     </Box>
-                    /*<Button onClick={handleLogout}>Logout</Button>*/
                 )}
-            </section>
 
+            </section>
         </div>
     );
 }

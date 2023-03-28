@@ -1,11 +1,21 @@
 .fullscreen-mode {
     height: 100vh;
     width: 100vw;
-    display: grid;
-    grid-template-rows: auto 1fr;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5em;
+    background: radial-gradient(
+            ellipse at center,
+            rgba(0, 0, 0, 1.8) 0%,
+            rgba(16, 16, 16, 1.8) 50%,
+            rgba(54, 54, 54, 1.8) 100%
+    );
 }
 
 .fullscreen-mode h1 {
+    color: white;
     margin: 0;
     text-align: center;
 }
@@ -14,4 +24,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.start-button {
+    flex: 1 0 40%;;
+    background: linear-gradient(to bottom, #ff7f50, #ff6347);
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.start-button:hover {
+    transform: scale(1.05);
 }
