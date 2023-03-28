@@ -13,69 +13,78 @@ import RegistrationPage from "./views/RegistrationPage";
 import keycloak from "./keycloak";
 import SetGoalPage from "./views/SetGoalPage";
 import CreateWorkoutPage from "./views/CreateWorkoutPage";
-
+import {Box} from "@mui/system";
+import Grid from "@mui/material/Grid";
 
 
 function App() {
     return (
         <BrowserRouter>
-            {keycloak.authenticated && <SidebarDrawer/>}
-            <main className="container">
-                <Routes>
-                    <Route path="/" element={<StartPage/>}/>
-                    <Route
-                        path="/profile"
-                        element={
-                            <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
-                                <ProfilePage/>
-                            </KeycloakRoute>
-                        }
-                    />
-                    <Route path={"/dashboard"} element={
-                        <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
-                            <DashboardPage/>
-                        </KeycloakRoute>
-                    }
-                    />
-                    <Route path={"/setgoals"} element={
-                        <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
-                            <SetGoalPage />
-                        </KeycloakRoute>
-                    }
-                    />
-                    <Route path="/workout"
-                           element={
-                               <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
-                                   <WorkoutPage/>
-                               </KeycloakRoute>
-                           }/>
-                    <Route path="/exercise"
-                           element={
-                               <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
-                                   <ExercisesPage/>
-                               </KeycloakRoute>
-                           }/>
-                    <Route path="/admin"
-                           element={
-                               <KeycloakRoute role={ROLES.Admin} redirectTo={"/"}>
-                                   <AdminPage />
-                               </KeycloakRoute>
-                           }/>
-                    <Route path="/registration"
-                           element={
-                               <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
-                                   <RegistrationPage />
-                               </KeycloakRoute>
-                           }/>
-                    <Route path="/create-workout"
-                           element={
-                               <KeycloakRoute role={ROLES.Admin} redirectTo={"/"}>
-                                   <CreateWorkoutPage />
-                               </KeycloakRoute>
-                           }/>
-                    <Route path="*" element={<h1>404 - Not Found!</h1>}/>
-                </Routes>
-            </main>
+            <Box sx={{flexGrow: 1}}>
+                <Grid container spacing={2}>
+                    <Grid item xs={3}>
+                        {keycloak.authenticated && <SidebarDrawer/>}
+                    </Grid>
+                    <Grid item xs={9}>
+                        <main className="container">
+                            <Routes>
+                                <Route path="/" element={<StartPage/>}/>
+                                <Route
+                                    path="/profile"
+                                    element={
+                                        <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
+                                            <ProfilePage/>
+                                        </KeycloakRoute>
+                                    }
+                                />
+                                <Route path={"/dashboard"} element={
+                                    <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
+                                        <DashboardPage/>
+                                    </KeycloakRoute>
+                                }
+                                />
+                                <Route path={"/setgoals"} element={
+                                    <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
+                                        <SetGoalPage/>
+                                    </KeycloakRoute>
+                                }
+                                />
+                                <Route path="/workout"
+                                       element={
+                                           <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
+                                               <WorkoutPage/>
+                                           </KeycloakRoute>
+                                       }/>
+                                <Route path="/exercise"
+                                       element={
+                                           <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
+                                               <ExercisesPage/>
+                                           </KeycloakRoute>
+                                       }/>
+                                <Route path="/admin"
+                                       element={
+                                           <KeycloakRoute role={ROLES.Admin} redirectTo={"/"}>
+                                               <AdminPage/>
+                                           </KeycloakRoute>
+                                       }/>
+                                <Route path="/registration"
+                                       element={
+                                           <KeycloakRoute role={ROLES.User} redirectTo={"/"}>
+                                               <RegistrationPage/>
+                                           </KeycloakRoute>
+                                       }/>
+                                <Route path="/create-workout"
+                                       element={
+                                           <KeycloakRoute role={ROLES.Admin} redirectTo={"/"}>
+                                               <CreateWorkoutPage/>
+                                           </KeycloakRoute>
+                                       }/>
+                                <Route path="*" element={<h1>404 - Not Found!</h1>}/>
+                            </Routes>
+                        </main>
+                    </Grid>
+                </Grid>
+            </Box>
         </BrowserRouter>
 
     );
