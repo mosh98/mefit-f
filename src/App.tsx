@@ -23,12 +23,11 @@ function App() {
             <Box sx={{flexGrow: 1}}>
                 <Grid container spacing={2}>
                     {keycloak.authenticated &&
-                    <Grid item xs={3}>
-                         <SidebarDrawer/>
-                    </Grid>
-                    }
-                    <Grid item xs={9}>
-                        <main className="container">
+                        <Grid item xs={2}>
+                            <SidebarDrawer/>
+                        </Grid>}
+                    <Grid item xs={10}>
+                        <main className="main-container">
                             <Routes>
                                 <Route path="/" element={<StartPage/>}/>
                                 <Route
