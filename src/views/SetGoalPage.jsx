@@ -1,13 +1,14 @@
 import SetGoalNew from "../components/forms/setgoal/SetGoalNew";
+import {Box} from "@mui/system";
 
 
 function SetGoalPage() {
 
     return (
-        <>
-            <p>setgoal page</p>
+        <Box className={"page-view"}>
+            <p>Set goal</p>
             <SetGoalNew />
-        </>
+        </Box>
         
     );
 }

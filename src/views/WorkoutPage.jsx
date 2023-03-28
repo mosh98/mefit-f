@@ -1,11 +1,10 @@
     import useWorkouts from "../hooks/useWorkouts";
     import WorkoutList from "../components/workouts/WorkoutList";
-    import SelectedWorkout from "../components/workouts/SelectWorkout";
     import keycloak from "../keycloak";
     import {Button} from "@mui/material";
     import {useNavigate} from "react-router-dom";
-    import ExerciseDisplay from "../components/exercise/ExerciseDisplay";
     import useExercises from "../hooks/useExcerises";
+    import {Box} from "@mui/system";
 
 function WorkoutPage() {
     const { workouts, error } = useWorkouts();
@@ -24,30 +23,15 @@ function WorkoutPage() {
     }
 
     return (
-        <div>
+        <Box className={"page-view"}>
             <h1>Workout Page</h1>
-
-
-
-
-            {/*{exercises.map((exercise) => (
-                <ExerciseDisplay exercises={exercise} />
-            ))}>*/}
 
             {keycloak.hasRealmRole('ADMIN') ? <>
                     <Button onClick={handleClick}> Create Workout</Button>
-                    {/*<SelectedWorkout workouts={workouts} />*/}
                     <WorkoutList workouts={workouts} />
                 </>
                 : <WorkoutList workouts={workouts} />}
-
-            {/*<GoalWorkouts workouts={workouts} />*/}
-            {/*<SelectedWorkout workouts={workouts} />*/}
-
-
-
-
-        </div>
+        </Box>
     );
 }
 export default WorkoutPage;

@@ -3,6 +3,7 @@ import useUsers from "../hooks/useUsers";
 import UserTable from "../components/profile/UserTable";
 import keycloak from "../keycloak";
 import React from "react";
+import {Box} from "@mui/system";
 
 function AdminPage() {
 
@@ -11,7 +12,7 @@ function AdminPage() {
 
 
     return (
-        <>
+        <Box className={"page-view"}>
             <Typography variant="h2" component="h1">
                 Admin Page
             </Typography>
@@ -29,7 +30,7 @@ function AdminPage() {
                 <h1>Users List</h1>
                 <UserTable users={users} error={error}/>
             </div>
-        </>
+        </Box>
     );
 }
 

@@ -3,12 +3,13 @@ import VerticalChart from "../components/chartsComponents/VerticalChart";
 import {DoughnutChart} from "../components/chartsComponents/DoughnutChart";
 import {NumberCards} from "../components/chartsComponents/NumberCards";
 import Grid from "@mui/material/Grid";
+import GoalWorkouts from "../components/workouts/GoalWorkouts";
 
 
 function DashboardPage() {
 
     return (
-        <>
+        <Box className={"page-view"}>
             <h1>Dashboard</h1>
             <Box sx={{flexGrow: 1}}>
                 <Grid container spacing={2}>
@@ -29,7 +30,8 @@ function DashboardPage() {
                     </Grid>
                 </Grid>
             </Box>
-        </>
+            {/*<GoalWorkouts workouts={workouts} />*/}
+        </Box>
     );
 }
 

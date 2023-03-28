@@ -4,6 +4,7 @@ import ExercisesCheckmark from "../components/exercise/ExerciseCheckmark";
 import keycloak from "../keycloak";
 import ScrollDialog from "../components/dialogs/ScrollDialog";
 import CreateExercise from "../components/exercise/CreateExercise";
+import {Box} from "@mui/system";
 
 function ExercisesPage() {
     const {exercises, error} = useExercises();
@@ -16,7 +17,7 @@ function ExercisesPage() {
     }
 
     return (
-        <div>
+        <Box className={"page-view"}>
             <h1>Exercise Overview</h1>
 
             {keycloak.hasRealmRole('ADMIN') ? <>
@@ -27,7 +28,7 @@ function ExercisesPage() {
 
             {/*<ExercisesCheckmark exercises={exercises} pageAction={'checkbox'} />*/}
 
-        </div>
+        </Box>
     );
 }
 

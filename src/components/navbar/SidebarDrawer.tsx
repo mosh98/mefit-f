@@ -12,14 +12,15 @@ import ListItemText from '@mui/material/ListItemText';
 import {Dashboard, FitnessCenter, Person} from "@mui/icons-material";
 import {Link} from "react-router-dom";
 import LogoutButton from "../LogoutButton";
-import {ListSubheader} from "@mui/material";
+import {ListSubheader, Stack} from "@mui/material";
 
 const drawerWidth = 240;
 
 const DrawerHeader = styled('div')(({theme}) => ({
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(0, 1),
+    backgroundColor: theme.palette.primary.main,
+    padding: theme.spacing(1, 2),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
@@ -54,18 +55,26 @@ export default function SidebarDrawer() {
                 anchor="left"
             >
                 <DrawerHeader>
+                    <Stack direction="row" spacing={2} sx={{  width: "100%" }}>
+                        <img
+                            src={"/img/image_1.png"}
+                            alt="Fit me"
+                            style={{ maxWidth: "100%", height: "50px" }}
+                        />
+                        <h1>ME FIT</h1>
+                    </Stack>
                 </DrawerHeader>
                 <Divider/>
                 <List subheader={<ListSubheader>Pages</ListSubheader>}> {pageItems.map((item) => (
-                        <ListItem component={Link} to={item.to} key={item.text}>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <item.icon/>
-                                </ListItemIcon>
-                                <ListItemText primary={item.text}/>
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
+                    <ListItem component={Link} to={item.to} key={item.text}>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <item.icon/>
+                            </ListItemIcon>
+                            <ListItemText primary={item.text}/>
+                        </ListItemButton>
+                    </ListItem>
+                ))}
                 </List>
                 <Divider/>
                 <List subheader={<ListSubheader>Catalog</ListSubheader>}>

@@ -51,8 +51,7 @@ function Row(props) {
                 <TableCell>{props.workout.name}</TableCell>
                 <TableCell>{props.workout.type}</TableCell>
                 <TableCell>{props.workout.experienceLevel}</TableCell>
-                <TableCell>{props.workout.exercises.length}</TableCell>
-{/*                {keycloak.hasRealmRole('ADMIN') &&
+                {keycloak.hasRealmRole('ADMIN') &&
                     <TableCell>
                         {props.workout['id']}
                         <DeleteDialog
@@ -61,7 +60,7 @@ function Row(props) {
                             errorMessage={deleteError}
                             successMessage={deleteSuccess}
                         />
-                    </TableCell>}*/}
+                    </TableCell>}
             </TableRow>
             {/* Collapsible rows */}
             <TableRow>
@@ -91,7 +90,6 @@ function WorkoutList(props) {
     }
 
 
-
     return (
         <div>
             <Paper sx={{width: '99%', mb: 2}}>
@@ -102,14 +100,18 @@ function WorkoutList(props) {
                                 <TableCell/>
                                 <TableCell>Workout name</TableCell>
                                 <TableCell>Target Area</TableCell>
-                                <TableCell>Number of exercises</TableCell>
                                 <TableCell>Experience</TableCell>
-                               {/* {keycloak.hasRealmRole('ADMIN') && <TableCell>Delete</TableCell>}*/}
+                                {keycloak.hasRealmRole('ADMIN') &&
+                                    <>
+                                        <TableCell>Update</TableCell>
+                                        <TableCell>Delete</TableCell>
+                                    </>
+                                }
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {workouts.map((workout, index) => (
-                                    <Row key={index} workout={workout}/>
+                                <Row key={index} workout={workout}/>
                             ))}
                         </TableBody>
                     </Table>

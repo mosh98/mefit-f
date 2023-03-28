@@ -66,7 +66,7 @@ function ProfilePage() {
     }
 
     return (
-        <>
+        <Box className={"page-view"}>
             <h1>Profile Page</h1>
 
             <Box sx={{flexGrow: 1}}>
@@ -105,7 +105,7 @@ function ProfilePage() {
                     </Grid>
                 </Grid>
             </Box>
-        </>
+        </Box>
     );
 }
 

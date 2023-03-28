@@ -41,7 +41,6 @@
     transform: scale(1.05);
 }
 
-/*
-.main-container {
-    margin: 2em;
-}*/
+.page-view {
+    margin: 2em 2em 2em 0 ;
+}
