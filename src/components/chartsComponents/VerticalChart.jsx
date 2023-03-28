@@ -54,8 +54,8 @@ function VerticalChart() {
         }, {
             label: 'Completed',
             data: labels.map((label) => muscleGroupStatsCompleted.total[label]),
-            backgroundColor: ['rgba(255, 99, 132, 0.2)'],
-            borderColor: ['rgba(255, 99, 132, 1)'],
+            backgroundColor: ['rgba(88,245,90,0.2)'],
+            borderColor: ['rgb(35,77,13)'],
             borderWidth: 1,
         },],
     };

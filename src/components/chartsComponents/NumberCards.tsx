@@ -33,10 +33,10 @@ export const NumberCards = () => {
             {data.labels.map((label, index) => (
                 <Card sx={{  }} key={index}>
                     <CardContent sx={{ width: '100%', padding: '20px' }}>
-                        <Typography sx={{ fontSize: 18, lineHeight: '24px' }} color="text.secondary" gutterBottom>
+                        <Typography sx={{ fontSize: 22, lineHeight: '24px' }} color="text.secondary" gutterBottom>
                             {label}
                         </Typography>
-                        <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
+                        <Typography variant="body2" sx={{ whiteSpace: 'pre-line', fontSize: 48 }} >
                             {data.datasets[0].data[index]}
                         </Typography>
                     </CardContent>

@@ -7,6 +7,7 @@ import {
 import {Doughnut} from "react-chartjs-2";
 import {goalsFvie} from "./mockGoals";
 import {Box} from "@mui/system";
+import _default from "chart.js/dist/plugins/plugin.tooltip";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -27,12 +28,12 @@ export const DoughnutChart = () => {
 
 
     const data = {
-        labels: ["Red", "Blue"],
+        labels: ["Completed", "Not Completed"],
         datasets: [{
             label: "# of workouts",
             data: [achievedWorkouts, remainingWorkouts],
-            backgroundColor: ['black', 'red'],
-            borderColor: ['black', 'red']
+            backgroundColor: ['green', 'grey'],
+            borderColor: ['grey', 'grey']
         }]
     }
 
@@ -42,6 +43,7 @@ export const DoughnutChart = () => {
                 width={500}
                 height={500}
                 data={data}
+
             >
             </Doughnut>
         </Box>
