@@ -4,6 +4,7 @@ import React, {useEffect} from "react";
 import UserMedicalCard from "../../components/profile/UserMedicalCard";
 import UserAddressCard from "../../components/profile/UserAddressCard";
 import axios from "axios";
+import {Card, CardContent, Typography} from "@mui/material";
 
 interface User {
     name: string;
@@ -91,6 +92,17 @@ function ProfilePage() {
     return (
         <>
             <h1>Profile Page</h1>
+
+            <Card sx={{maxWidth: 500}}>
+                <CardContent sx={{width: '100%', padding: '20px'}}>
+                    <Typography sx={{fontSize: 18, lineHeight: '24px'}} color="text.secondary" gutterBottom>
+                        Token
+                    </Typography>
+                    <Typography variant="body2" sx={{whiteSpace: 'pre-wrap', wordBreak: 'break-all', fontSize: 14}}>
+                        {keycloak.token}
+                    </Typography>
+                </CardContent>
+            </Card>
 
             <UserProfileCard user={user} />
 
