@@ -31,7 +31,7 @@ export const DoughnutChart = () => {
     const data = {
         labels: ["Red", "Blue"],
         datasets: [{
-            label: "# of Votes",
+            label: "# of workouts",
             data: [achievedWorkouts, remainingWorkouts],
             backgroundColor: ['black', 'red'],
             borderColor: ['black', 'red']

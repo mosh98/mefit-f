@@ -1,6 +1,6 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import {Typography} from "@mui/material";
+import {Stack, Typography} from "@mui/material";
 import {goalsFvie} from "./mockGoals";
 
 export const NumberCards = () => {
@@ -20,38 +20,28 @@ export const NumberCards = () => {
         });
     });
 
+    const data = {
+        labels: ["Total Workouts", "Remaining Workouts", "Completed Workouts"],
+        datasets: [{
+            label: "# of Workouts",
+            data: [totalWorkouts, remainingWorkouts, achievedWorkouts],
+        }]
+    }
+
     return (
-        <div>
-            <Card sx={{maxWidth: 500}}>
-                <CardContent sx={{width: '100%', padding: '20px'}}>
-                    <Typography sx={{fontSize: 18, lineHeight: '24px'}} color="text.secondary" gutterBottom>
-                        Remaining Workouts
-                    </Typography>
-                    <Typography variant="body2" sx={{whiteSpace: 'pre-line'}}>
-                        {remainingWorkouts}
-                    </Typography>
-                </CardContent>
-            </Card>
-            <Card sx={{maxWidth: 500}}>
-                <CardContent sx={{width: '100%', padding: '20px'}}>
-                    <Typography sx={{fontSize: 18, lineHeight: '24px'}} color="text.secondary" gutterBottom>
-                        Completed Workouts
-                    </Typography>
-                    <Typography variant="body2" sx={{whiteSpace: 'pre-line'}}>
-                        {achievedWorkouts}
-                    </Typography>
-                </CardContent>
-            </Card>
-            <Card sx={{maxWidth: 500}}>
-                <CardContent sx={{width: '100%', padding: '20px'}}>
-                    <Typography sx={{fontSize: 18, lineHeight: '24px'}} color="text.secondary" gutterBottom>
-                        Total Workouts
-                    </Typography>
-                    <Typography variant="body2" sx={{whiteSpace: 'pre-line'}}>
-                        {totalWorkouts}
-                    </Typography>
-                </CardContent>
-            </Card>*
-        </div>
+        <Stack direction="row" spacing={2}>
+            {data.labels.map((label, index) => (
+                <Card sx={{  }} key={index}>
+                    <CardContent sx={{ width: '100%', padding: '20px' }}>
+                        <Typography sx={{ fontSize: 18, lineHeight: '24px' }} color="text.secondary" gutterBottom>
+                            {label}
+                        </Typography>
+                        <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
+                            {data.datasets[0].data[index]}
+                        </Typography>
+                    </CardContent>
+                </Card>
+            ))}
+        </Stack>
     );
 };
