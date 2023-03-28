@@ -1,26 +1,36 @@
-import {Card, CardContent, Typography} from "@mui/material";
-import keycloak from "../keycloak";
-import GoalWorkouts from "../components/workouts/GoalWorkouts";
+import Box from "@mui/material/Box";
+import VerticalChart from "../components/chartsComponents/VerticalChart";
+import {DoughnutChart} from "../components/chartsComponents/DoughnutChart";
+import {NumberCards} from "../components/chartsComponents/NumberCards";
+import Grid from "@mui/material/Grid";
+
 
 function DashboardPage() {
 
-  return (
-    <div>
-      <h1>Dashboard</h1>
+    return (
+        <>
+            <h1>Dashboard</h1>
+            <Box sx={{flexGrow: 1}}>
+                <Grid container spacing={2}>
+                    <Grid item xs={8}>
 
-        <Card sx={{ maxWidth: 500 }}>
-            <CardContent sx={{ width: '100%', padding: '20px' }}>
-                <Typography sx={{ fontSize: 18, lineHeight: '24px' }} color="text.secondary" gutterBottom>
-                    Token
-                </Typography>
-                <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all', fontSize: 14 }}>
-                    {keycloak.token}
-                </Typography>
-            </CardContent>
-        </Card>
+                            <NumberCards/>
 
-        {/*<GoalWorkouts workouts={workouts} />*/}
-    </div>
-  );
+                    </Grid>
+                    <Grid item xs={4}>
+
+                            <DoughnutChart/>
+
+                    </Grid>
+                    <Grid item xs={8}>
+
+                            <VerticalChart/>
+
+                    </Grid>
+                </Grid>
+            </Box>
+        </>
+    );
 }
+
 export default DashboardPage;
