@@ -42,6 +42,11 @@ export function SortByTargetArea({ onUserTargetAreaChange }: SortTargetAreaProps
       id:4,
       name: "Shoulders",
       description: "BBBBBBBuild up the muscle volume to look pumped!",
+    },
+    { 
+      id:5,
+      name: "Full body",
+      description: "BBBBBBBuild up the muscle volume to look pumped!",
     }
   ]
   )

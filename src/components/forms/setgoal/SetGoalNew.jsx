@@ -52,12 +52,11 @@ function SetGoal() {
     }
 
     const workoutsBySelectedTargetArea = workouts.filter((workout) => {
-        return !targetArea || workout.type === targetArea;
+        return !targetArea|| targetArea==="Full body"|| workout.type === targetArea;
         
     });
 
     console.log("TargetArea "+level)
-
 
     const workoutsBySelectedExperience = workoutsBySelectedTargetArea.filter((workout) => {
         return !level || workout.experienceLevel === level;
@@ -183,7 +182,7 @@ function SetGoal() {
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {isComplete && (
                 <Typography sx={{ mt: 2 }}>
-                All steps completed - your goal has been set!
+                <h3>All steps completed - your goal has been set!</h3>
                 </Typography>
             )}
             </Box>
