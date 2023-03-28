@@ -188,10 +188,6 @@ function SetGoal() {
             )}
             </Box>
 
-{/*                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleReset}>Reset</Button>
-                    </Box> */}
                 </React.Fragment>
             ) : (
                 <React.Fragment>
@@ -217,9 +213,9 @@ function SetGoal() {
                             size="large" 
                             onClick={handleNext}
                             sx={{ width: '8em' }}
-                            disabled={activeStep===0 && !targetArea ||
-                                     activeStep===1 && !level ||
-                                     activeStep===2 && !selectedWorkouts }
+                            disabled={(activeStep===0 && !targetArea)||
+                                      (activeStep===1 && !level) ||
+                                      (activeStep===2 && selectedWorkouts.length===0) }
                             >
                             
                             {activeStep === steps.length - 1 ? 'Confirm' : 'Next'}
