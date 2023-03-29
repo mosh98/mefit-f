@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mefit-f/static/css/main.0d3d8c2c.css",
+    "main.js": "/mefit-f/static/js/main.2f312a35.js",
+    "static/js/787.39f3a31e.chunk.js": "/mefit-f/static/js/787.39f3a31e.chunk.js",
+    "index.html": "/mefit-f/index.html",
+    "main.0d3d8c2c.css.map": "/mefit-f/static/css/main.0d3d8c2c.css.map",
+    "main.2f312a35.js.map": "/mefit-f/static/js/main.2f312a35.js.map",
+    "787.39f3a31e.chunk.js.map": "/mefit-f/static/js/787.39f3a31e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0d3d8c2c.css",
+    "static/js/main.2f312a35.js"
+  ]
+}
