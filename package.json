@@ -2,6 +2,7 @@
   "name": "mefit",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://miwgu.github.io/mefit-f",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
