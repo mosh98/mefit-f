@@ -1,27 +1,29 @@
 import {Button, Stack, TextField, Typography, Container} from '@mui/material';
-import {ChangeEvent, FormEvent, useState} from "react";
+import React, {ChangeEvent, FormEvent, useState} from "react";
+import ExerciseForm from "./create-forms/ExerciseForm";
 
+interface ProfileFormData {
+
+    weight?: number;
+    height?: number;
+    disabilities?: string;
+    medicalCondition?: string;
+    profileImage?: string;
+}
 interface ProfileFormProps {
-
+    user?: ProfileFormData;
     onSubmit: (values: any) => void;
     headerText: string;
 }
 
-interface ProfileFormData {
-  //  profileImg: string;
-    weight: number;
-    height: number;
-    disabilities?: string;
-    medicalCondition?: string;
-}
-
-function ProfileForm({onSubmit, headerText}: ProfileFormProps) {
+function ProfileForm({ user, onSubmit, headerText}: ProfileFormProps) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState<ProfileFormData>({
-     //   profileImg: '',
-        weight: 0,
-        height: 0,
-        disabilities: '',
-        medicalCondition: '',
+        profileImage: user?.profileImage || '',
+        weight: user?.weight || 0,
+        height: user?.height || 0,
+        disabilities: user?.disabilities || '',
+        medicalCondition: user?.medicalCondition || '',
     });
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,10 +34,13 @@ function ProfileForm({onSubmit, headerText}: ProfileFormProps) {
         e.preventDefault();
         onSubmit(formData);
         console.log("formData ", formData);
+        setIsModalOpen(true)
+
     };
 
     return (
         <Container maxWidth="xs">
+            {isModalOpen ? <p>Update successfully</p> : (
             <form onSubmit={handleSubmit}>
                 <Stack direction='column' spacing={3}>
                     <Typography variant="h4" component="h1">
@@ -87,6 +92,7 @@ function ProfileForm({onSubmit, headerText}: ProfileFormProps) {
                     </Button>
                 </Stack>
             </form>
+            )}
         </Container>
     );
 }

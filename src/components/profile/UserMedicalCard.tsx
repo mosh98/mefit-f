@@ -16,22 +16,9 @@ interface UserMedicalCardProps {
     onSubmit: () => void;
 }
 
-function UserMedicalCard({ onSubmit }: UserMedicalCardProps) {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
-
-    const user: User = {
-        weight: userInfo.weight || 0,
-        height: userInfo.height || 0,
-        disabilities: userInfo.disabilities,
-        medicalCondition: userInfo.medicalCondition || '',
-    };
-
-
-    if (!userInfo) {
+function UserMedicalCard({ user, onSubmit }: UserMedicalCardProps) {
+    if (!user) {
         return <div>Loading...</div>;
-    }
-    if (userInfo.error) {
-        return <div>Error: {userInfo.error}</div>;
     }
 
     return (
@@ -41,14 +28,13 @@ function UserMedicalCard({ onSubmit }: UserMedicalCardProps) {
                     User Medical Info
                 </Typography>
                 <Typography variant="body2" sx={{ fontSize: 16 }}>
-                    Medical Conditions: {user.medicalCondition} <br />
                     Weight: {user.weight} <br />
                     Height: {user.height} <br />
                     Disabilities: {user.disabilities} <br />
                     Medical Conditions: {user.medicalCondition} <br />
                 </Typography>
                 <CardActions>
-                    <ScrollDialog content={<ProfileForm onSubmit={onSubmit} headerText={"Update info"} />} buttonText="Update" headerText="Update info" />
+                    <ScrollDialog content={<ProfileForm user={user} onSubmit={onSubmit} headerText={"Update info"} />} buttonText="Update" headerText="Update info" />
                 </CardActions>
             </CardContent>
         </Card>

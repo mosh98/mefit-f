@@ -17,8 +17,8 @@ export function useProfileDetailById(id) {
     return { profile, error };
 }
 
-export function useProfileDetailByKeycloakId(keycloakId) {
-    const [profile, setProfile] = useState();
+export function useProfileDetailByKeycloakId(keycloakId){
+    const [profile, setProfile] = useState(null);
     const [error, setError] = useState("");
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export function useProfileDetailByKeycloakId(keycloakId) {
             setError(error);
         };
         init();
-    }, [ keycloakId ]);
+    }, [keycloakId]);
 
     return { profile, error };
 }

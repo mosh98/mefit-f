@@ -1,12 +1,23 @@
 import Box from "@mui/material/Box";
 import VerticalChart from "../components/chartsComponents/VerticalChart";
 import {DoughnutChart} from "../components/chartsComponents/DoughnutChart";
-import {NumberCards} from "../components/chartsComponents/NumberCards";
+import {GoalsList, NumberCards} from "../components/chartsComponents/NumberCards";
 import Grid from "@mui/material/Grid";
-import GoalWorkouts from "../components/workouts/GoalWorkouts";
+import WorkoutGoalsData from "../components/chartsComponents/fetchGoals";
 
 
 function DashboardPage() {
+/*    const {goal, error} = WorkoutGoalsData()
+
+    if (error) {
+        return <div>failed to load</div>
+    }
+
+    if (!goal) {
+        return <div>loading...</div>
+    }*/
+
+
 
     return (
         <Box className={"page-view"}>
@@ -31,6 +42,7 @@ function DashboardPage() {
                 </Grid>
             </Box>
             {/*<GoalWorkouts workouts={workouts} />*/}
+            <GoalsList />
         </Box>
     );
 }

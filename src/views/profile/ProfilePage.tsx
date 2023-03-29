@@ -5,6 +5,7 @@ import UserMedicalCard from "../../components/profile/UserMedicalCard";
 import UserAddressCard from "../../components/profile/UserAddressCard";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import {useProfileDetailByKeycloakId} from "../../hooks/useProfileDetail";
 
 interface User {
     name: string;
@@ -13,11 +14,6 @@ interface User {
     username: string;
     sub: string;
     email: string;
-    weight?: number;
-    height?: number;
-    disabilities?: string;
-    medicalCondition?: string;
-    profileImage?: string;
     address: string;
     post_code: string;
     city: string;
@@ -26,7 +22,32 @@ interface User {
     roles?: string[];
 }
 
+interface Profile {
+    weight?: number;
+    height?: number;
+    disabilities?: string;
+    medicalCondition?: string;
+    profileImg?: string;
+}
+
 function ProfilePage() {
+
+    const { profile: rawProfile, error } = useProfileDetailByKeycloakId(keycloak.tokenParsed?.sub );
+    const profile = rawProfile as (Profile | null);
+
+    localStorage.setItem('profile', JSON.stringify(rawProfile));
+
+    const localProfile = JSON.parse(localStorage.getItem('profile') || '{}');
+
+    console.log("profile local: ", localProfile);
+
+    if (error) {
+        return <div>failed to load</div>
+    }
+
+    if (!profile) {
+        return <div>loading...</div>
+    }
 
     const tokenParsed = keycloak.tokenParsed as {
         name?: string;
@@ -37,6 +58,16 @@ function ProfilePage() {
         email?: string;
     };
 
+    const profileUser: Profile = {
+        weight: profile.weight || 0,
+        height: profile.height || 0,
+        disabilities: profile.disabilities || '',
+        medicalCondition: profile.medicalCondition  || '',
+        profileImg: profile.profileImg || '',
+    };
+
+    console.log("profileUser: ", profileUser);
+
     const user: User = {
         name: tokenParsed.name || '',
         firstName: tokenParsed.given_name || '',
@@ -45,15 +76,6 @@ function ProfilePage() {
         sub: tokenParsed.sub || '',
         email: tokenParsed.email || '',
         roles: keycloak.tokenParsed?.realm_access?.roles || [],
-        // weight: userInfo.profile.weight
-        weight: 0,
-        //  height: userInfo.profile.height ,
-        height: 0,
-        //  disabilities: userInfo.profile.disabilities || '',,
-        disabilities: '',
-        // medicalCondition: userInfo.profile.medicalCondition
-        medicalCondition: '',
-        profileImage: "",
         address: "",
         post_code: "",
         city: "",
@@ -73,7 +95,7 @@ function ProfilePage() {
                 <Grid container spacing={2}>
                     <Grid item xs={8}>
                         <img
-                            src={user.profileImage}
+                            src={`${profileUser.profileImg}`}
                             alt="avatar"
                             style={{
                                 width: "300px",
@@ -96,7 +118,7 @@ function ProfilePage() {
                     </Grid>
                     <Grid item xs={8}>
 
-                        <UserMedicalCard user={user} onSubmit={handleSubmit}/>
+                        <UserMedicalCard user={profileUser} onSubmit={handleSubmit}/>
 
                     </Grid>
                     <Grid item xs={4}>

@@ -1,7 +1,9 @@
 import ExerciseForm, {ExerciseFormData} from "../forms/create-forms/ExerciseForm";
 import {postExercise} from "../../api/exercises";
+import {useState} from "react";
 
 function CreateExercise() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // TODO: fix post exercise
     const onCreate = async (values: ExerciseFormData) => {
@@ -12,12 +14,13 @@ function CreateExercise() {
             console.error("Failed to create exercise:", error);
         } else {
             console.log("Exercise created successfully:", exercise);
+            setIsModalOpen(true)
         }
     };
 
     return (
         <div>
-            <ExerciseForm onSubmit={onCreate} mode="create"/>
+            {isModalOpen ? <p>Exercise created successfully</p> : <ExerciseForm onSubmit={onCreate} mode="create"/>}
         </div>
     )
 }

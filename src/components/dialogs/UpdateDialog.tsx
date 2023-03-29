@@ -4,16 +4,17 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import {useState} from "react";
+import {ReactNode, useState} from "react";
 
 interface UpdateDialogProps {
+    content: ReactNode;
     entityName: string;
     onUpdate: () => Promise<{ error: string | null; response: any }>;
     errorMessage: string | null;
     successMessage: string | null;
 }
 
-function UpdateDialog({entityName, onUpdate, errorMessage, successMessage}: UpdateDialogProps) {
+function UpdateDialog({ content, entityName, onUpdate, errorMessage, successMessage}: UpdateDialogProps) {
     const [open, setOpen] = useState(false);
     const [isDone, setIsDone] = useState(false);
     const handleClickOpen = () => {
@@ -48,7 +49,7 @@ function UpdateDialog({entityName, onUpdate, errorMessage, successMessage}: Upda
                     </DialogContent>
                 ) : (
                     <DialogContent>
-                        Are you sure you want to delete this {entityName}?
+                        {content}
                     </DialogContent>
                 )}
                 <DialogActions>

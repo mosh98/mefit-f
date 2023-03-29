@@ -1,20 +1,36 @@
-import {Fragment, useState} from 'react';
+import {Fragment, useEffect, useState} from 'react';
 import {Box, Button, Stepper, Step, StepLabel, Typography} from '@mui/material';
 import AvatarSelector from '../components/forms/AvatarSelector';
 import ProfileForm from '../components/forms/ProfileForm';
-import {updateProfile} from "../api/profile";
+import {fetchProfileByKeycloakId, updateProfile} from "../api/profile";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import {useNavigate} from "react-router-dom";
-
+import keycloak from "../keycloak";
 const steps = ['Select avatar', 'Fill out profile form', 'Review and submit'];
 
-const userProfile = JSON.parse(localStorage.getItem('profile') || '{}');
-const profileId = userProfile.id;
-
-console.log("profileId ", profileId);
 
 export default function RegistrationStepper() {
+    const [profileId, setProfileId] = useState<string>('');
+    useEffect(() => {
+
+        if (keycloak.authenticated) {
+            const init = async () => {
+                try {
+
+                    const {profile} = await fetchProfileByKeycloakId(keycloak.tokenParsed?.sub);
+                    setProfileId(profile.id);
+
+                } catch (error) {
+
+                    console.log(error);
+
+                }
+            };
+            init();
+        }
+    }, [])
+
     const [activeStep, setActiveStep] = useState(0);
     const [formData, setFormData] = useState({
         profileImg: null,
@@ -30,22 +46,20 @@ export default function RegistrationStepper() {
     };
 
     const handleAvatarSubmit = (profileImg: any) => {
-        setFormData({...formData, profileImg});
+        setFormData((prevFormData) => ({ ...prevFormData, profileImg }));
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        console.log(formData); // send formData to backend
-
     };
 
     const handleProfileFormSubmit = (newFormData: any) => {
-        setFormData({...formData, ...newFormData});
+        setFormData((prevFormData) => ({ ...prevFormData, ...newFormData }));
         setActiveStep(2);
-        console.log(newFormData); // send formData to backend
-
     };
 
     const handleRegistrationSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        await updateProfile(formData, profileId);
+
+        console.log("formData ", formData);
+       await updateProfile(formData, profileId);
 
         navigate("/dashboard");
     };
