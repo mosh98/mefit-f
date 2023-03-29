@@ -13,6 +13,7 @@ import {Dashboard, FitnessCenter, Person} from "@mui/icons-material";
 import {Link} from "react-router-dom";
 import LogoutButton from "../LogoutButton";
 import {ListSubheader, Stack} from "@mui/material";
+import keycloak from "../../keycloak";
 
 const drawerWidth = 240;
 
@@ -31,7 +32,7 @@ export default function SidebarDrawer() {
     const pageItems = [
         { to: '/dashboard', icon: Dashboard, text: 'Dashboard' },
         { to: '/profile', icon: Person, text: 'Profile' },
-        { to: '/admin', icon: Person, text: 'Admin' },
+       /* { to: '/admin', icon: Person, text: 'Admin' },*/
         { to: '/setgoals', icon: Person, text: 'Set Goals'}
     ];
     const catalogItems = [
@@ -76,6 +77,20 @@ export default function SidebarDrawer() {
                     </ListItem>
                 ))}
                 </List>
+                {keycloak.hasRealmRole("ADMIN") && (
+                    <>
+                        <Divider/>
+                        <List subheader={<ListSubheader>Admin</ListSubheader>}>
+                            <ListItem component={Link} to={"/admin"}>   <ListItemButton>
+                                <ListItemIcon>
+                                    <Person/>
+                                </ListItemIcon>
+                                <ListItemText primary={"Admin"}/>
+                            </ListItemButton>
+                            </ListItem>
+                        </List>
+                    </>
+                )}
                 <Divider/>
                 <List subheader={<ListSubheader>Catalog</ListSubheader>}>
                     {catalogItems.map((item) => (
@@ -90,6 +105,7 @@ export default function SidebarDrawer() {
                     ))}
                 </List>
                 <Divider/>
+                <br />
                 <LogoutButton/>
             </Drawer>
         </Box>

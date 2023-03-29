@@ -17,8 +17,6 @@ function DashboardPage() {
         return <div>loading...</div>
     }*/
 
-
-
     return (
         <Box className={"page-view"}>
             <h1>Dashboard</h1>
