@@ -14,7 +14,7 @@ import {createUser} from "../api/user";
 // If not provided, default to "/"
 function KeycloakRoute({children, role, redirectTo = "/"}) {
     const [isNewUser, setIsNewUser] = useState({});
-
+console.log("isNewUser ",isNewUser);
 
     useEffect(() => {
         if (keycloak.authenticated) {
