@@ -4,14 +4,18 @@ import {DoughnutChart} from "../components/chartsComponents/DoughnutChart";
 import {GoalsList, NumberCards} from "../components/chartsComponents/NumberCards";
 import Grid from "@mui/material/Grid";
 import {useMeFitContext} from "../MeFitMyContext";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 function DashboardPage() {
     const {profile, goal, goalError, fetchGoalData} = useMeFitContext();
 
+    const [reRender, setReRender] = useState<boolean>(false);
+
+
     useEffect(() => {
         fetchGoalData(profile?.goal);
-    }, []);
+        console.log("DASHBOARD PAGE", profile);
+    }, [reRender]);
 
     if (goalError) {
         return <p>{goalError}</p>;
@@ -20,6 +24,10 @@ function DashboardPage() {
         return <p>Loading goals...</p>;
     }
 
+    //make a function for toggeling reRender
+    const toggleReRender = () => {
+        setReRender(!reRender);
+    }
     return (
         <Box className={"page-view"}>
             <h1>Dashboard</h1>
@@ -27,24 +35,17 @@ function DashboardPage() {
             <Box sx={{flexGrow: 1}}>
                 <Grid container spacing={2}>
                     <Grid item xs={8}>
-
                         <NumberCards goals={[goal]} />
-
                     </Grid>
                     <Grid item xs={4}>
-
                         <DoughnutChart goals={[goal]}/>
-
                     </Grid>
                     <Grid item xs={8}>
-
                             <VerticalChart goals={[goal]}/>
-
                     </Grid>
                 </Grid>
             </Box>
-            {/*<GoalWorkouts workouts={[goal]} />*/}
-            <GoalsList goals={[goal]}/>
+            <GoalsList goals={[goal]} toggleReRender={toggleReRender} />
         </Box>
     );
 }
