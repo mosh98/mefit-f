@@ -23,29 +23,6 @@ export const fetchExercises = async () => {
 }
 
 /**
- * Fetch a workout by its id.
- * @param {number} workoutId
- * @returns {Promise<{workout: { id, name, type, completed, programs, exercises, goal } | null, error: null}>}
- */
-export const fetchWorkoutById = async (workoutId) => {
-
-    try {
-        const {data, status} = await axios.get(apiUrl + "workouts/workoutById/" + workoutId);
-        console.log(status)
-        return Promise.resolve({
-            workout: data,
-            error: null,
-        });
-    } catch (e) {
-        return {
-            workout: null,
-            error: e.message,
-        };
-    }
-}
-
-
-/**
  * Create a new exercise on the database
  * @param exerciseInfo
  * @returns {Promise<{exercise: any[], error}|{exercise: any, error: null}>}

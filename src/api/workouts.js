@@ -8,7 +8,6 @@ const apiUrl = process.env.REACT_APP_API_URL;
  * SAMPLE FUNCTION: Fetch workouts from a REST API
  * @returns { Promise<{ workouts: [], error: null | string }>} response
  */
-
 export const fetchWorkouts = async () => {
     try {
         const response = await axios.get(`${apiUrl}workouts/allWorkouts`, {

@@ -98,7 +98,7 @@ const MeFitProvider: React.FC<MeFitProviderProps> = ({ children }) => {
 
     const fetchExerciseData = async () => {
         try {
-            const { exercises: exercises, error } = await fetchExercises();
+            const { exercises, error } = await fetchExercises();
             if (error) {
                 console.log("Fetch exercises error", error);
                 setExerciseError(error);
@@ -118,7 +118,7 @@ const MeFitProvider: React.FC<MeFitProviderProps> = ({ children }) => {
 
     const fetchWorkoutData = async () => {
         try {
-            const { workouts: workouts, error } = await fetchWorkouts();
+            const { workouts, error } = await fetchWorkouts();
             if (error) {
                 console.log("Fetch workouts error", error);
                 setWorkoutError(error);

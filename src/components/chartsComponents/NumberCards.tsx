@@ -4,7 +4,6 @@ import {Stack, Typography} from "@mui/material";
 import WorkoutListCheckmark from "../workouts/WorkoutCheckmark";
 import {UserGoal, Workout} from "../../const/interface";
 import {useMeFitContext} from "../../MeFitMyContext";
-import {useState} from "react";
 
 interface NumberCardsProps {
     goals: UserGoal[];

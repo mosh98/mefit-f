@@ -11,11 +11,12 @@ import {
 } from "@mui/material";
 import {userExperience} from "../../../const/userExperience";
 import {ChangeEvent, FormEvent, useState} from "react";
+import {Exercise} from "../../../const/interface";
 
 interface ExerciseFormProps {
-    onSubmit: (values: ExerciseFormData) => void;
+    onSubmit: (values: Exercise) => void;
     mode: "create" | "update";
-    initialData?: ExerciseFormData;
+    initialData?: Exercise;
 }
 
 export interface ExerciseFormData {
@@ -30,7 +31,7 @@ export interface ExerciseFormData {
 }
 
 function ExerciseForm({ onSubmit, mode, initialData }: ExerciseFormProps) {
-    const [formData, setFormData] = useState<ExerciseFormData>(
+    const [formData, setFormData] = useState<Exercise>(
         initialData || {
             name: '',
             userExperience: '',

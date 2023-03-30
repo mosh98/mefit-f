@@ -5,9 +5,7 @@ import {
     Legend,
 } from "chart.js";
 import {Doughnut} from "react-chartjs-2";
-import {goalsFvie} from "./mockGoals";
 import {Box} from "@mui/system";
-import _default from "chart.js/dist/plugins/plugin.tooltip";
 import {UserGoal, Workout} from "../../const/interface";
 
 ChartJS.register(ArcElement, Tooltip, Legend);

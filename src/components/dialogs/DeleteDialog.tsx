@@ -7,7 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import {useState} from "react";
 
 interface DeleteDialogProps {
-    entityName: string;
+    entityName: string | undefined;
     onDelete: () => Promise<{ error: string | null; response: any }>;
     errorMessage: string | null;
     successMessage: string | null;
