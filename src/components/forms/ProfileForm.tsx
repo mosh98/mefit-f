@@ -24,6 +24,7 @@ function ProfileForm({ user, onSubmit, headerText}: ProfileFormProps) {
         disabilities: user?.disabilities || '',
         medicalCondition: user?.medicalCondition || '',
     });
+    const [isComplete, setIsComplete] = useState(false);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({...formData, [e.target.id]: e.target.value});
@@ -34,6 +35,7 @@ function ProfileForm({ user, onSubmit, headerText}: ProfileFormProps) {
         onSubmit(formData);
         /*        console.log("formData ", formData);
                 setIsModalOpen(true)*/
+        setIsComplete(true);
 
     };
 
@@ -89,6 +91,12 @@ function ProfileForm({ user, onSubmit, headerText}: ProfileFormProps) {
                     >
                         Update Now
                     </Button>
+
+                    {isComplete && (
+                    <div  style={{ display: "flex", justifyContent: "center" }}>
+                    The content is updated!</div>
+                    )}
+
                 </Stack>
             </form>
             )}

@@ -26,6 +26,7 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
         country: "",
     });
     const [profile, setProfile] = useState<any>(null);
+    const [isComplete, setIsComplete] = useState(false);
 
     //https://database-mefit.herokuapp.com/addresses/addressByUserId/1
     useEffect(() => {
@@ -55,6 +56,7 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
         e.preventDefault();
         //console.log(formData);
         onSubmit(formData);
+        setIsComplete(true);
     };
 
     const updateAddress = async (id: number, data: any) => {
@@ -136,6 +138,12 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
                     >
                         Update
                     </Button>
+
+                    {isComplete && (
+                    <div  style={{ display: "flex", justifyContent: "center" }}>
+                    The content is updated!</div>
+                    )}
+
                 </Stack>
             </form>
             )}

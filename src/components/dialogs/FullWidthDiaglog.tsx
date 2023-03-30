@@ -61,7 +61,7 @@ function FullWidthDialog({ content, buttonText, headerText, onSelect }: ScrollDi
                     {content}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleClose}>Close</Button>
                     <Button onClick={handleSelected}>Select</Button>
                 </DialogActions>
             </Dialog>
