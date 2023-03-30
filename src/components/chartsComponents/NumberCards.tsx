@@ -58,9 +58,11 @@ export const NumberCards = ({goals}: NumberCardsProps) => {
 
 interface GoalsListProps {
     goals: UserGoal[];
+    toggleReRender: () => void;
+
 }
 
-export const GoalsList = ({goals}: GoalsListProps) => {
+export const GoalsList = ({goals,toggleReRender }: GoalsListProps) => {
     const {profile, updateGoalApi, fetchGoalData} = useMeFitContext();
     // const [goal, setGoal] = useState<UserGoal[]>([]);
 
@@ -79,8 +81,10 @@ export const GoalsList = ({goals}: GoalsListProps) => {
                 }
             );
 
+
             // Handle the successful response
             console.log(response.data);
+
         } catch (error) {
             // Handle the error
             console.error(error);
@@ -102,7 +106,7 @@ export const GoalsList = ({goals}: GoalsListProps) => {
         //patch body: {completed: true}
         updateWorkout(workout, {completed: !workout.completed});
 
-
+        toggleReRender();
 
 
     }
