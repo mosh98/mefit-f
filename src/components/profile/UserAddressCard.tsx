@@ -25,54 +25,50 @@ export function UserAddressCard({ user, onSubmit }: UserDetailsCardProps) {
 
     console.log("profile: ", profile?.address);
 
-    const addressId = profile?.address;
-
-    console.log("add: ", addressId);
 
     //create user adress object
 
     //TODO: useeffect to populate user info
     //https://database-mefit.herokuapp.com/addresses/addressByUserId/1
+
     useEffect(() => {
-      //  const profile:  Record<string, any>  = JSON.parse(localStorage.getItem('profile') || '{}');
+
+
 
         const fetchAdress = async () => {
             console.log("Fetch adress from profile page:");
-            console.log("add 11: ", addressId);
-            const response = await axios.get(`https://database-mefit.herokuapp.com/addresses/addressByUserId/${addressId}`, {
+            const response = await axios.get(`https://database-mefit.herokuapp.com/addresses/addressByUserId/${profile?.user}`, {
                 headers: {
                     'Authorization': `Bearer ${keycloak.token}`,
                     'Content-Type': 'application/json',
                 }
             })
+            console.log("response: ", response.data);
+
             setUserObject({  address: response.data.address,
                 post_code: response.data.post_code,
                 city: response.data.city,
                 country:response.data.country,})
 
         }
+        console.log("isFormSubmitted: ", isFormSubmitted);
+        console.log("userObject: ", userObject);
 
         fetchAdress();
-        console.log(userObject)
+
+
     },[isFormSubmitted]);
     const handleFormSubmit = () => {
         if (isFormSubmitted == true){
+            console.log("Form submitted State converted from TRUE to FALSE");
 
             setIsFormSubmitted(false);
         }else {
+            console.log("Form submitted State converted from FALSE to TRUE");
             setIsFormSubmitted(true);
         }
     };
 
-
-    //opening and closing modal
-    const handleModalOpen = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleModalClose = () => {
-        setIsModalOpen(false);
-    };
 
     return (
         <>

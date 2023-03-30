@@ -3,6 +3,7 @@ import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import keycloak from "../../keycloak";
 import axios from "axios";
 import {fetchProfileByKeycloakId} from "../../api/profile";
+import {useMeFitContext} from "../../MeFitMyContext";
 
 interface AddressFormProps {
     onSubmit: (values: any) => void;
@@ -17,7 +18,10 @@ interface AddressFormData {
 }
 
 function AddressForm({onSubmit, headerText}: AddressFormProps) {
-    const localProfile = JSON.parse(localStorage.getItem('profile') || '{}');
+    const userId: any = useMeFitContext().profile?.user;
+    const address_id: any  = useMeFitContext().profile?.address;
+
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState<AddressFormData>({
         address: "",
@@ -25,15 +29,14 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
         city: "",
         country: "",
     });
-    const [profile, setProfile] = useState<any>(null);
+
 
     //https://database-mefit.herokuapp.com/addresses/addressByUserId/1
     useEffect(() => {
 
-        console.log("profile local Adressform: ", localProfile.user);
        // console.log("Adressform mounted:", profile.user);
         const fetchAdress = async () => {
-            const response = await axios.get(`https://database-mefit.herokuapp.com/addresses/addressByUserId/${localProfile?.user}`, {
+            const response = await axios.get(`https://database-mefit.herokuapp.com/addresses/addressByUserId/${userId}`, {
                 headers: {
                     'Authorization': `Bearer ${keycloak.token}`,
                     'Content-Type': 'application/json',
@@ -42,6 +45,7 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
             setFormData(response.data)
 
         }
+
         fetchAdress();
 
     },[]);
@@ -57,15 +61,16 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
         onSubmit(formData);
     };
 
-    const updateAddress = async (id: number, data: any) => {
+    const updateAddress = async (id: number | undefined, data: any) => {
         try {
-            const response = await axios.patch(`https://database-mefit.herokuapp.com/addresses/updateAddress/${id}`, data, {
+            const response = await axios.patch(`https://database-mefit.herokuapp.com/addresses/updateAddress/${address_id}`, data, {
                 headers: {
                     'Authorization': `Bearer ${keycloak.token}`,
                     'Content-Type': 'application/json',
                 }
             });
-            console.log(response.data);
+
+            onSubmit(response.data);
         } catch (error) {
             console.log(error);
         }
@@ -73,13 +78,9 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
     };
 
     const handleClick = () => {
-        console.log(formData);
         onSubmit(formData)
-        //TODO: update user profile in server
+        // update user profile in server
 
-        //get profile from local storage
-        const profile:  Record<string, any>  = JSON.parse(localStorage.getItem('profile') || '{}');
-        const address_id: number = localProfile.address
         updateAddress(address_id, formData)
         setIsModalOpen(true);
     };
