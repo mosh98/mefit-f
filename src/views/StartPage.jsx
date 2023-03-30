@@ -48,8 +48,8 @@ function StartPage() {
                             <h1>ME FIT</h1>
                         </Stack>
                         <Stack sx={{minWidth: 300}} direction={'row'} spacing={5}>
-                            <Button className={'start-button'} onClick={() => keycloak.login()}>Login</Button>
-                            <Button className={'start-button'} onClick={() => keycloak.register()}>Register</Button>
+                            <Button className={'start-button'} onClick={() => keycloak.login()} style={{color:"white", fontWeight:"bold"}}>Login</Button>
+                            <Button className={'start-button'} onClick={() => keycloak.register()} style={{color:"white", fontWeight:"bold"}} >Register</Button>
                         </Stack>
 
                     </Box>
