@@ -21,8 +21,11 @@ function Row(props) {
 
     const isChecked = () => {
         if (props.mode === "select") {
+
             return props.checkedIds.includes(props.workout.id);
+
         } else if (props.mode === "complete") {
+
             return props.workout.completed;
         }
     };
@@ -89,6 +92,7 @@ function WorkoutListCheckmark(props) {
                 setPickedWorkouts(newPickedWorkouts);
             }
         } else if (mode === "complete") {
+
             onWorkoutCompletion(workout.id, checked);
         }
     };

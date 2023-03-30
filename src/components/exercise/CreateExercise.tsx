@@ -1,10 +1,13 @@
-import ExerciseForm, {ExerciseFormData} from "../forms/create-forms/ExerciseForm";
+import ExerciseForm from "../forms/create-forms/ExerciseForm";
 import {postExercise} from "../../api/exercises";
+import {useState} from "react";
+import {Exercise} from "../../const/interface";
 
 function CreateExercise() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // TODO: fix post exercise
-    const onCreate = async (values: ExerciseFormData) => {
+    const onCreate = async (values: Exercise) => {
         console.log("Creating exercise:", values);
         // Implement your create exercise logic here
         const {exercise, error} = await postExercise(values);
@@ -12,12 +15,13 @@ function CreateExercise() {
             console.error("Failed to create exercise:", error);
         } else {
             console.log("Exercise created successfully:", exercise);
+            setIsModalOpen(true)
         }
     };
 
     return (
         <div>
-            <ExerciseForm onSubmit={onCreate} mode="create"/>
+            {isModalOpen ? <p>Exercise created successfully</p> : <ExerciseForm onSubmit={onCreate} mode="create"/>}
         </div>
     )
 }

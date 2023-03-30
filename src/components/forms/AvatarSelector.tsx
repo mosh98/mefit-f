@@ -1,5 +1,6 @@
 import { Stack, Typography, Container, Button } from "@mui/material";
 import { FormEvent, useState } from "react";
+import Grid from "@mui/material/Grid";
 
 interface AvatarSelectorProps {
     onSelect: (avatar: string) => void;
@@ -33,37 +34,41 @@ function AvatarSelector({ onSelect, headerText, handleSubmit  }: AvatarSelectorP
     };
 
     return (
-        <Container maxWidth="xs">
+        <Container>
             <form onSubmit={handleFormSubmit}>
                 <Stack direction="column" spacing={3}>
                     <Typography variant="h4" component="h1">
                         {headerText}
                     </Typography>
-                    <Stack direction="row" spacing={3}>
+                    <Grid container spacing={4} justifyContent="center">
                         {avatars.map((avatar, index) => (
-                        <img
-                            key={index}
-                            src={`/img/avatars/${avatar}`}
-                            alt="avatar"
-                            onClick={() => handleSelect(`/img/avatars/${avatar}`)}
-                            style={{
-                                width: "100px",
-                                height: "100px",
-                                border:
-                                    selectedAvatar === `/img/avatars/${avatar}` ? "2px solid blue" : "none",
-                            }}
-                        />
-                    ))}
-                    </Stack>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        size="large"
-                        disableElevation
-                        disabled={!selectedAvatar}
-                    >
-                        Update
-                    </Button>
+                            <Grid key={index} item xs={3} justifyContent="center" alignItems="center">
+                                <img
+                                    src={`/img/avatars/${avatar}`}
+                                    alt="avatar"
+                                    onClick={() => handleSelect(`/img/avatars/${avatar}`)}
+                                    style={{
+                                        width: "125px",
+                                        height: "125px",
+                                        border:
+                                            selectedAvatar === `/img/avatars/${avatar}` ? "2px solid blue" : "none",
+                                    }}
+                                />
+                            </Grid>
+                        ))}
+                        <Container maxWidth="xs" sx={{ marginTop: 5 }}>
+                            <Button
+                                fullWidth={true}
+                                type="submit"
+                                variant="contained"
+                                size="large"
+                                disableElevation
+                                disabled={!selectedAvatar}
+                            >
+                                Update
+                            </Button>
+                        </Container>
+                    </Grid>
                 </Stack>
             </form>
         </Container>

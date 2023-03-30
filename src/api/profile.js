@@ -5,7 +5,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 
 /**
- * SAMPLE FUNCTION: Fetch profile by id from a REST API
+ * Fetch profile by id from a REST API
  * @param profileId
  * @returns {Promise<{profile: null, error}|{profile: any, error: null}>}
  */
@@ -24,6 +24,12 @@ export const fetchProfileById = async (profileId) => {
     }
 }
 
+/**
+ * Fetch profile by keycloak id from a REST API
+ * @param keycloakId
+ * @returns {Promise<{profile: any, error: null}|{profile: *[], error}>}
+ */
+
 export const fetchProfileByKeycloakId = async (keycloakId) => {
     try {
         const response = await axios.get(`${apiUrl}profiles/profileByUserKeycloakId/${keycloakId}`, {
@@ -38,7 +44,12 @@ export const fetchProfileByKeycloakId = async (keycloakId) => {
     }
 }
 
-// update profile
+/**
+ * Create a new profile on the database
+ * @param profile
+ * @param profileId
+ * @returns {Promise<{profile: any, error: null}|{profile: *[], error}>}
+ */
 export const updateProfile = async (profile, profileId) => {
     try {
         const response = await axios.patch(`${apiUrl}profiles/updateProfile/${profileId}`, profile, {

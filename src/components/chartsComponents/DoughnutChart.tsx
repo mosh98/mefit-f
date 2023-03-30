@@ -5,17 +5,21 @@ import {
     Legend,
 } from "chart.js";
 import {Doughnut} from "react-chartjs-2";
-import {goalsFvie} from "./mockGoals";
 import {Box} from "@mui/system";
+import {UserGoal, Workout} from "../../const/interface";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const DoughnutChart = () => {
+interface DoughnutChartProps {
+    goals: UserGoal[];
+}
+
+export const DoughnutChart = ({ goals }: DoughnutChartProps) => {
     let achievedWorkouts = 0;
     let remainingWorkouts = 0;
 
-    goalsFvie.forEach(goalWorkout => {
-        goalWorkout.workouts.forEach(workout => {
+    goals.forEach((goalWorkout: UserGoal) => {
+        goalWorkout.workouts?.forEach((workout: Workout) => {
 
             if (workout.completed) {
                 achievedWorkouts += 1;
@@ -27,12 +31,12 @@ export const DoughnutChart = () => {
 
 
     const data = {
-        labels: ["Red", "Blue"],
+        labels: ["Completed", "Not Completed"],
         datasets: [{
             label: "# of workouts",
             data: [achievedWorkouts, remainingWorkouts],
-            backgroundColor: ['black', 'red'],
-            borderColor: ['black', 'red']
+            backgroundColor: ['green', 'grey'],
+            borderColor: ['grey', 'grey']
         }]
     }
 
@@ -42,6 +46,7 @@ export const DoughnutChart = () => {
                 width={500}
                 height={500}
                 data={data}
+
             >
             </Doughnut>
         </Box>

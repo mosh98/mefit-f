@@ -51,7 +51,7 @@ function ScrollDialog({ content, buttonText, headerText }: ScrollDialogProps) {
                     {content}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>
         </>

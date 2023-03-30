@@ -4,16 +4,17 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import {useState} from "react";
+import {ReactNode, useState} from "react";
 
-interface DeleteDialogProps {
-    entityName: string | undefined;
-    onDelete: () => Promise<{ error: string | null; response: any }>;
+interface UpdateDialogProps {
+    content: ReactNode;
+    entityName: string;
+    onUpdate: () => Promise<{ error: string | null; response: any }>;
     errorMessage: string | null;
     successMessage: string | null;
 }
 
-function DeleteDialog({entityName, onDelete, errorMessage, successMessage}: DeleteDialogProps) {
+function UpdateDialog({ content, entityName, onUpdate, errorMessage, successMessage}: UpdateDialogProps) {
     const [open, setOpen] = useState(false);
     const [isDone, setIsDone] = useState(false);
     const handleClickOpen = () => {
@@ -24,9 +25,9 @@ function DeleteDialog({entityName, onDelete, errorMessage, successMessage}: Dele
         setOpen(false);
     };
 
-    function handleDelete() {
-        if (onDelete) {
-            onDelete().then(() => {
+    function handleUpdate() {
+        if (onUpdate) {
+            onUpdate().then(() => {
                 setIsDone(true);
             });
         }
@@ -34,13 +35,13 @@ function DeleteDialog({entityName, onDelete, errorMessage, successMessage}: Dele
 
     return (
         <>
-            <Button onClick={handleClickOpen}>Delete</Button>
+            <Button onClick={handleClickOpen}>Update</Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="Delete-entity"
             >
-                <DialogTitle id="scroll-dialog-title">Delete {entityName}</DialogTitle>
+                <DialogTitle id="scroll-dialog-title">Update {entityName}</DialogTitle>
                 {isDone ? (
                     <DialogContent>
                         {errorMessage && <p>Error: {errorMessage}</p>}
@@ -48,7 +49,7 @@ function DeleteDialog({entityName, onDelete, errorMessage, successMessage}: Dele
                     </DialogContent>
                 ) : (
                     <DialogContent>
-                        Are you sure you want to delete this {entityName}?
+                        {content}
                     </DialogContent>
                 )}
                 <DialogActions>
@@ -57,7 +58,7 @@ function DeleteDialog({entityName, onDelete, errorMessage, successMessage}: Dele
                     ) : (
                         <>
                             <Button onClick={handleClose}>Cancel</Button>
-                            <Button onClick={handleDelete}>Delete</Button>
+                            <Button onClick={handleUpdate}>Delete</Button>
                         </>
                     )}
                 </DialogActions>
@@ -66,4 +67,4 @@ function DeleteDialog({entityName, onDelete, errorMessage, successMessage}: Dele
     );
 }
 
-export default DeleteDialog;
+export default UpdateDialog;

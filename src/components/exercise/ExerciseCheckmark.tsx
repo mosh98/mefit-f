@@ -9,21 +9,11 @@ import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import Table from '@mui/material/Table';
 import ScrollDialog from '../../components/dialogs/ScrollDialog';
-import ExerciseForm, {ExerciseFormData} from '../forms/create-forms/ExerciseForm';
+import ExerciseForm from '../forms/create-forms/ExerciseForm';
 import {deleteExercise, patchExercise} from '../../api/exercises';
 import DeleteDialog from "../dialogs/DeleteDialog";
+import {Exercise} from "../../const/interface";
 
-interface Exercise {
-    id: number;
-    muscleGroup: string;
-    sets: number;
-    userExperience: string;
-    name: string;
-    reps: number;
-    description: string;
-    exerciseImageLink: string;
-    videoLink: string;
-}
 
 interface Props {
     exercises: Exercise[];
@@ -62,7 +52,7 @@ export default function ExercisesCheckmark(props: Props) {
     ];
 
 
-    async function onUpdate(id: number, exerciseInfo: ExerciseFormData) {
+    async function onUpdate(id: number, exerciseInfo: Exercise) {
         console.log("Update exercise ", exerciseInfo, "with id ", id);
 
         const response = await patchExercise(exerciseInfo, id);
@@ -73,16 +63,16 @@ export default function ExercisesCheckmark(props: Props) {
         }
     }
 
-    const onDelete = async (id: number) => {
+    const onDelete = async (id: number | undefined ) => {
         const {exercise, error} = await deleteExercise(id);
         if (error) {
             setDeleteError(error);
             console.error("Error deleting exercise:", error);
-            return { error, response: null };
+            return {error, response: null};
         } else {
             setDeleteSuccess("Exercise deleted successfully");
             console.log("Exercise deleted successfully:", exercise);
-            return { error: null, response: exercise };
+            return {error: null, response: exercise};
         }
 
         // TODO Handle refresh of the page after delete when handleClose in DeleteDialog
@@ -140,7 +130,7 @@ export default function ExercisesCheckmark(props: Props) {
                                                         content={
                                                             <ExerciseForm
                                                                 mode={"update"}
-                                                                onSubmit={(exerciseInfo) => onUpdate(exercise.id, exerciseInfo)}
+                                                                onSubmit={(exerciseInfo) => exercise.id && onUpdate(exercise.id, exerciseInfo)}
                                                                 initialData={exercise}
                                                             />
                                                         }
