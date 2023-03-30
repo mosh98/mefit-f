@@ -5,6 +5,8 @@ import WorkoutListCheckmark from "../workouts/WorkoutCheckmark";
 import {UserGoal, Workout} from "../../const/interface";
 import {useMeFitContext} from "../../MeFitMyContext";
 import {useState} from "react";
+import axios from "axios";
+import keycloak from "../../keycloak";
 
 interface NumberCardsProps {
     goals: UserGoal[];
@@ -62,11 +64,61 @@ export const GoalsList = ({goals}: GoalsListProps) => {
     const {profile, updateGoalApi, fetchGoalData} = useMeFitContext();
     // const [goal, setGoal] = useState<UserGoal[]>([]);
 
+
+
+    const updateWorkout = async (id:  number | Workout , data: any) => {
+        try {
+            const response = await axios.patch(
+                `https://database-mefit.herokuapp.com/workouts/updateWorkout/${id}`,
+                data,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${keycloak.token}`,
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+
+            // Handle the successful response
+            console.log(response.data);
+        } catch (error) {
+            // Handle the error
+            console.error(error);
+        }
+    };
+
+
     let handleWorkoutCompletion = async (/*goalId: number,*/ workout: Workout) => {
         console.log("Completed workout id: ", workout, "completed: ", !workout.completed);
+        console.log(typeof workout);
+
+
         // Update the workout in the context
 
         console.log("Goal id ", profile?.goal)
+
+        //updatwe workout using workdout id using an axios patch
+        //patch link: https://database-mefit.herokuapp.com/workouts/updateWorkout/:id
+        //patch body: {completed: true}
+        updateWorkout(workout, {completed: !workout.completed});
+
+
+
+
+    }
+    return (
+        <div>
+            {goals.map((goal, index) => (
+                <div key={`${goal.id}-${index}`}>
+                    <WorkoutListCheckmark mode="complete" workouts={goal.workouts}
+                                          onWorkoutCompletion={handleWorkoutCompletion}/>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+
 
 /*        try {
             const {goal: updatedGoal, error} = await updateGoalApi(profile?.goal, workout);
@@ -81,15 +133,3 @@ export const GoalsList = ({goals}: GoalsListProps) => {
             console.log("Error updating goal", e);
         }
     ;*/
-    }
-    return (
-        <div>
-            {goals.map((goal, index) => (
-                <div key={`${goal.id}-${index}`}>
-                    <WorkoutListCheckmark mode="complete" workouts={goal.workouts}
-                                          onWorkoutCompletion={handleWorkoutCompletion}/>
-                </div>
-            ))}
-        </div>
-    );
-}

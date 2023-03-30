@@ -16,6 +16,9 @@ function StartPage() {
         if (keycloak.authenticated) {
             if (profile) {
                 setIsProfileDataFetched(true);
+                //save keycloak token to local storage
+                localStorage.setItem("keycloakToken", keycloak.token);
+
             }
         }
     }, [profile]);

@@ -1,6 +1,13 @@
 import WorkoutListCheckmark from "./WorkoutCheckmark";
 import {useState} from "react";
 
+/**
+ * NOT USED
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
 
 export default function GoalWorkouts(props) {
     const { workouts } = props;

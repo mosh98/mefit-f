@@ -11,6 +11,7 @@ function DashboardPage() {
 
     useEffect(() => {
         fetchGoalData(profile?.goal);
+        console.log("DASHBOARD PAGE", profile);
     }, []);
 
     if (goalError) {

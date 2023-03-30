@@ -34,7 +34,10 @@ export const VerticalChart = ({ goals }: VerticalChartProps) => {
         )
     ).reduce<{ total: Record<string, number> }>(
         (acc, muscleGroup) => {
-            acc.total['muscleGroup'] = (acc.total['muscleGroup'] || 0) + 1;
+            if (muscleGroup) {
+                acc.total[muscleGroup] = (acc.total[muscleGroup] || 0) + 1;
+            }
+
             return acc;
         },
         { total: {} }
@@ -43,18 +46,22 @@ export const VerticalChart = ({ goals }: VerticalChartProps) => {
     const muscleGroupStatsCompleted = goals.flatMap((goal) =>
         goal.workouts?.filter((workout) => workout.completed).flatMap((workout) =>
             workout.exercises?.map((exercise) => exercise.muscleGroup)
-        )
+        ) ?? []
     ).reduce<{ total: Record<string, number> }>(
         (acc, muscleGroup) => {
-            acc.total['muscleGroup'] = (acc.total['muscleGroup'] || 0) + 1;
+            if (muscleGroup !== undefined) {
+                acc.total[muscleGroup] = (acc.total[muscleGroup] ?? 0) + 1;
+            }
             return acc;
         },
         { total: {} }
     );
 
 
+
     ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
+    // {'Chest':3}
     const data = {
         labels: labels,
         datasets: [{
