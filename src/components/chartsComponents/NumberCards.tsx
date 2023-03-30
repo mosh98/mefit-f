@@ -7,6 +7,7 @@ import {useMeFitContext} from "../../MeFitMyContext";
 import {useState} from "react";
 import axios from "axios";
 import keycloak from "../../keycloak";
+import {updateProfile} from "../../api/profile";
 
 interface NumberCardsProps {
     goals: UserGoal[];
@@ -104,7 +105,7 @@ export const GoalsList = ({goals,toggleReRender }: GoalsListProps) => {
         //updatwe workout using workdout id using an axios patch
         //patch link: https://database-mefit.herokuapp.com/workouts/updateWorkout/:id
         //patch body: {completed: true}
-        updateWorkout(workout, {completed: !workout.completed});
+        await updateWorkout(workout, {completed: !workout.completed});
 
         toggleReRender();
 

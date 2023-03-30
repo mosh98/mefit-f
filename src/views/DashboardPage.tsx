@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import {useMeFitContext} from "../MeFitMyContext";
 import {useEffect, useState} from "react";
 
-function DashboardPage() {
+export function DashboardPage() {
     const {profile, goal, goalError, fetchGoalData} = useMeFitContext();
 
     const [reRender, setReRender] = useState<boolean>(false);
@@ -50,4 +50,4 @@ function DashboardPage() {
     );
 }
 
-export default DashboardPage;
+//export default DashboardPage;
