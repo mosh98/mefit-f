@@ -43,15 +43,17 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
                 }
             })
             setFormData(response.data)
+            onSubmit(response.data);
 
         }
 
         fetchAdress();
 
-    },[]);
+    },[isModalOpen]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({...formData, [e.target.id]: e.target.value});
+        onSubmit(formData);
     };
 
     //TODO: is this necessary?
@@ -83,6 +85,7 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
         // update user profile in server
 
         updateAddress(address_id, formData)
+        onSubmit("")
         setIsModalOpen(true);
     };
 
