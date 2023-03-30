@@ -15,18 +15,21 @@ import SetGoalPage from "./views/SetGoalPage";
 import CreateWorkoutPage from "./views/CreateWorkoutPage";
 import {Box} from "@mui/system";
 import Grid from "@mui/material/Grid";
+import MeFitProvider from "./MeFitMyContext";
 
 
 function App() {
     return (
         <BrowserRouter>
-            <Box sx={{flexGrow: 1}}>
+            <Box sx={{flexGrow: 1, background: '#e2e2e2'}}>
+                <MeFitProvider>
                 <Grid container spacing={2}>
                     {keycloak.authenticated &&
-                        <Grid item xs={2}>
+
+                        <Grid item xs={3}>
                             <SidebarDrawer/>
                         </Grid>}
-                    <Grid item xs={10}>
+                    <Grid item xs={9}>
                         <main className="main-container">
                             <Routes>
                                 <Route path="/" element={<StartPage/>}/>
@@ -84,7 +87,9 @@ function App() {
                             </Routes>
                         </main>
                     </Grid>
+
                 </Grid>
+            </MeFitProvider>
             </Box>
         </BrowserRouter>
 
@@ -92,4 +97,3 @@ function App() {
 }
 
 export default App;
-

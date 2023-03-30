@@ -4,15 +4,8 @@ import AddressForm from "../../components/forms/AddressForm";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import keycloak from "../../keycloak";
-import Dialog from "@mui/material/Dialog";
-
-interface User {
-    address: string;
-    post_code: string;
-    city: string;
-    country: string;
-
-}
+import {useMeFitContext} from "../../MeFitMyContext";
+import {UserAddress as User} from "../../const/interface";
 
 interface UserDetailsCardProps {
     user: User;
@@ -20,27 +13,33 @@ interface UserDetailsCardProps {
 }
 
 export function UserAddressCard({ user, onSubmit }: UserDetailsCardProps) {
+    const {profile} = useMeFitContext();
     const [userObject, setUserObject] = useState({
         address: "",
         post_code: "",
         city: "",
         country: "",
     });
-
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    console.log("profile: ", profile?.address);
+
+    const addressId = profile?.address;
+
+    console.log("add: ", addressId);
 
     //create user adress object
 
     //TODO: useeffect to populate user info
     //https://database-mefit.herokuapp.com/addresses/addressByUserId/1
     useEffect(() => {
-        const profile:  Record<string, any>  = JSON.parse(localStorage.getItem('profile') || '{}');
+      //  const profile:  Record<string, any>  = JSON.parse(localStorage.getItem('profile') || '{}');
 
         const fetchAdress = async () => {
             console.log("Fetch adress from profile page:");
-
-            const response = await axios.get(`https://database-mefit.herokuapp.com/addresses/addressByUserId/${profile.user}`, {
+            console.log("add 11: ", addressId);
+            const response = await axios.get(`https://database-mefit.herokuapp.com/addresses/addressByUserId/${addressId}`, {
                 headers: {
                     'Authorization': `Bearer ${keycloak.token}`,
                     'Content-Type': 'application/json',

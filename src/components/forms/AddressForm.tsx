@@ -1,5 +1,5 @@
 import {Button, Stack, TextField, Typography, Container} from '@mui/material';
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import keycloak from "../../keycloak";
 import axios from "axios";
 import {fetchProfileByKeycloakId} from "../../api/profile";
@@ -17,7 +17,8 @@ interface AddressFormData {
 }
 
 function AddressForm({onSubmit, headerText}: AddressFormProps) {
-
+    const localProfile = JSON.parse(localStorage.getItem('profile') || '{}');
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState<AddressFormData>({
         address: "",
         post_code: "",
@@ -29,10 +30,10 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
     //https://database-mefit.herokuapp.com/addresses/addressByUserId/1
     useEffect(() => {
 
-        const profile:  Record<string, any>  = JSON.parse(localStorage.getItem('profile') || '{}');
-        console.log("Adressform mounted:", profile.user);
+        console.log("profile local Adressform: ", localProfile.user);
+       // console.log("Adressform mounted:", profile.user);
         const fetchAdress = async () => {
-            const response = await axios.get(`https://database-mefit.herokuapp.com/addresses/addressByUserId/${profile?.user}`, {
+            const response = await axios.get(`https://database-mefit.herokuapp.com/addresses/addressByUserId/${localProfile?.user}`, {
                 headers: {
                     'Authorization': `Bearer ${keycloak.token}`,
                     'Content-Type': 'application/json',
@@ -78,12 +79,14 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
 
         //get profile from local storage
         const profile:  Record<string, any>  = JSON.parse(localStorage.getItem('profile') || '{}');
-        const address_id: number = profile.address
+        const address_id: number = localProfile.address
         updateAddress(address_id, formData)
+        setIsModalOpen(true);
     };
 
     return (
         <Container maxWidth="xs">
+            {isModalOpen ? <p>Update successfully</p> : (
             <form onSubmit={handleSubmit}>
                 <Stack direction='column' spacing={3}>
                     <Typography variant="h4" component="h1">
@@ -135,6 +138,7 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
                     </Button>
                 </Stack>
             </form>
+            )}
         </Container>
     );
 }

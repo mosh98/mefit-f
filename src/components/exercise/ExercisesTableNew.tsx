@@ -10,6 +10,8 @@ import ScrollDialog from "../../components/dialogs/ScrollDialog";
 import { Box } from '@mui/system';
 import { useState } from 'react';
 import { Exercise } from "../../const/interface"
+import ExerciseDisplay from "./ExerciseDisplay";
+import * as React from "react";
 
 interface Props {
     exercises: Exercise[];
@@ -94,11 +96,12 @@ export default function ExercisesTableNew(props: Props) {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {exercises.map((exercise) => (
-                                    <TableRow key={exercise['id'] + "-" + exercise['userExperience']}>
+                                {exercises.map((exercise,index) => (
+                                    <TableRow key={exercise['id'] + "-" + exercise['userExperience'] + "-" + index}>
                                         <TableCell>{exercise['name']}</TableCell>
                                         <TableCell>
-                                            <ScrollDialog content={<div>{exercise['description']}</div>} buttonText="Info" headerText={`Description for ${exercise['name']}`} />
+                                            <ScrollDialog content={<ExerciseDisplay exercise={exercise} />} buttonText={"INFO"} />
+                                            {/*<ScrollDialog content={<div>{exercise['description']}</div>} buttonText="Info" headerText={`Description for ${exercise['name']}`} />*/}
                                         </TableCell>
                                         <TableCell>{exercise['muscleGroup']}</TableCell>
                                         <TableCell>{exercise['userExperience']}</TableCell>

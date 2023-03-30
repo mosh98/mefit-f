@@ -5,28 +5,16 @@ import UserMedicalCard from "../../components/profile/UserMedicalCard";
 import UserAddressCard from "../../components/profile/UserAddressCard";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-
-interface User {
-    name: string;
-    firstName: string;
-    lastName: string;
-    username: string;
-    sub: string;
-    email: string;
-    weight?: number;
-    height?: number;
-    disabilities?: string;
-    medicalCondition?: string;
-    profileImage?: string;
-    address: string;
-    post_code: string;
-    city: string;
-    country: string;
-
-    roles?: string[];
-}
+import {useMeFitContext} from "../../MeFitMyContext";
+import {UserProfile, UserKeycloak, UserAddress} from "../../const/interface";
 
 function ProfilePage() {
+    const {profile} = useMeFitContext();
+
+
+    if (!profile) {
+        return <div>loading...</div>
+    }
 
     const tokenParsed = keycloak.tokenParsed as {
         name?: string;
@@ -35,9 +23,20 @@ function ProfilePage() {
         preferred_username?: string;
         sub?: string;
         email?: string;
+        roles?: string[];
     };
 
-    const user: User = {
+    const profileUser: UserProfile = {
+        profileImg: profile?.profileImg || undefined,
+        weight: profile?.weight || 0,
+        height: profile?.height || 0,
+        disabilities: profile?.disabilities || undefined,
+        medicalCondition: profile?.medicalCondition || undefined,
+    };
+
+    console.log("profileUser: ", profileUser);
+
+    const userKeycloak: UserKeycloak = {
         name: tokenParsed.name || '',
         firstName: tokenParsed.given_name || '',
         lastName: tokenParsed.family_name || '',
@@ -45,15 +44,9 @@ function ProfilePage() {
         sub: tokenParsed.sub || '',
         email: tokenParsed.email || '',
         roles: keycloak.tokenParsed?.realm_access?.roles || [],
-        // weight: userInfo.profile.weight
-        weight: 0,
-        //  height: userInfo.profile.height ,
-        height: 0,
-        //  disabilities: userInfo.profile.disabilities || '',,
-        disabilities: '',
-        //  medicalCondition: userInfo.profile.medicalCondition
-        medicalCondition: '',
-        profileImage: "",
+    };
+
+    const userAddress: UserAddress = {
         address: "",
         post_code: "",
         city: "",
@@ -66,14 +59,14 @@ function ProfilePage() {
     }
 
     return (
-        <>
+        <Box className={"page-view"}>
             <h1>Profile Page</h1>
 
             <Box sx={{flexGrow: 1}}>
                 <Grid container spacing={2}>
                     <Grid item xs={8}>
                         <img
-                            src={user.profileImage}
+                            src={`${profileUser.profileImg}`}
                             alt="avatar"
                             style={{
                                 width: "300px",
@@ -91,46 +84,22 @@ function ProfilePage() {
                     </Grid>
                     <Grid item xs={4}>
 
-                        <UserProfileCard user={user}/>
+                        <UserProfileCard user={userKeycloak}/>
 
                     </Grid>
                     <Grid item xs={8}>
 
-                        <UserMedicalCard user={user} onSubmit={handleSubmit}/>
+                        <UserMedicalCard user={profileUser} onSubmit={handleSubmit}/>
 
                     </Grid>
                     <Grid item xs={4}>
 
-                        <UserAddressCard user={user} onSubmit={handleSubmit}/>
+                        <UserAddressCard user={userAddress} onSubmit={handleSubmit}/>
                     </Grid>
                 </Grid>
             </Box>
-        </>
+        </Box>
     );
 }
 
 export default ProfilePage;
-
-/*  useEffect(() => {
-
-        const profile:  Record<string, any>  = JSON.parse(localStorage.getItem('profile') || '{}');
-
-        const fetchAdress = async () => {
-            console.log("Fetch adress from profile page:");
-
-            const response = await axios.get(`https://database-mefit.herokuapp.com/addresses/addressByUserId/${profile.user}`, {
-                headers: {
-                    'Authorization': `Bearer ${keycloak.token}`,
-                    'Content-Type': 'application/json',
-                }
-            })
-            user.address = response.data.address;
-            user.post_code = response.data.post_code;
-            user.city = response.data.city;
-            user.country = response.data.country;
-        }
-
-        fetchAdress();
-        console.log(user)
-    },[]);
-    */

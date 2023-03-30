@@ -17,7 +17,7 @@ import ExercisesTableNew from "../exercise/ExercisesTableNew";
 import keycloak from "../../keycloak";
 import DeleteDialog from "../dialogs/DeleteDialog";
 import {deleteWorkoutById} from "../../api/workouts";
-
+import UpdateDialog from "../dialogs/UpdateDialog";
 
 function Row(props) {
     const [open, setOpen] = useState(false);
@@ -51,17 +51,18 @@ function Row(props) {
                 <TableCell>{props.workout.name}</TableCell>
                 <TableCell>{props.workout.type}</TableCell>
                 <TableCell>{props.workout.experienceLevel}</TableCell>
-                <TableCell>{props.workout.exercises.length}</TableCell>
-{/*                {keycloak.hasRealmRole('ADMIN') &&
-                    <TableCell>
-                        {props.workout['id']}
-                        <DeleteDialog
-                            entityName={props.workout['name']}
-                            onDelete={() => onDelete(props.workout.id)}
-                            errorMessage={deleteError}
-                            successMessage={deleteSuccess}
-                        />
-                    </TableCell>}*/}
+                {keycloak.hasRealmRole('ADMIN') &&
+                    <>
+                        <TableCell>
+                            <UpdateDialog
+                                entityName={props.workout['name']}
+                                onUpdate={() => onDelete(props.workout.id)}
+                                errorMessage={deleteError}
+                                successMessage={deleteSuccess}
+                            />
+                        </TableCell>
+                    </>
+                }
             </TableRow>
             {/* Collapsible rows */}
             <TableRow>
@@ -91,7 +92,6 @@ function WorkoutList(props) {
     }
 
 
-
     return (
         <div>
             <Paper sx={{width: '99%', mb: 2}}>
@@ -102,14 +102,17 @@ function WorkoutList(props) {
                                 <TableCell/>
                                 <TableCell>Workout name</TableCell>
                                 <TableCell>Target Area</TableCell>
-                                <TableCell>Number of exercises</TableCell>
                                 <TableCell>Experience</TableCell>
-                               {/* {keycloak.hasRealmRole('ADMIN') && <TableCell>Delete</TableCell>}*/}
+                                {keycloak.hasRealmRole('ADMIN') &&
+                                    <>
+                                        <TableCell>Update</TableCell>
+                                    </>
+                                }
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {workouts.map((workout, index) => (
-                                    <Row key={index} workout={workout}/>
+                                <Row key={index} workout={workout}/>
                             ))}
                         </TableBody>
                     </Table>

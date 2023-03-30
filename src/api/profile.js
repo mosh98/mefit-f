@@ -53,3 +53,19 @@ export const updateProfile = async (profile, profileId) => {
 
     }
 }
+
+/*
+const updateProfile = async (profile: UserProfile) => {
+    try {
+        const response = await axios.patch(`${apiUrl}profiles/updateProfile/${profile.id}`, profile, {
+            headers: {
+                'Authorization': `Bearer ${keycloak.token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        setProfile(response.data);
+        return {profile: response.data, error: null};
+    } catch (error) {
+        return {profile: null, error: error.message};
+    }
+};*/
