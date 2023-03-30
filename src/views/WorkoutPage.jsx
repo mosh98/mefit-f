@@ -1,22 +1,22 @@
-    import useWorkouts from "../hooks/useWorkouts";
     import WorkoutList from "../components/workouts/WorkoutList";
     import keycloak from "../keycloak";
-    import {Button} from "@mui/material";
+    import {Button, Box} from "@mui/material";
     import {useNavigate} from "react-router-dom";
-    import useExercises from "../hooks/useExcerises";
-    import {Box} from "@mui/system";
+    import {useMeFitContext} from "../MeFitMyContext";
+    import {useEffect} from "react";
 
 function WorkoutPage() {
-    const { workouts, error } = useWorkouts();
-    const { exercises, errorN } = useExercises();
+    const { workouts, workoutError, fetchWorkoutData } = useMeFitContext();
     const navigate = useNavigate();
 
-    if (error) return <div>Failed to load workouts</div>;
-    if (!workouts) return <div>Loading...</div>;
-    if (errorN) return <div>Failed to load workouts</div>;
-    if (!exercises) return <div>Loading...</div>;
+    useEffect(() => {
+        fetchWorkoutData();
+    }, [])
 
-    console.log("workouts ", workouts, error);
+    if (workoutError) return <div>Failed to load workouts</div>;
+    if (!workouts) return <div>Loading...</div>;
+
+    console.log("workouts ", workouts, workoutError);
 
     function handleClick() {
         navigate("/create-workout");

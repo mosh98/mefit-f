@@ -7,29 +7,13 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import {useNavigate} from "react-router-dom";
 import keycloak from "../keycloak";
+import {useMeFitContext} from "../MeFitMyContext";
 const steps = ['Select avatar', 'Fill out profile form', 'Review and submit'];
 
 
 export default function RegistrationStepper() {
-    const [profileId, setProfileId] = useState<string>('');
-    useEffect(() => {
-
-        if (keycloak.authenticated) {
-            const init = async () => {
-                try {
-
-                    const {profile} = await fetchProfileByKeycloakId(keycloak.tokenParsed?.sub);
-                    setProfileId(profile.id);
-
-                } catch (error) {
-
-                    console.log(error);
-
-                }
-            };
-            init();
-        }
-    }, [])
+    const {profile, fetchProfileData} = useMeFitContext();
+    const profileId = profile?.id;
 
     const [activeStep, setActiveStep] = useState(0);
     const [formData, setFormData] = useState({
@@ -58,8 +42,16 @@ export default function RegistrationStepper() {
     const handleRegistrationSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
-        console.log("formData ", formData);
-       await updateProfile(formData, profileId);
+        console.log("Update profile with:", formData);
+        const {profile: updatedProfile, error} = await updateProfile(formData, profile?.id);
+
+        if (error) {
+            // Handle the error here, e.g. show an error message to the user
+            console.log("Error updating profile", error);
+        } else {
+            // Update the profile in the context
+            fetchProfileData();
+        }
 
         navigate("/dashboard");
     };

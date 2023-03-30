@@ -1,56 +1,41 @@
 import keycloak from "../keycloak";
 import {Button, CircularProgress, Stack} from "@mui/material";
 import {useNavigate} from "react-router-dom";
-import React, {useEffect} from "react";
-import {fetchProfileByKeycloakId} from "../api/profile";
+import React, {useEffect, useState} from "react";
 import {Box} from "@mui/system";
+import {useMeFitContext} from "../MeFitMyContext";
 
-/**
- * Example Start Page using Keycloak Context.
- */
 
 // TODO: add error handling for Forms
 function StartPage() {
-
     const navigate = useNavigate();
+    const {profile, fetchProfileData} = useMeFitContext();
+    const [isProfileDataFetched, setIsProfileDataFetched] = useState(false);
+
+    useEffect(() => {
+        if (keycloak.authenticated) {
+            if (profile) {
+                setIsProfileDataFetched(true);
+            }
+        }
+    }, [profile]);
 
     useEffect(() => {
 
         if (keycloak.authenticated) {
 
-            const init = async () => {
-                try {
-
-                    const {profile} = await fetchProfileByKeycloakId(keycloak.idTokenParsed.sub);
-
-                    localStorage.setItem("profile", JSON.stringify(profile));
-
-                } catch (error) {
-
-                    console.log(error);
-
-                }
-            };
-            init();
-
-            setTimeout(() => {
-                const profile = JSON.parse(localStorage.getItem("profile"));
-                console.log("profile", profile);
-
-                if (profile.profileImg == null) {
+            if (isProfileDataFetched) {
+                if (profile?.profileImg == null) {
                     navigate("/registration");
                 } else {
                     navigate("/dashboard");
                 }
-            }, 1500);
+            } else {
+                fetchProfileData();
+            }
         }
-    }, [navigate])
+    }, [ isProfileDataFetched, navigate ])
 
-
-    /*function handleLogout() {
-        localStorage.clear();
-        keycloak.logout();
-    }*/
 
     return (
         <div>

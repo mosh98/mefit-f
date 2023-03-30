@@ -12,18 +12,8 @@ import ScrollDialog from '../../components/dialogs/ScrollDialog';
 import ExerciseForm, {ExerciseFormData} from '../forms/create-forms/ExerciseForm';
 import {deleteExercise, patchExercise} from '../../api/exercises';
 import DeleteDialog from "../dialogs/DeleteDialog";
+import {Exercise} from "../../const/interface";
 
-interface Exercise {
-    id: number;
-    muscleGroup: string;
-    sets: number;
-    userExperience: string;
-    name: string;
-    reps: number;
-    description: string;
-    exerciseImageLink: string;
-    videoLink: string;
-}
 
 interface Props {
     exercises: Exercise[];
@@ -136,7 +126,7 @@ export default function ExercisesCheckmark(props: Props) {
                                             </TableCell>) : (
                                             <>
                                                 <TableCell>
-                                                    <ScrollDialog
+                                                 {/*   <ScrollDialog
                                                         content={
                                                             <ExerciseForm
                                                                 mode={"update"}
@@ -146,15 +136,15 @@ export default function ExercisesCheckmark(props: Props) {
                                                         }
                                                         buttonText="Update"
                                                         headerText={`Update exercise ${exercise['name']}`}
-                                                    />
+                                                    /> *}
                                                 </TableCell>
                                                 <TableCell>
-                                                    <DeleteDialog
+                        {/*                            <DeleteDialog
                                                         entityName={exercise['name']}
                                                         onDelete={() => onDelete(exercise.id)}
                                                         errorMessage={deleteError}
                                                         successMessage={deleteSuccess}
-                                                    />
+                                                    />*/}
                                                 </TableCell>
                                             </>
                                         )}

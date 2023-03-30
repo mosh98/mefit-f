@@ -5,45 +5,12 @@ import UserMedicalCard from "../../components/profile/UserMedicalCard";
 import UserAddressCard from "../../components/profile/UserAddressCard";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import {useProfileDetailByKeycloakId} from "../../hooks/useProfileDetail";
-
-interface User {
-    name: string;
-    firstName: string;
-    lastName: string;
-    username: string;
-    sub: string;
-    email: string;
-    address: string;
-    post_code: string;
-    city: string;
-    country: string;
-
-    roles?: string[];
-}
-
-interface Profile {
-    weight?: number;
-    height?: number;
-    disabilities?: string;
-    medicalCondition?: string;
-    profileImg?: string;
-}
+import {useMeFitContext} from "../../MeFitMyContext";
+import {UserProfile, UserKeycloak, UserAddress} from "../../const/interface";
 
 function ProfilePage() {
+    const {profile} = useMeFitContext();
 
-    const { profile: rawProfile, error } = useProfileDetailByKeycloakId(keycloak.tokenParsed?.sub );
-    const profile = rawProfile as (Profile | null);
-
-    localStorage.setItem('profile', JSON.stringify(rawProfile));
-
-    const localProfile = JSON.parse(localStorage.getItem('profile') || '{}');
-
-    console.log("profile local: ", localProfile);
-
-    if (error) {
-        return <div>failed to load</div>
-    }
 
     if (!profile) {
         return <div>loading...</div>
@@ -56,19 +23,20 @@ function ProfilePage() {
         preferred_username?: string;
         sub?: string;
         email?: string;
+        roles?: string[];
     };
 
-    const profileUser: Profile = {
-        weight: profile.weight || 0,
-        height: profile.height || 0,
-        disabilities: profile.disabilities || '',
-        medicalCondition: profile.medicalCondition  || '',
-        profileImg: profile.profileImg || '',
+    const profileUser: UserProfile = {
+        profileImg: profile?.profileImg || undefined,
+        weight: profile?.weight || 0,
+        height: profile?.height || 0,
+        disabilities: profile?.disabilities || undefined,
+        medicalCondition: profile?.medicalCondition || undefined,
     };
 
     console.log("profileUser: ", profileUser);
 
-    const user: User = {
+    const userKeycloak: UserKeycloak = {
         name: tokenParsed.name || '',
         firstName: tokenParsed.given_name || '',
         lastName: tokenParsed.family_name || '',
@@ -76,6 +44,9 @@ function ProfilePage() {
         sub: tokenParsed.sub || '',
         email: tokenParsed.email || '',
         roles: keycloak.tokenParsed?.realm_access?.roles || [],
+    };
+
+    const userAddress: UserAddress = {
         address: "",
         post_code: "",
         city: "",
@@ -113,7 +84,7 @@ function ProfilePage() {
                     </Grid>
                     <Grid item xs={4}>
 
-                        <UserProfileCard user={user}/>
+                        <UserProfileCard user={userKeycloak}/>
 
                     </Grid>
                     <Grid item xs={8}>
@@ -123,7 +94,7 @@ function ProfilePage() {
                     </Grid>
                     <Grid item xs={4}>
 
-                        <UserAddressCard user={user} onSubmit={handleSubmit}/>
+                        <UserAddressCard user={userAddress} onSubmit={handleSubmit}/>
                     </Grid>
                 </Grid>
             </Box>
@@ -132,27 +103,3 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
-
-/*  useEffect(() => {
-
-        const profile:  Record<string, any>  = JSON.parse(localStorage.getItem('profile') || '{}');
-
-        const fetchAdress = async () => {
-            console.log("Fetch adress from profile page:");
-
-            const response = await axios.get(`https://database-mefit.herokuapp.com/addresses/addressByUserId/${profile.user}`, {
-                headers: {
-                    'Authorization': `Bearer ${keycloak.token}`,
-                    'Content-Type': 'application/json',
-                }
-            })
-            user.address = response.data.address;
-            user.post_code = response.data.post_code;
-            user.city = response.data.city;
-            user.country = response.data.country;
-        }
-
-        fetchAdress();
-        console.log(user)
-    },[]);
-    */

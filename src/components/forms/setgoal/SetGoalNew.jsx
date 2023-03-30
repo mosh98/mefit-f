@@ -14,12 +14,13 @@ import useWorkouts from "../../../hooks/useWorkouts";
 import WorkoutSummary from "../../workouts/WorkoutSummary";
 import axios from "../../../api";
 import keycloak from "../../../keycloak";
+import {useMeFitContext} from "../../../MeFitMyContext";
 
 
 const steps = ['What is your Taget Area?', 'What is your Level?', 'Select a program or workouts.', 'Confirm your workouts'];
 
 function SetGoal() {
-    const {workouts, isLoading, isError} = useWorkouts();  // steg 1
+    const {profile, workouts, workoutError} = useMeFitContext();
     const [content, setContent] = useState(<SortByTargetArea />);
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
@@ -29,17 +30,12 @@ function SetGoal() {
     const [selectedWorkouts, setSelectedWorkouts] = useState([]);
     const [isComplete, setIsComplete] = useState(false);
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-    if (isError) {
+    if (workoutError) {
         return <div>Error...</div>;
     }
     if (!workouts) {
         return <div>Not found...</div>;
     }
-
-    const profile = JSON.parse(localStorage.getItem('profile'));
 
     function handleSelectedTargetAreaChange(targetArea) {
         setTargetArea(targetArea)

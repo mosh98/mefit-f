@@ -8,12 +8,19 @@ import {
     Legend
 } from "chart.js";
 import {Bar} from "react-chartjs-2";
+import {UserGoal, Workout} from "../../const/interface";
 
-function VerticalChart() {
 
-    const labels = goalsFvie.reduce((acc, goal) => {
-        goal.workouts.forEach((workout) => {
-            workout.exercises.forEach((exercise) => {
+interface VerticalChartProps {
+    goals: UserGoal[];
+}
+
+export const VerticalChart = ({ goals }: VerticalChartProps) => {
+
+/*
+    const labels = goals.reduce((acc, goal) => {
+        goal.workouts?.forEach((workout) => {
+            workout.exercises?.forEach((exercise) => {
                 if (!acc.includes(exercise.muscleGroup)) {
                     acc.push(exercise.muscleGroup);
                 }
@@ -22,18 +29,21 @@ function VerticalChart() {
         return acc;
     }, []);
 
-    const muscleGroupStats = goalsFvie.flatMap((goal) =>
-        goal.workouts.flatMap((workout) =>
-            workout.exercises.map((exercise) => exercise.muscleGroup)
+    const muscleGroupStats = goals.flatMap((goal) =>
+        goal.workouts?.flatMap((workout) =>
+            workout.exercises?.map((exercise) => exercise.muscleGroup)
         )
-    ).reduce((acc, muscleGroup) => {
-        acc.total[muscleGroup] = (acc.total[muscleGroup] || 0) + 1;
-        return acc;
-    }, {total: {}});
+    ).reduce<{ total: Record<string, number> }>(
+        (acc, muscleGroup) => {
+            acc.total['muscleGroup'] = (acc.total['muscleGroup'] || 0) + 1;
+            return acc;
+        },
+        { total: {} }
+    );
 
-    const muscleGroupStatsCompleted = goalsFvie.flatMap((goal) =>
-        goal.workouts.filter((workout) => workout.completed).flatMap((workout) =>
-            workout.exercises.map((exercise) => exercise.muscleGroup)
+    const muscleGroupStatsCompleted = goals.flatMap((goal) =>
+        goal.workouts?.filter((workout) => workout.completed).flatMap((workout) =>
+            workout.exercises?.map((exercise) => exercise.muscleGroup)
         )
     ).reduce((acc, muscleGroup) => {
         acc.total[muscleGroup] = (acc.total[muscleGroup] || 0) + 1;
@@ -59,18 +69,17 @@ function VerticalChart() {
             borderWidth: 1,
         },],
     };
+*/
 
     return (
         <div>
 
             <div className="chart">
-                <Bar
+           {/*     <Bar
                     data={data}
-                ></Bar>
+                ></Bar>*/}
             </div>
 
         </div>
     );
 }
-
-export default VerticalChart;

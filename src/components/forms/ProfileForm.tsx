@@ -1,6 +1,5 @@
 import {Button, Stack, TextField, Typography, Container} from '@mui/material';
 import React, {ChangeEvent, FormEvent, useState} from "react";
-import ExerciseForm from "./create-forms/ExerciseForm";
 
 interface ProfileFormData {
 
@@ -33,8 +32,8 @@ function ProfileForm({ user, onSubmit, headerText}: ProfileFormProps) {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         onSubmit(formData);
-        console.log("formData ", formData);
-        setIsModalOpen(true)
+        /*        console.log("formData ", formData);
+                setIsModalOpen(true)*/
 
     };
 
@@ -88,7 +87,7 @@ function ProfileForm({ user, onSubmit, headerText}: ProfileFormProps) {
                         size="large"
                         disableElevation
                     >
-                        Update
+                        Update Now
                     </Button>
                 </Stack>
             </form>

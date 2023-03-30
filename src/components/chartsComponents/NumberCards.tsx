@@ -3,27 +3,19 @@ import CardContent from "@mui/material/CardContent";
 import {Stack, Typography} from "@mui/material";
 import {goalsFvie} from "./mockGoals";
 import WorkoutListCheckmark from "../workouts/WorkoutCheckmark";
-import WorkoutGoalsData from "./fetchGoals";
+import {UserGoal, Workout} from "../../const/interface";
 
-export const NumberCards = () => {
+interface NumberCardsProps {
+    goals: UserGoal[];
+}
 
-    const {goal, error} = WorkoutGoalsData()
-
-    if (error) {
-        return <div>failed to load</div>
-    }
-
-    if (!goal) {
-        return <div>loading...</div>
-    }
-
+export const NumberCards = ({ goals }: NumberCardsProps) => {
     let totalWorkouts = 0;
     let achievedWorkouts = 0;
     let remainingWorkouts = 0;
 
-
-    goalsFvie.forEach(goalWorkout => {
-        goalWorkout.workouts.forEach(workout => {
+    goals.forEach((goalWorkout: UserGoal) => {
+        goalWorkout.workouts?.forEach((workout: Workout) => {
             totalWorkouts += 1;
 
             if (workout.completed) {

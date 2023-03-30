@@ -61,14 +61,6 @@ function Row(props) {
                                 successMessage={deleteSuccess}
                             />
                         </TableCell>
-                        <TableCell>
-                            <DeleteDialog
-                                entityName={props.workout['name']}
-                                onDelete={() => onDelete(props.workout.id)}
-                                errorMessage={deleteError}
-                                successMessage={deleteSuccess}
-                            />
-                        </TableCell>
                     </>
                 }
             </TableRow>
@@ -114,7 +106,6 @@ function WorkoutList(props) {
                                 {keycloak.hasRealmRole('ADMIN') &&
                                     <>
                                         <TableCell>Update</TableCell>
-                                        <TableCell>Delete</TableCell>
                                     </>
                                 }
                             </TableRow>
