@@ -33,7 +33,7 @@ function DashboardPage() {
                     </Grid>
                     <Grid item xs={4}>
 
-                        {/*<DoughnutChart goals={[goal]}/>*/}
+                        <DoughnutChart goals={[goal]}/>
 
                     </Grid>
                     <Grid item xs={8}>
@@ -43,8 +43,8 @@ function DashboardPage() {
                     </Grid>
                 </Grid>
             </Box>
-            {/*<GoalWorkouts workouts={workouts} />*/}
-            <GoalsList />
+            {/*<GoalWorkouts workouts={[goal]} />*/}
+            <GoalsList goals={[goal]}/>
         </Box>
     );
 }
