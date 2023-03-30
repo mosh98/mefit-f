@@ -23,3 +23,19 @@ export const fetchGoalById = async (goalId) => {
         return {goal: [], error: error.message};
     }
 }
+
+
+export const updateGoal = async (goalId, goalCompleted) => {
+    try {
+        const response = await axios.patch(`https://database-mefit.herokuapp.com/goal/updateGoal/${goalId}`, goalCompleted, {
+            headers: {
+                'Authorization': `Bearer ${keycloak.token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+        console.log(response.data)
+        return {goal: response.data, error: null};
+    } catch (error) {
+        return {goal: null, error: error.message};
+    }
+}

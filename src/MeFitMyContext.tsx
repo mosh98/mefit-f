@@ -4,7 +4,7 @@ import {fetchProfileByKeycloakId, updateProfile} from "./api/profile";
 import {Exercise, UserGoal, UserProfile, Workout} from "./const/interface";
 import {fetchExercises} from "./api/exercises";
 import {fetchWorkouts} from "./api/workouts";
-import {fetchGoalById} from "./api/goal";
+import {fetchGoalById, updateGoal} from "./api/goal";
 
 interface MeFitProviderProps {
     children: React.ReactNode;
@@ -24,6 +24,7 @@ interface MeFitContextType {
     goal: UserGoal | null;
     goalError: string | null;
     fetchGoalData: (goal: number | undefined) => void;
+    updateGoalApi: (goalId: number, updatedGoal: UserGoal) => Promise<{ goal: UserGoal | null; error: string | null }>;
 }
 
 export const MeFitContext = createContext<MeFitContextType>({
@@ -40,6 +41,7 @@ export const MeFitContext = createContext<MeFitContextType>({
     goal: null,
     goalError: null,
     fetchGoalData: () => {},
+    updateGoalApi: () => Promise.resolve({ goal: null, error: null }),
 });
 
 export const useMeFitContext = () => useContext(MeFitContext);
@@ -81,6 +83,7 @@ const MeFitProvider: React.FC<MeFitProviderProps> = ({ children }) => {
             const { profile: UserProfile, error } = await updateProfile(updatedProfile, profile?.id);
             if (error) {
                 console.log("Update profile", error);
+                setProfileError(error)
                 return { profile: null, error };
             } else {
                 console.log("Update profile", profile);
@@ -154,6 +157,24 @@ const MeFitProvider: React.FC<MeFitProviderProps> = ({ children }) => {
         fetchGoalData();
     } , []);
 
+    const updateGoalApi = async (goalId: number, updatedGoal: UserGoal) => {
+        try {
+            const { goal: UserGoal, error } = await updateGoal(goalId, updatedGoal);
+            if (error) {
+                console.log("Update goal", error);
+                setGoalError(error)
+                return { goal: null, error };
+            } else {
+                console.log("Update goal", goal);
+                setGoal(goal);
+                return { goal, error: null };
+            }
+        } catch (error: string | any) {
+            console.log(error);
+            return { goal: null, error: error.message };
+        }
+    }
+
     const contextValue = {
         profile,
         profileError,
@@ -168,6 +189,7 @@ const MeFitProvider: React.FC<MeFitProviderProps> = ({ children }) => {
         goal,
         goalError,
         fetchGoalData,
+        updateGoalApi,
     };
 
     return <MeFitContext.Provider value={contextValue}>{children}</MeFitContext.Provider>;
