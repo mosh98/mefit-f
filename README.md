@@ -26,7 +26,7 @@ Open [MEFIT Application](https://mefit-f-git-master-mosh98.vercel.app/) to view 
 - Keycloak
 
 ## User Manual
-
+in UserManual folder
 
 ## Group members
 
