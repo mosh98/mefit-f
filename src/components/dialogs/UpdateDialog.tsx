@@ -58,7 +58,7 @@ function UpdateDialog({ content, entityName, onUpdate, errorMessage, successMess
                     ) : (
                         <>
                             <Button onClick={handleClose}>Cancel</Button>
-                            <Button onClick={handleUpdate}>Delete</Button>
+                            <Button onClick={handleUpdate}>Update</Button>
                         </>
                     )}
                 </DialogActions>

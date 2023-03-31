@@ -1,3 +1,4 @@
+
 import axios from ".";
 import keycloak from "../keycloak";
 
@@ -67,7 +68,6 @@ export const fetchWorkoutById = async (workoutId) => {
 /**
  * Delete a workout by its id.
  * @param {number} workoutId
- * @returns {Promise<{workout: { id, name, type, completed, programs, exercises, goal } | null, error: null}>}
  * @returns {Promise<{workout: null, error: null}>}
  */
 
@@ -85,3 +85,28 @@ export const deleteWorkoutById = async (workoutId) => {
     }
 }
 
+/**
+ * Update a workout by its id.
+ * @param {number} workoutId
+ * @param workout
+ * @returns {Promise<{workout: { id, name, type, completed, programs, exercises, goal } | null, error: null}>}
+ */
+
+export const updateWorkoutById = async (id , data) => {
+    try {
+        const response = await axios.patch(
+            `https://database-mefit.herokuapp.com/workouts/updateWorkout/${id}`,
+            data,
+            {
+                headers: {
+                    'Authorization': `Bearer ${keycloak.token}`,
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+        return {workout: response.data, error: null};
+    } catch (error) {
+        return {workout: [], error: error.message};
+
+    }
+}

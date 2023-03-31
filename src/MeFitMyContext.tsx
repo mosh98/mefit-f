@@ -3,7 +3,7 @@ import keycloak from "./keycloak";
 import {fetchProfileByKeycloakId, updateProfile} from "./api/profile";
 import {Exercise, UserGoal, UserProfile, Workout} from "./const/interface";
 import {fetchExercises} from "./api/exercises";
-import {fetchWorkouts} from "./api/workouts";
+import {fetchWorkouts, updateWorkoutById} from "./api/workouts";
 import {fetchGoalById, updateGoal} from "./api/goal";
 
 interface MeFitProviderProps {
@@ -21,6 +21,7 @@ interface MeFitContextType {
     workouts: Workout[] | null;
     workoutError: string | null;
     fetchWorkoutData: () => void;
+    updateWorkoutApi: (workoutId: number, workout: Workout) => Promise<{ workout: Workout | null; error: string | null }>;
     goal: UserGoal | null;
     goalError: string | null;
     fetchGoalData: (goal: number | undefined) => void;
@@ -38,6 +39,7 @@ export const MeFitContext = createContext<MeFitContextType>({
     workouts: null,
     workoutError: null,
     fetchWorkoutData: () => {},
+    updateWorkoutApi: () => Promise.resolve({ workout: null, error: null }),
     goal: null,
     goalError: null,
     fetchGoalData: () => {},
@@ -136,6 +138,24 @@ const MeFitProvider: React.FC<MeFitProviderProps> = ({ children }) => {
         fetchWorkoutData();
     } , []);
 
+    const updateWorkoutApi = async (workoutId: number, updatedWorkout: Workout) => {
+        try {
+            const { workout: updatedWorkoutData, error } = await updateWorkoutById(workoutId, updatedWorkout);
+            if (error) {
+                console.log("Update workout", error);
+                setWorkoutError(error)
+                return { workout: null, error };
+            } else {
+                console.log("Update workout", updatedWorkoutData);
+                setWorkouts(workouts);
+                return { workout: updatedWorkoutData, error: null };
+            }
+        } catch (error: string | any) {
+            console.log(error);
+            return { workout: null, error: error.message };
+        }
+    }
+    
     const fetchGoalData = async (goalId?: number) => {
         if (!goalId) return;
         try {
@@ -186,6 +206,7 @@ const MeFitProvider: React.FC<MeFitProviderProps> = ({ children }) => {
         workouts,
         workoutError,
         fetchWorkoutData,
+        updateWorkoutApi,
         goal,
         goalError,
         fetchGoalData,
