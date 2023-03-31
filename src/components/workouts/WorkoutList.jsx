@@ -15,28 +15,60 @@ import {KeyboardArrowDown, KeyboardArrowUp} from "@mui/icons-material";
 import Collapse from "@mui/material/Collapse";
 import ExercisesTableNew from "../exercise/ExercisesTableNew";
 import keycloak from "../../keycloak";
-import DeleteDialog from "../dialogs/DeleteDialog";
-import {deleteWorkoutById} from "../../api/workouts";
 import UpdateDialog from "../dialogs/UpdateDialog";
+import {UpdateWorkout} from "../forms/UpdateWorkout";
+import {updateWorkoutById } from "../../api/workouts";
+import axios from "axios";
+import {useMeFitContext} from "../../MeFitMyContext";
 
 function Row(props) {
+    const {fetchWorkoutData} = useMeFitContext();
     const [open, setOpen] = useState(false);
-    const [deleteError, setDeleteError] = useState('');
-    const [deleteSuccess, setDeleteSuccess] = useState('');
+    const [updateError, setUpdateSError] = useState('');
+    const [updateSuccess, setUpdateSuccess] = useState('');
 
-    const onDelete = async (id) => {
-        const {workout, error} = await deleteWorkoutById(id);
-        if (error) {
-            setDeleteError(error);
-            console.error("Error deleting workout:", error);
-            return {error, response: null};
-        } else {
-            setDeleteSuccess("Workout deleted successfully");
-            console.log("Workout deleted successfully:", workout);
-            return {error: null, response: workout};
+    const updateWorkout = async (id , data) => {
+        try {
+            const response = await axios.patch(
+                `https://database-mefit.herokuapp.com/workouts/updateWorkout/${id}`,
+                data,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${keycloak.token}`,
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+
+
+            // Handle the successful response
+            console.log(response.data);
+
+        } catch (error) {
+            // Handle the error
+            console.error(error);
+        }
+    };
+
+    const onUpdate = async (id, updatedWorkout) => {
+        console.log("onUpdate IS this it", id);
+        console.log("onUpdate IS this it", props.workout);
+        const a = props.workout.name;
+        console.log("onUpdate IS this it", props.workout.name);
+        console.log("onUpdate IS this it", a);
+
+     //   await updateWorkoutById(id, updatedWorkout)
+
+        try {
+            await updateWorkoutById(id, props.workout);
+            setUpdateSError('');
+            setUpdateSuccess('Workout updated successfully');
+        } catch (e) {
+            setUpdateSError('Failed to update workout');
+            setUpdateSuccess('');
         }
 
-        // TODO Handle refresh of the page after delete when handleClose in DeleteDialog
+         fetchWorkoutData();
     }
 
     return (
@@ -54,11 +86,12 @@ function Row(props) {
                 {keycloak.hasRealmRole('ADMIN') &&
                     <>
                         <TableCell>
-                            <UpdateDialog
+                        <UpdateDialog
+                                content={<UpdateWorkout workout={props.workout} onUpdate={(updatedWorkout) => onUpdate(props.workout.id, updatedWorkout)} />}
                                 entityName={props.workout['name']}
-                                onUpdate={() => onDelete(props.workout.id)}
-                                errorMessage={deleteError}
-                                successMessage={deleteSuccess}
+                                onUpdate={() => onUpdate(props.workout.id)}
+                                errorMessage={updateError}
+                                successMessage={updateSuccess}
                             />
                         </TableCell>
                     </>
