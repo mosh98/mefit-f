@@ -6,7 +6,6 @@ import {Exercise} from "../../const/interface";
 function CreateExercise() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // TODO: fix post exercise
     const onCreate = async (values: Exercise) => {
         // Implement your create exercise logic here
         const {exercise, error} = await postExercise(values);

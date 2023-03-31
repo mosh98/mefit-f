@@ -2,7 +2,6 @@ import {Button, Stack, TextField, Typography, Container} from '@mui/material';
 import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import keycloak from "../../keycloak";
 import axios from "axios";
-import {fetchProfileByKeycloakId} from "../../api/profile";
 import {useMeFitContext} from "../../MeFitMyContext";
 
 interface AddressFormProps {
@@ -56,7 +55,6 @@ function AddressForm({onSubmit, headerText}: AddressFormProps) {
         onSubmit(formData);
     };
 
-    //TODO: is this necessary?
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         //console.log(formData);

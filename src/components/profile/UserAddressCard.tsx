@@ -21,14 +21,7 @@ export function UserAddressCard({ user, onSubmit }: UserDetailsCardProps) {
         country: "",
     });
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-
-    //create user adress object
-
-    //TODO: useeffect to populate user info
-    //https://database-mefit.herokuapp.com/addresses/addressByUserId/1
 
     useEffect(() => {
 
@@ -55,7 +48,7 @@ export function UserAddressCard({ user, onSubmit }: UserDetailsCardProps) {
 
     },[isFormSubmitted]);
     const handleFormSubmit = () => {
-        if (isFormSubmitted == true){
+        if (isFormSubmitted){
 
             setIsFormSubmitted(false);
         }else {

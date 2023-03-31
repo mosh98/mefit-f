@@ -31,7 +31,6 @@ export default function CreateWorkoutStepper() {
     if (!exercises) return <div>Loading...</div>;
 
     const handleWorkoutFormSubmit = () => {
-        //TODO: Remove this
     };
 
     const handleWorkoutInputChange = (newFormData: Workout) => {

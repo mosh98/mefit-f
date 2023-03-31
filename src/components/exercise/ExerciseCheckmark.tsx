@@ -74,7 +74,6 @@ export default function ExercisesCheckmark(props: Props) {
             return {error: null, response: exercise};
         }
 
-        // TODO Handle refresh of the page after delete when handleClose in DeleteDialog
     }
 
     return (

@@ -6,7 +6,6 @@ import {Box} from "@mui/system";
 import {useMeFitContext} from "../MeFitMyContext";
 
 
-// TODO: add error handling for Forms
 function StartPage() {
     const navigate = useNavigate();
     const {profile, fetchProfileData} = useMeFitContext();
