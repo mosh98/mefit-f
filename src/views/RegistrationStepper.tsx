@@ -42,7 +42,6 @@ export default function RegistrationStepper() {
     const handleRegistrationSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
-        console.log("Update profile with:", formData);
         const {profile: updatedProfile, error} = await updateProfile(formData, profile?.id);
 
         if (error) {

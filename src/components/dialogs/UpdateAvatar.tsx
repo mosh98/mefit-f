@@ -40,7 +40,6 @@ function UpdateAvatar({ user, onSubmit, headerText, open, onClose }: UpdateAvata
     const handleAvatarSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         onSubmit(formData);
-        console.log("formData ", formData);
         onClose();
     };
 

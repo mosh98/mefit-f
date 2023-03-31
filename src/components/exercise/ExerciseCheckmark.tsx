@@ -53,13 +53,13 @@ export default function ExercisesCheckmark(props: Props) {
 
 
     async function onUpdate(id: number, exerciseInfo: Exercise) {
-        console.log("Update exercise ", exerciseInfo, "with id ", id);
 
         const response = await patchExercise(exerciseInfo, id);
         if (response.error) {
             console.error("Error updating exercise:", response.error);
         } else {
             console.log("Exercise updated successfully:", response.exercise);
+
         }
     }
 
@@ -71,7 +71,6 @@ export default function ExercisesCheckmark(props: Props) {
             return {error, response: null};
         } else {
             setDeleteSuccess("Exercise deleted successfully");
-            console.log("Exercise deleted successfully:", exercise);
             return {error: null, response: exercise};
         }
 

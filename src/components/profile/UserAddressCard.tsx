@@ -23,7 +23,6 @@ export function UserAddressCard({ user, onSubmit }: UserDetailsCardProps) {
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    console.log("profile: ", profile?.address);
 
 
     //create user adress object
@@ -36,14 +35,12 @@ export function UserAddressCard({ user, onSubmit }: UserDetailsCardProps) {
 
 
         const fetchAdress = async () => {
-            console.log("Fetch adress from profile page:");
             const response = await axios.get(`https://database-mefit.herokuapp.com/addresses/addressByUserId/${profile?.user}`, {
                 headers: {
                     'Authorization': `Bearer ${keycloak.token}`,
                     'Content-Type': 'application/json',
                 }
             })
-            console.log("response: ", response.data);
 
             setUserObject({  address: response.data.address,
                 post_code: response.data.post_code,
@@ -51,8 +48,7 @@ export function UserAddressCard({ user, onSubmit }: UserDetailsCardProps) {
                 country:response.data.country,})
 
         }
-        console.log("isFormSubmitted: ", isFormSubmitted);
-        console.log("userObject: ", userObject);
+
 
         fetchAdress();
 
@@ -60,11 +56,9 @@ export function UserAddressCard({ user, onSubmit }: UserDetailsCardProps) {
     },[isFormSubmitted]);
     const handleFormSubmit = () => {
         if (isFormSubmitted == true){
-            console.log("Form submitted State converted from TRUE to FALSE");
 
             setIsFormSubmitted(false);
         }else {
-            console.log("Form submitted State converted from FALSE to TRUE");
             setIsFormSubmitted(true);
         }
     };

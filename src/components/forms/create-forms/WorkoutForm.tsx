@@ -40,7 +40,6 @@ function WorkoutForm({onSubmit, onInputChange, mode, initialData}: WorkoutFormPr
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(formData)
         onSubmit(formData);
     };
 

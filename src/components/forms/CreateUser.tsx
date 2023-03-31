@@ -28,12 +28,10 @@ function CreateUser({onSubmit}: CreateUserFormProps) {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('Form submitted' + JSON.stringify(formData));
 
         const result = await createUser(formData);
         onSubmit(result);
 
-        console.log('Form returned' + JSON.stringify(result));
     };
 
     return (

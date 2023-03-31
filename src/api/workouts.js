@@ -52,7 +52,6 @@ export const fetchWorkoutById = async (workoutId) => {
 
     try {
         const {data, status} = await axios.get(apiUrl + "workouts/workoutById/" + workoutId);
-        console.log(status)
         return Promise.resolve({
             workout: data,
             error: null,

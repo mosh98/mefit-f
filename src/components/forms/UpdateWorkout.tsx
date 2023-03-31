@@ -23,8 +23,7 @@ export const UpdateWorkout = ({ workout, onUpdate }: UpdateWorkoutProps) => {
         setWorkoutToUpdate({...workoutToUpdate, [e.target.id]: e.target.value});
     };
     const handleSubmit = async (values: Workout) => {
-        console.log("values: ", values);
-        console.log("workoutToUpdate: ", workoutToUpdate);
+
 
         await onUpdate(workoutToUpdate);
     }

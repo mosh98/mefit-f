@@ -15,7 +15,6 @@ export default function GoalWorkouts(props) {
 
     let handleWorkoutCompletion = (workoutId, completed) => {
         // Update the completed status of the workout with the given workoutId in the database
-        console.log("Completed workout id: ", workoutId, "completed: ", completed);
 
         // After updating the database, update the local state
         setWorkoutGoals(workoutGoals.map(workout => {

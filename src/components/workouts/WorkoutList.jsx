@@ -42,7 +42,6 @@ function Row(props) {
 
 
             // Handle the successful response
-            console.log(response.data);
 
         } catch (error) {
             // Handle the error
@@ -51,11 +50,7 @@ function Row(props) {
     };
 
     const onUpdate = async (id, updatedWorkout) => {
-        console.log("onUpdate IS this it", id);
-        console.log("onUpdate IS this it", props.workout);
         const a = props.workout.name;
-        console.log("onUpdate IS this it", props.workout.name);
-        console.log("onUpdate IS this it", a);
 
      //   await updateWorkoutById(id, updatedWorkout)
 

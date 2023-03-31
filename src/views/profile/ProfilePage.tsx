@@ -34,7 +34,6 @@ function ProfilePage() {
         medicalCondition: profile?.medicalCondition || undefined,
     };
 
-    console.log("profileUser: ", profileUser);
 
     const userKeycloak: UserKeycloak = {
         name: tokenParsed.name || '',
