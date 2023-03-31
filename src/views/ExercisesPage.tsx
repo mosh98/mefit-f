@@ -21,7 +21,6 @@ function ExercisesPage() {
         return <p>Loading exercises...</p>;
     }
 
-    console.log("Exercises", exercises);
 
     return (
         <Box className={"page-view"}>

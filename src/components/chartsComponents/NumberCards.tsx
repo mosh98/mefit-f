@@ -94,13 +94,11 @@ export const GoalsList = ({goals,toggleReRender }: GoalsListProps) => {
 
 
     let handleWorkoutCompletion = async (/*goalId: number,*/ workout: Workout) => {
-        console.log("Completed workout id: ", workout, "completed: ", !workout.completed);
-        console.log(typeof workout);
+
 
 
         // Update the workout in the context
 
-        console.log("Goal id ", profile?.goal)
 
         //updatwe workout using workdout id using an axios patch
         //patch link: https://database-mefit.herokuapp.com/workouts/updateWorkout/:id

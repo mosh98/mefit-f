@@ -40,15 +40,12 @@ export default function CreateWorkoutStepper() {
 
     const handleSubmit = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
-        console.log(formData);
         const workoutData = {
             name: formData.name,
             type: formData.type,
             experienceLevel: formData.experienceLevel,
             exercises: formData.exercises
         };
-
-        console.log(workoutData);
 
         const {workout, error} = await postWorkout(workoutData);
         if (error) {

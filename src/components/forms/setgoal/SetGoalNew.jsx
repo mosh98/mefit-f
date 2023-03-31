@@ -39,12 +39,10 @@ function SetGoal() {
 
     function handleSelectedTargetAreaChange(targetArea) {
         setTargetArea(targetArea)
-        console.log("handleSelectedTargetAreaChange", targetArea);
     }
 
     function handleSelectedExperienceChange(experience) {
         setLevel(experience)
-        console.log("handleSelectedExperienceChange", experience);
     }
 
     const workoutsBySelectedTargetArea = workouts.filter((workout) => {
@@ -52,7 +50,6 @@ function SetGoal() {
         
     });
 
-    console.log("TargetArea "+level)
 
     const workoutsBySelectedExperience = workoutsBySelectedTargetArea.filter((workout) => {
         return !level || workout.experienceLevel === level;
@@ -60,11 +57,9 @@ function SetGoal() {
     });
     
     
-    console.log("level "+level)
 
     const handleWorkoutSelection = (selectedWorkouts) => {
         setSelectedWorkouts(selectedWorkouts);
-        console.log("Selected Workouts:", selectedWorkouts);
     };
 
     const stepsContent = [
@@ -146,7 +141,6 @@ function SetGoal() {
                     'Content-Type': 'application/json',
                 },
             });
-            console.log(response.data)
             return {goal: response.data, error: null};
         } catch (error) {
             return {goal: null, error: error.message};

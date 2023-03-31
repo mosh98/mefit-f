@@ -3,7 +3,7 @@ import keycloak from "./keycloak";
 import {fetchProfileByKeycloakId, updateProfile} from "./api/profile";
 import {Exercise, UserGoal, UserProfile, Workout} from "./const/interface";
 import {fetchExercises} from "./api/exercises";
-import {fetchWorkouts} from "./api/workouts";
+import {fetchWorkouts, updateWorkoutById} from "./api/workouts";
 import {fetchGoalById, updateGoal} from "./api/goal";
 
 interface MeFitProviderProps {
@@ -21,6 +21,7 @@ interface MeFitContextType {
     workouts: Workout[] | null;
     workoutError: string | null;
     fetchWorkoutData: () => void;
+    updateWorkoutApi: (workoutId: number, workout: Workout) => Promise<{ workout: Workout | null; error: string | null }>;
     goal: UserGoal | null;
     goalError: string | null;
     fetchGoalData: (goal: number | undefined) => void;
@@ -38,6 +39,7 @@ export const MeFitContext = createContext<MeFitContextType>({
     workouts: null,
     workoutError: null,
     fetchWorkoutData: () => {},
+    updateWorkoutApi: () => Promise.resolve({ workout: null, error: null }),
     goal: null,
     goalError: null,
     fetchGoalData: () => {},
@@ -60,16 +62,13 @@ const MeFitProvider: React.FC<MeFitProviderProps> = ({ children }) => {
         try {
             const { profile, error } = await fetchProfileByKeycloakId(keycloak.tokenParsed?.sub);
             if (error) {
-                console.log("Fetch profile error", error);
 
                 setProfileError(error);
             } else {
-                console.log("Fetch profile", profile);
 
                 setProfile(profile);
             }
         } catch (error: string | any) {
-            console.log(error);
             setProfileError(error.message);
         }
     };
@@ -82,16 +81,13 @@ const MeFitProvider: React.FC<MeFitProviderProps> = ({ children }) => {
         try {
             const { profile: UserProfile, error } = await updateProfile(updatedProfile, profile?.id);
             if (error) {
-                console.log("Update profile", error);
                 setProfileError(error)
                 return { profile: null, error };
             } else {
-                console.log("Update profile", profile);
                 setProfile(profile);
                 return { profile, error: null };
             }
         } catch (error: string | any) {
-            console.log(error);
             return { profile: null, error: error.message };
         }
     };
@@ -100,14 +96,11 @@ const MeFitProvider: React.FC<MeFitProviderProps> = ({ children }) => {
         try {
             const { exercises, error } = await fetchExercises();
             if (error) {
-                console.log("Fetch exercises error", error);
                 setExerciseError(error);
             } else {
-                console.log("Fetch exercises", exercises);
                 setExercises(exercises);
             }
         } catch (error: string | any) {
-            console.log(error);
             setExerciseError(error.message);
         }
     };
@@ -120,14 +113,11 @@ const MeFitProvider: React.FC<MeFitProviderProps> = ({ children }) => {
         try {
             const { workouts, error } = await fetchWorkouts();
             if (error) {
-                console.log("Fetch workouts error", error);
                 setWorkoutError(error);
             } else {
-                console.log("Fetch workouts", workouts);
                 setWorkouts(workouts);
             }
         } catch (error: string | any) {
-            console.log(error);
             setWorkoutError(error.message);
         }
     }
@@ -136,19 +126,31 @@ const MeFitProvider: React.FC<MeFitProviderProps> = ({ children }) => {
         fetchWorkoutData();
     } , []);
 
+    const updateWorkoutApi = async (workoutId: number, updatedWorkout: Workout) => {
+        try {
+            const { workout: updatedWorkoutData, error } = await updateWorkoutById(workoutId, updatedWorkout);
+            if (error) {
+                setWorkoutError(error)
+                return { workout: null, error };
+            } else {
+                setWorkouts(workouts);
+                return { workout: updatedWorkoutData, error: null };
+            }
+        } catch (error: string | any) {
+            return { workout: null, error: error.message };
+        }
+    }
+    
     const fetchGoalData = async (goalId?: number) => {
         if (!goalId) return;
         try {
             const { goal, error } = await fetchGoalById(goalId);
             if (error) {
-                console.log("Fetch goals error", error);
                 setGoalError(error);
             } else {
-                console.log("Fetch goals", goal);
                 setGoal(goal);
             }
         } catch (error: string | any) {
-            console.log(error);
             setGoalError(error.message);
         }
     }
@@ -161,16 +163,13 @@ const MeFitProvider: React.FC<MeFitProviderProps> = ({ children }) => {
         try {
             const { goal: UserGoal, error } = await updateGoal(goalId, updatedGoal);
             if (error) {
-                console.log("Update goal", error);
                 setGoalError(error)
                 return { goal: null, error };
             } else {
-                console.log("Update goal", goal);
                 setGoal(goal);
                 return { goal, error: null };
             }
         } catch (error: string | any) {
-            console.log(error);
             return { goal: null, error: error.message };
         }
     }
@@ -186,6 +185,7 @@ const MeFitProvider: React.FC<MeFitProviderProps> = ({ children }) => {
         workouts,
         workoutError,
         fetchWorkoutData,
+        updateWorkoutApi,
         goal,
         goalError,
         fetchGoalData,

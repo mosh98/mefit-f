@@ -28,7 +28,6 @@ function UserMedicalCard({user, onSubmit}: UserMedicalCardProps) {
 
     const handleSubmit = async (values: UserProfile) => {
         // Call your API to update the user profile here
-        console.log("Update profile with:", values);
         const {profile: updatedProfile, error} = await updateProfile(values, profile?.id);
 
         if (error) {

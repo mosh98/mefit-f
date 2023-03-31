@@ -33,7 +33,6 @@ export const updateGoal = async (goalId, goalCompleted) => {
                 'Content-Type': 'application/json',
             },
         });
-        console.log(response.data)
         return {goal: response.data, error: null};
     } catch (error) {
         return {goal: null, error: error.message};

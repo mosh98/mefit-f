@@ -17,11 +17,9 @@ function LevelsCards(props) {
     const selectedLevelId = event.target.value;
     const selectedLevel = levels.find((level) => level.id.toString() === selectedLevelId);
     props.setLevel(selectedLevel);
-    console.log("1:"+selectedLevel)
 
     setSelectedValue(selectedLevelId);
     props.setLevel(selectedLevel); // call the setLevel function passed in as a prop
-    console.log(selectedLevel)
   };
 
   

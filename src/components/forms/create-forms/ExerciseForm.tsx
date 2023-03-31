@@ -50,7 +50,6 @@ function ExerciseForm({ onSubmit, mode, initialData }: ExerciseFormProps) {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(formData)
         onSubmit(formData);
     };
 

@@ -15,7 +15,6 @@ import {createUser} from "../api/user";
 function KeycloakRoute({children, role, redirectTo = "/"}) {
     const [isNewUser, setIsNewUser] = useState({});
 
-
     useEffect(() => {
         if (keycloak.authenticated) {
             const newUser = {
@@ -25,7 +24,6 @@ function KeycloakRoute({children, role, redirectTo = "/"}) {
                 keyCloakId: keycloak.tokenParsed.sub,
             };
 
-            console.log("newUser ",newUser);
             const checkCreateUser = async () => {
 
                 try {

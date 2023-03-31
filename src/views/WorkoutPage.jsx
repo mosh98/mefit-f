@@ -16,8 +16,6 @@ function WorkoutPage() {
     if (workoutError) return <div>Failed to load workouts</div>;
     if (!workouts) return <div>Loading...</div>;
 
-    console.log("workouts ", workouts, workoutError);
-
     function handleClick() {
         navigate("/create-workout");
     }

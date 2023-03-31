@@ -8,8 +8,6 @@ import {Box} from "@mui/system";
 function AdminPage() {
 
     const {users, error} = useUsers();
-    console.log(users);
-
 
     return (
         <Box className={"page-view"}>
